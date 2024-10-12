@@ -1,6 +1,11 @@
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:my_app/View/Loging/loging_screen.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:my_app/auth/view/BasicProfileSetUp/profile_satus_screen.dart';
+import 'package:my_app/auth/view/LifestyleQuestioner/first_question_screen.dart';
+
+import 'package:my_app/onbord/onbord.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,7 +15,9 @@ void main() async {
           appId: "1:101994162280:android:77020a049668cc0beb33dd",
           projectId: "test-1ac28",
           messagingSenderId: "id"));
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -20,14 +27,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Fitness App',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: LogingScreen(),
+        home: FirstQuestionScreen(),
       ),
     );
   }
