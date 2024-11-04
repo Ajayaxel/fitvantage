@@ -3,7 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/height_setuo_screen.dart';
-import 'package:my_app/auth/view/Home/home.dart';
+
+import 'package:my_app/home/view/home_screen.dart';
+
 
 class WeightSetupScreen extends StatefulWidget {
   const WeightSetupScreen({super.key});

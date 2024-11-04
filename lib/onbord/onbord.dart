@@ -78,9 +78,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/onbord/onbordcontent_model.dart';
-import 'package:my_app/onbord/screen1.dart';
-import 'package:my_app/onbord/screen2.dart';
-import 'package:my_app/onbord/screen3.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Onboard extends StatefulWidget {
@@ -92,16 +89,16 @@ class Onboard extends StatefulWidget {
 
 class _OnboardState extends State<Onboard> {
   String buttontext = "Skip";
-   String buttonNext = "Next";
+  String buttonNext = "Next";
 
   PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-backgroundColor: Colors.green,
+      backgroundColor: Colors.green,
       body: Stack(
         children: [
-           Positioned(
+          Positioned(
             top: -5,
             right: -5,
             left: -5,
@@ -113,33 +110,31 @@ backgroundColor: Colors.green,
           ),
           Positioned(
             bottom: 119,
-     left: 0,
-     right: 0,
-      
-      top: 0,
+            left: 0,
+            right: 0,
+            top: 0,
             child: PageView(
               controller: pageController,
               onPageChanged: (index) {
                 if (index == 2) {
                   buttontext = "";
-                  buttonNext="";
+                  buttonNext = "";
                 } else {
                   buttontext = "Skip";
-                  buttonNext ="Next";
+                  buttonNext = "Next";
                 }
                 setState(() {});
               },
               children: [
                 OnbordContent(),
                 OnbordContent(),
-                OnbordContent(showGetStarted: true,)
-                
+                OnbordContent(
+                  showGetStarted: true,
+                )
               ],
             ),
           ),
-          
           Positioned(
-         
             left: 16,
             right: 16,
             bottom: 24,
@@ -164,27 +159,26 @@ backgroundColor: Colors.green,
                     SmoothPageIndicator(
                       controller: pageController,
                       count: 3,
-                      effect:ExpandingDotsEffect(
+                      effect: ExpandingDotsEffect(
                           dotWidth: 8,
                           dotHeight: 8,
                           // radius: 5,
-                          activeDotColor: Color(0xff6CCE73
-            ),
+                          activeDotColor: Color(0xff6CCE73),
                           dotColor: Color(0xff6CCE73)),
                     ),
                     GestureDetector(
                       onTap: () {
                         pageController.animateToPage(
-                          (pageController.page??0).toInt()+1,
-                          duration: Duration(milliseconds: 200), curve: Curves.decelerate);
+                            (pageController.page ?? 0).toInt() + 1,
+                            duration: Duration(milliseconds: 200),
+                            curve: Curves.decelerate);
                       },
                       child: Text(
                         buttonNext,
                         style: GoogleFonts.leagueSpartan(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xff171917
-            )),
+                            color: Color(0xff171917)),
                       ),
                     ),
                   ],

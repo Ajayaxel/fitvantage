@@ -2,12 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/get_rx/src/rx_workers/rx_workers.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/controller/auth_controller.dart';
-import 'package:my_app/auth/view/BasicProfileSetUp/setup_screen.dart';
+
 import 'package:my_app/auth/view/BasicProfileSetUp/start_setup_screen.dart';
 import 'package:my_app/auth/view/Loging/forget_password.dart';
 import 'package:my_app/auth/view/Loging/login_er_page.dart';
@@ -60,7 +57,7 @@ class _SignupPageState extends State<SignupPage> {
             left: 0,
             bottom: 0,
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(24),
+              padding: const EdgeInsets.all(24),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -84,7 +81,7 @@ class _SignupPageState extends State<SignupPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 65,
                   ),
                   Text(
@@ -94,7 +91,7 @@ class _SignupPageState extends State<SignupPage> {
                         fontWeight: FontWeight.w800,
                         fontSize: 28),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   FittedBox(
@@ -109,7 +106,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(

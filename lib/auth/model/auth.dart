@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_app/auth/model/database.dart';
-import 'package:my_app/auth/view/Home/home.dart';
 import 'package:my_app/utils/auth_exceptions.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 

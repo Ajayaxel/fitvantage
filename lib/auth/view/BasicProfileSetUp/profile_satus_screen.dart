@@ -3,7 +3,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/constwidget/percentage_details.dart';
-import 'package:my_app/auth/view/Home/home.dart';
+import 'package:my_app/lifestylequestiner/view/life_style_scrren.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class ProfileSatusScreen extends StatefulWidget {
@@ -120,7 +120,7 @@ class _ProfileSatusScreenState extends State<ProfileSatusScreen> {
                   Spacer(),
                   GestureDetector(
                     onTap: () {
-                      Get.to(HomeScreen());
+                      Get.to(LifeStyleScrren());
                     },
                     child: Container(
                       height: 56,

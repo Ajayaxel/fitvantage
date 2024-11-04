@@ -3,7 +3,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/gender_screen.dart';
-import 'package:my_app/auth/view/Home/home.dart';
+
+import 'package:my_app/home/view/home_screen.dart';
 
 class StartSetupScreen extends StatelessWidget {
   const StartSetupScreen({super.key});
@@ -35,7 +36,7 @@ class StartSetupScreen extends StatelessWidget {
                   alignment: Alignment.topRight,
                   child: GestureDetector(
                     onTap: () {
-                       Get.to(const HomeScreen());
+                       Get.to( HomeScreen());
                     },
                     child: Text(
                       "Skip",

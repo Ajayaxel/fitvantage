@@ -6,6 +6,7 @@ import 'package:my_app/utils/auth_exceptions.dart';
 
 class AuthController extends GetxController{
   final AuthRepo _authRepo = AuthRepo();
+  
   bool isLoading =false;
    final signInWithGoogleEither = Rxn<Option<Either<AppException, void>>>(none());
 

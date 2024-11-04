@@ -4,7 +4,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/profile_satus_screen.dart';
-import 'package:my_app/auth/view/Home/home.dart';
+import 'package:my_app/home/view/home_screen.dart';
+
 
 class UpdateProfileScreen extends StatelessWidget {
   const UpdateProfileScreen({super.key});

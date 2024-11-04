@@ -20,10 +20,6 @@ class OnbordContent extends StatelessWidget {
       
        
         children: [
-          // Image.asset("assets/Onbording/Layer_1.png"),
-          // SizedBox(
-          //   height: 30,widget
-          // ),
           FittedBox(
             child: Text(
               "Start your \n Fitness Journey ",

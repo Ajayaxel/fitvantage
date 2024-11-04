@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/controller/auth_controller.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/start_setup_screen.dart';
-import 'package:my_app/auth/view/Home/home.dart';
 import 'package:my_app/auth/view/Loging/login_er_page.dart';
 import 'package:my_app/auth/view/Loging/signup_page.dart';
 
@@ -33,6 +32,7 @@ class Networkauth extends StatelessWidget {
         }),
       );
     });
+    
     return Scaffold(
       body: Stack(
         alignment: AlignmentDirectional.center,
@@ -56,7 +56,7 @@ class Networkauth extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 SvgPicture.asset("assets/Onbording/Frame .svg"),
-                SizedBox(
+                const SizedBox(
                   height: 37.78,
                 ),
                 Flexible(
@@ -113,7 +113,8 @@ class Networkauth extends StatelessWidget {
                 ),
                 ButtonScreen(
                   onPressed: () {
-                    authController.signInWithGoogle();
+                       authController.signInWithGoogle();
+                       log("you toched");
                   },
                   image: 'assets/loging/flat-color-icons_google.svg',
                   data: 'Sign in with Google',

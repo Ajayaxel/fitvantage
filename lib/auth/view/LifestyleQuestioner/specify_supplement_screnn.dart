@@ -7,7 +7,6 @@ import 'package:my_app/auth/view/LifestyleQuestioner/Constants/head_nav.dart';
 import 'package:my_app/auth/view/LifestyleQuestioner/Constants/next_button.dart';
 import 'package:my_app/auth/view/LifestyleQuestioner/diet_screen_three.dart';
 
-
 class SpecifySupplementScrenn extends StatelessWidget {
   const SpecifySupplementScrenn({super.key});
 
@@ -17,10 +16,10 @@ class SpecifySupplementScrenn extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          BackgroundImage(),
+          const BackgroundImage(),
           SafeArea(
               child: Padding(
-            padding: EdgeInsets.all(24),
+            padding: const EdgeInsets.all(24),
             child: Column(
               children: [
                 HeadNavgtion(
@@ -113,20 +112,22 @@ class SpecifySupplementScrenn extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Flexible(
-                      child: Container(
-                        margin: EdgeInsets.all(5), // Gap between boxes
+                    FittedBox(
+                      child: Flexible(
                         child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              color: Color(0xff24262B)),
-                          height: 48,
-                          child: Center(
-                            child: Text('BCAAs',
-                                style: GoogleFonts.manrope(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16)),
+                          margin: EdgeInsets.all(5), // Gap between boxes
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                color: Color(0xff24262B)),
+                            height: 48,
+                            child: Center(
+                              child: Text('BCAAs',
+                                  style: GoogleFonts.manrope(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16)),
+                            ),
                           ),
                         ),
                       ),
@@ -278,7 +279,7 @@ class SpecifySupplementScrenn extends StatelessWidget {
                     ),
                   ],
                 ),
-                Spacer(),
+                  Spacer(),
                 NextButton(onTap: () {
                   Get.to(DietScreenThree());
                 })

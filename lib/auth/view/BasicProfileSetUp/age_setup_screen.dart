@@ -3,7 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/weight_setup_screen.dart';
-import 'package:my_app/auth/view/Home/home.dart';
+import 'package:my_app/home/view/home_screen.dart';
+
+
+
 
 class AgeSetupScreen extends StatefulWidget {
   const AgeSetupScreen({super.key});

@@ -70,7 +70,7 @@ class _LoginErPageState extends State<LoginErPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 35.5,
                   ),
                   Text(
@@ -80,7 +80,7 @@ class _LoginErPageState extends State<LoginErPage> {
                         fontWeight: FontWeight.w800,
                         fontSize: 28),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Center(
@@ -97,31 +97,31 @@ class _LoginErPageState extends State<LoginErPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   InputFileds(
                     input: 'Name',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   InputFileds(
                     input: 'Phone ',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   InputFileds(
                     input: 'Email ',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   InputFileds(
                     input: 'Password',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   InputFileds(

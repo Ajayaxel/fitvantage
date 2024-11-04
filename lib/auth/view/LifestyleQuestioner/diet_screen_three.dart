@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/LifestyleQuestioner/Constants/backround_image.dart';
 import 'package:my_app/auth/view/LifestyleQuestioner/Constants/cards.dart';
 import 'package:my_app/auth/view/LifestyleQuestioner/Constants/head_nav.dart';
 import 'package:my_app/auth/view/LifestyleQuestioner/Constants/next_button.dart';
 
-class DietScreenThree extends StatefulWidget {
+class DietScreenThree extends StatelessWidget {
   const DietScreenThree({super.key});
 
-  @override
-  State<DietScreenThree> createState() => _DietScreenThreeState();
-}
-
-class _DietScreenThreeState extends State<DietScreenThree> {
-  int selectedIndex = 0;
+  //int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          BackgroundImage(),
+          const BackgroundImage(),
           SafeArea(
               child: Padding(
             padding: const EdgeInsets.all(24),
@@ -53,21 +47,19 @@ class _DietScreenThreeState extends State<DietScreenThree> {
                   children: [
                     CardS(
                       titil: 'Plant Based',
-                      subtitile: 'Vegan', status: selectedIndex==1,
-                      onTap: () {
-                        setState(() {
-                          selectedIndex=1;
-                        });
-                      },
+                      subtitile: 'Vegan', status: false,
+                      // onTap: () {
+                      //   setState(() {
+                      //     selectedIndex=1;
+                      //   });
+                      // },
                     ),
                     CardS(
                       titil: 'Carbo Diet',
                       subtitile: 'Bread, etc',
-                      status: selectedIndex==2,
+                      status: false,
                       onTap: () {
-                        setState(() {
-                          selectedIndex=2;
-                        });
+                      
                       },
                     ),
                   ],
@@ -81,21 +73,17 @@ class _DietScreenThreeState extends State<DietScreenThree> {
                     CardS(
                       titil: 'Specialized',
                       subtitile: 'Paleo, keto, etc',
-                      status: selectedIndex==3,
+                      status: false,
                       onTap: () {
-                        setState(() {
-                          selectedIndex=3;
-                        });
+                       
                       },
                     ),
                     CardS(
                       titil: 'Traditional',
                       subtitile: 'Fruit diet',
-                      status: selectedIndex==4,
+                      status:false,
                       onTap: () {
-                        setState(() {
-                          selectedIndex=4;
-                        });
+                        
                       },
                     ),
                   ],

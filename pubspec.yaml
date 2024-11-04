@@ -50,10 +50,14 @@ dependencies:
   get: ^4.6.6
   smooth_page_indicator: ^1.2.0+3
   glassmorphism_widgets: ^0.2.2
-  device_preview: ^1.2.0
   percent_indicator: ^4.2.3
   glassmorphism: ^3.0.0
   dio: ^5.7.0
+  date_picker_timeline: ^1.2.5
+  circular_countdown_timer: ^0.2.4
+  video_player: ^2.9.2
+  carousel_slider: ^5.0.0
+  
   
   
 
@@ -84,6 +88,10 @@ flutter:
       - assets/loging/
       - assets/Onbording/
       - assets/setup/
+      - assets/avaters/
+      - assets/Backgrounds/
+      - assets/icons/
+      - assets/RiveAssets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

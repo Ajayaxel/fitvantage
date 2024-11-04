@@ -4,7 +4,10 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/constwidget/questions_box.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/update_profile_screen.dart';
-import 'package:my_app/auth/view/Home/home.dart';
+import 'package:my_app/home/view/home_screen.dart';
+
+
+
 
 class FoodYouHateScreen extends StatefulWidget {
   const FoodYouHateScreen({super.key});

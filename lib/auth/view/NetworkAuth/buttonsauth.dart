@@ -16,30 +16,33 @@ class ButtonScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 56,
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(12)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(image),
-            const SizedBox(width: 8,),
-            Flexible(
-              child: FittedBox(
-                child: Text(
-                  data,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.montserrat(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16),
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+          height: 56,
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(12)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(image),
+              const SizedBox(width: 8,),
+              Flexible(
+                child: FittedBox(
+                  child: Text(
+                    data,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.montserrat(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ));
+            ],
+          )),
+    );
 
     // return ElevatedButton.icon(
 
