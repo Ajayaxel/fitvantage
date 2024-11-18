@@ -3,8 +3,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/gender_screen.dart';
+import 'package:my_app/home/view/bootmNav/bottm_nav.dart';
 
-import 'package:my_app/home/view/home_screen.dart';
 
 class StartSetupScreen extends StatelessWidget {
   const StartSetupScreen({super.key});
@@ -36,7 +36,7 @@ class StartSetupScreen extends StatelessWidget {
                   alignment: Alignment.topRight,
                   child: GestureDetector(
                     onTap: () {
-                       Get.to( HomeScreen());
+                       Get.to( const BottmNav());
                     },
                     child: Text(
                       "Skip",
@@ -47,11 +47,11 @@ class StartSetupScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                 Spacer(
+                 const Spacer(
                   flex: 3,
                  ),
-                Flexible(
-                  child: const SizedBox(
+                const Flexible(
+                  child: SizedBox(
                     height: 459,
                   ),
                 ),
@@ -94,12 +94,12 @@ class StartSetupScreen extends StatelessWidget {
                             Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>GenderScreen()));
+                            builder: (context) =>const GenderScreen()));
                         },
                   child: Container(
                     height: 56,
                     width: 327,
-                    padding: EdgeInsets.only(left: 24, right: 24),
+                    padding: const EdgeInsets.only(left: 24, right: 24),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: Colors.black),

@@ -43,12 +43,7 @@ class _CarouleScreenState extends State<CarouleScreen> {
                       GradientImage(
                         imageUrl: imageUrl,
                         height:  MediaQuery.of(context).size.height * 0.65,
-                        // child: Image.network(
-                        //   imageUrl,
-                        //   fit: BoxFit.cover,
-                        //   width: double.infinity,
-                        //   height: MediaQuery.of(context).size.height * 0.65,
-                        // ),
+                     
                       ),
                       Container(
                         width: double.infinity,
@@ -89,12 +84,11 @@ class _CarouleScreenState extends State<CarouleScreen> {
                               ),
                               textAlign: TextAlign.center,
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             ElevatedButton(
                               onPressed: () {
                                 // Action for the button
                               },
-                              child: Text("EXPOLORE",style: TextStyle(color: Colors.white),),
                               style: ElevatedButton.styleFrom(
                                 foregroundColor: Colors.black, backgroundColor: Colors.white.withOpacity(0.3),
                                 shape: RoundedRectangleBorder(
@@ -102,6 +96,7 @@ class _CarouleScreenState extends State<CarouleScreen> {
                                 ),
                                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                               ),
+                              child: Text("EXPOLORE",style: TextStyle(color: Colors.white),),
                             ),
                           ],
                         ),
@@ -154,8 +149,8 @@ class GradientImage extends StatelessWidget {
   const GradientImage({
     required this.imageUrl,
     required this.height,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +163,7 @@ class GradientImage extends StatelessWidget {
             Colors.black.withOpacity(1.0), // Top transparent
             Colors.black.withOpacity(0), // Bottom opaque
           ],
-          stops: [0.0, 1.0],
+          stops: const [0.0, 1.0],
         ).createShader(bounds);
       },
       blendMode: BlendMode.dstIn,

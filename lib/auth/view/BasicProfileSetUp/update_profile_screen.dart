@@ -4,7 +4,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/profile_satus_screen.dart';
-import 'package:my_app/home/view/home_screen.dart';
+import 'package:my_app/home/view/bootmNav/bottm_nav.dart';
+
 
 
 class UpdateProfileScreen extends StatelessWidget {
@@ -27,7 +28,7 @@ class UpdateProfileScreen extends StatelessWidget {
         ),
         SafeArea(
           child: Padding(
-            padding: EdgeInsets.only(left: 24,right: 24,bottom: 35),
+            padding: const EdgeInsets.only(left: 24,right: 24,bottom: 35),
             child: Column(
               children: [
                 const SizedBox(
@@ -40,7 +41,7 @@ class UpdateProfileScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                         size: 23,
@@ -55,7 +56,7 @@ class UpdateProfileScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                           onTap: () {
-                         Get.to(HomeScreen());
+                         Get.to(const BottmNav());
                       },
                       child: Text(
                         "Skip",
@@ -83,7 +84,7 @@ class UpdateProfileScreen extends StatelessWidget {
                         fontSize: 33),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 FittedBox(
@@ -114,7 +115,7 @@ class UpdateProfileScreen extends StatelessWidget {
                 const Spacer(flex: 3,),
                  GestureDetector(
                   onTap: () {
-                     Get.to(ProfileSatusScreen());
+                     Get.to(const ProfileSatusScreen());
                   },
                    child: Container(
                     height: 56,

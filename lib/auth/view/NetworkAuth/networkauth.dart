@@ -72,16 +72,16 @@ class Networkauth extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 60,
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(SignupPage());
+                    Get.to(const SignupPage());
                   },
                   child: Container(
                     height: 56,
-                    padding: EdgeInsets.only(left: 24, right: 24),
+                    padding: const EdgeInsets.only(left: 24, right: 24),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: Colors.black),
@@ -146,7 +146,7 @@ class Networkauth extends StatelessWidget {
                           child: Text(
                             "Sign Up",
                             style: GoogleFonts.montserrat(
-                                color: Color(0xff7FFA88),
+                                color: const Color(0xff7FFA88),
                                 fontWeight: FontWeight.w400,
                                 fontSize: 16),
                           ),
@@ -162,7 +162,7 @@ class Networkauth extends StatelessWidget {
           Center(
             child: GetBuilder<AuthController>(
               builder: (controller) {
-                log('is Loading' + controller.isLoading.toString());
+                log('is Loading${controller.isLoading}');
                 return Visibility(
                   visible: controller.isLoading,
                   child: Container(

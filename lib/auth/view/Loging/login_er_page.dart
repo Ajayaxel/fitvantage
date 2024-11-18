@@ -127,7 +127,7 @@ class _LoginErPageState extends State<LoginErPage> {
                   InputFileds(
                     input: 'Confirm Password',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
@@ -136,7 +136,7 @@ class _LoginErPageState extends State<LoginErPage> {
                         scale: 1.4,
                         child: Checkbox(
                           checkColor: Colors.black,
-                          activeColor: Color(0xff7FFA88),
+                          activeColor: const Color(0xff7FFA88),
                           // Example with tristate
                           value: value,
                           onChanged: (bool? newValue) {
@@ -188,16 +188,16 @@ class _LoginErPageState extends State<LoginErPage> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.to(StartSetupScreen());
+                      Get.to(const StartSetupScreen());
                     },
                     child: Container(
                       height: 56,
-                      padding: EdgeInsets.only(left: 24, right: 24),
+                      padding: const EdgeInsets.only(left: 24, right: 24),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           color: Colors.black),
@@ -211,7 +211,7 @@ class _LoginErPageState extends State<LoginErPage> {
                       )),
                     ),
                   ),
-                  SizedBox(height: 38),
+                  const SizedBox(height: 38),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -235,7 +235,7 @@ class _LoginErPageState extends State<LoginErPage> {
                             text: 'Sign In',
                             style: GoogleFonts.montserrat(
                               fontSize: 16,
-                              color: Color(0xff7FFA88),
+                              color: const Color(0xff7FFA88),
                               fontWeight: FontWeight.w400,
                             ),
                           ),

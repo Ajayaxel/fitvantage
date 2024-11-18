@@ -3,7 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/weight_setup_screen.dart';
-import 'package:my_app/home/view/home_screen.dart';
+import 'package:my_app/home/view/bootmNav/bottm_nav.dart';
+
 
 
 
@@ -34,7 +35,7 @@ class _AgeSetupScreenState extends State<AgeSetupScreen> {
         ),
         SafeArea(
           child: Padding(
-            padding: EdgeInsets.only(left: 24, right: 24, bottom: 35),
+            padding: const EdgeInsets.only(left: 24, right: 24, bottom: 35),
             child: Column(
               children: [
                 const SizedBox(
@@ -47,7 +48,7 @@ class _AgeSetupScreenState extends State<AgeSetupScreen> {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                         size: 23,
@@ -62,7 +63,7 @@ class _AgeSetupScreenState extends State<AgeSetupScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.to(HomeScreen());
+                        Get.to(const BottmNav());
                       },
                       child: Text(
                         "Skip",
@@ -85,7 +86,7 @@ class _AgeSetupScreenState extends State<AgeSetupScreen> {
                       fontWeight: FontWeight.w800,
                       fontSize: 33),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 FittedBox(
@@ -100,7 +101,7 @@ class _AgeSetupScreenState extends State<AgeSetupScreen> {
                     ),
                   ),
                 ),
-                Flexible(
+                const Flexible(
                   child: SizedBox(
                     height: 97,
                   ),
@@ -117,18 +118,18 @@ class _AgeSetupScreenState extends State<AgeSetupScreen> {
                       height: 32,
                       width: 46,
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 1,
                 ),
                 Text(
                   "$count",
                   style: GoogleFonts.montserrat(
-                    color: Color(0xff7FFA88),
+                    color: const Color(0xff7FFA88),
                     fontSize: 64,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 2,
                 ),
                 GestureDetector(
@@ -145,21 +146,21 @@ class _AgeSetupScreenState extends State<AgeSetupScreen> {
                       height: 32,
                       width: 46,
                     )),
-                Flexible(
+                const Flexible(
                     child: SizedBox(
                   height: 308,
                 )),
-                Spacer(flex: 2,),
+                const Spacer(flex: 2,),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => WeightSetupScreen()));
+                            builder: (context) => const WeightSetupScreen()));
                   },
                   child: Container(
                     height: 56,
-                    padding: EdgeInsets.only(left: 24, right: 24),
+                    padding: const EdgeInsets.only(left: 24, right: 24),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: const Color.fromARGB(31, 108, 105, 105)),

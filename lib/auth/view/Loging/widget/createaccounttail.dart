@@ -23,7 +23,7 @@ class CreateAccountTail extends StatelessWidget {
         decoration:  InputDecoration(
           border: InputBorder.none,
           // suffixIcon: Icon(Icons.visibility),
-          hintText: "$text",
+          hintText: text,
           hintStyle: const TextStyle(fontSize: 16, color: Color(0xff667085)),
         ),
         validator: (value) {

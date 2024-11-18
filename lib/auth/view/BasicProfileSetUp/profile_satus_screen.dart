@@ -3,6 +3,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/constwidget/percentage_details.dart';
+import 'package:my_app/home/view/bootmNav/bottm_nav.dart';
 import 'package:my_app/lifestylequestiner/view/life_style_scrren.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -38,17 +39,17 @@ class _ProfileSatusScreenState extends State<ProfileSatusScreen> {
               padding: const EdgeInsets.only(left: 24, right: 24, top: 24),
               child: Column(
                 children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Text(
-                      "Skip",
-                      style: GoogleFonts.montserrat(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15.4),
-                    ),
-                  ),
-                  SizedBox(
+                  // Align(
+                  //   alignment: Alignment.topRight,
+                  //   child: Text(
+                  //     "Skip",
+                  //     style: GoogleFonts.montserrat(
+                  //         color: Colors.white,
+                  //         fontWeight: FontWeight.w500,
+                  //         fontSize: 15.4),
+                  //   ),
+                  // ),
+                  const SizedBox(
                     height: 12,
                   ),
                   CircularPercentIndicator(
@@ -58,8 +59,8 @@ class _ProfileSatusScreenState extends State<ProfileSatusScreen> {
                     circularStrokeCap: CircularStrokeCap.round,
                     animation: true,
                     animationDuration: 1800,
-                    progressColor: Color(0xff96E912),
-                    center: new Text(
+                    progressColor: const Color(0xff96E912),
+                    center: Text(
                       "78%",
                       style: GoogleFonts.montserrat(
                           color: Colors.white,
@@ -67,7 +68,7 @@ class _ProfileSatusScreenState extends State<ProfileSatusScreen> {
                           fontSize: 34.4),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 24,
                   ),
                   Flexible(
@@ -107,8 +108,8 @@ class _ProfileSatusScreenState extends State<ProfileSatusScreen> {
                     percent: '30 %',
                     icon: Icons.close,
                   ),
-                  Flexible(
-                    child: const SizedBox(
+                  const Flexible(
+                    child: SizedBox(
                       height: 33,
                     ),
                   ),
@@ -117,10 +118,10 @@ class _ProfileSatusScreenState extends State<ProfileSatusScreen> {
                     percent: '10 %',
                     icon: Icons.close,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   GestureDetector(
                     onTap: () {
-                      Get.to(LifeStyleScrren());
+                      Get.to(const BottmNav());
                     },
                     child: Container(
                       height: 56,

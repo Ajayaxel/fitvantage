@@ -296,7 +296,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/LifestyleQuestioner/Constants/backround_image.dart';
 
-import 'package:my_app/home/view/home_screen.dart';
+import 'package:my_app/home/view/lifestyleScorescreens/nutrition_score_screen.dart';
 
 import 'package:my_app/lifestylequestiner/controller/life_style_questionair_controller.dart';
 
@@ -335,7 +335,7 @@ class _LifeStyleScrrenState extends State<LifeStyleScrren> {
             );
           }, (d) {
             if (controller.categoryIsEmpty()) {
-              return Center(
+              return const Center(
                 child: Text("No data"),
               );
             }
@@ -347,7 +347,7 @@ class _LifeStyleScrrenState extends State<LifeStyleScrren> {
 
             return Stack(
               children: [
-                BackgroundImage(),
+                const BackgroundImage(),
                 SafeArea(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -413,20 +413,7 @@ class _LifeStyleScrrenState extends State<LifeStyleScrren> {
                               fontWeight: FontWeight.w200),
                         ),
 
-                        // Slider(
-                        //   value: _sliderValue,
-                        //   min: 1,
-                        //   max: question.options.length.toDouble(),
-                        //   divisions: question.options.length.toInt() - 1,
-                        //   activeColor: Color(0xff7FFA88),
-                        //   inactiveColor: Colors.white30,
-                        //   thumbColor: Colors.white,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       _sliderValue = value;
-                        //     });
-                        //   },
-                        // ),
+               
                                 Slider(
                           value: _sliderValue,
                           min: 1,
@@ -446,16 +433,16 @@ class _LifeStyleScrrenState extends State<LifeStyleScrren> {
                         ),
 
                         SizedBox(height: screenHeight * 0.05),
-                        Spacer(),
+                        const Spacer(),
                         // Row for Previous and Next buttons.
                         Padding(
-                          padding: EdgeInsets.only(left: 12, right: 12),
+                          padding: const EdgeInsets.only(left: 12, right: 12),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               // Previous button
                               if (!controller.isFirstQuestion())
-                                Container(
+                                SizedBox(
                                   height: 53,
                                   width: 150,
                                   child: ElevatedButton(
@@ -470,7 +457,7 @@ class _LifeStyleScrrenState extends State<LifeStyleScrren> {
                                               BorderRadius.circular(14)),
                                       backgroundColor: Colors.white,
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       "Previous",
                                       style: TextStyle(
                                           color: Colors.black,
@@ -488,7 +475,7 @@ class _LifeStyleScrrenState extends State<LifeStyleScrren> {
                                 onTap: () {
                                   log('IS last question ${controller.isLastQuestion()}');
                                   if (controller.isLastQuestion()) {
-                                    Get.offAll( HomeScreen());
+                                    Get.offAll( const NutritionScoreScreen());
                                   } else {
                                     controller.showNextQuestion();
                                   }
@@ -521,7 +508,7 @@ class _LifeStyleScrrenState extends State<LifeStyleScrren> {
                   top: screenHeight * 0.03,
                   right: screenWidth * 0.03,
                   child: IconButton(
-                    icon: Icon(Icons.close, color: Colors.white),
+                    icon: const Icon(Icons.close, color: Colors.white),
                     onPressed: () {
                       // Handle the close action.
                     },

@@ -8,7 +8,8 @@ import 'package:my_app/auth/view/LifestyleQuestioner/Constants/backround_image.d
 import 'package:my_app/auth/view/LifestyleQuestioner/Constants/head_nav.dart';
 import 'package:my_app/auth/view/LifestyleQuestioner/Constants/next_button.dart';
 import 'package:my_app/auth/view/LifestyleQuestioner/Constants/question_selcted_box.dart';
-import 'package:my_app/home/view/home_screen.dart';
+import 'package:my_app/home/view/Homepages/home_screen.dart';
+
 
 
 import 'package:my_app/lifestylequestiner/controller/life_style_questionair_controller.dart';
@@ -39,7 +40,7 @@ class FirstQuestionScreen extends StatelessWidget {
             );
           }, (d) {
             if (controller.categoryIsEmpty()) {
-              return Center(
+              return const Center(
                 child: Text("No data"),
               );
             }
@@ -58,8 +59,8 @@ class FirstQuestionScreen extends StatelessWidget {
                             text:
                                 d.data[controller.categoryI].categoryName ?? '',
                           ),
-                          Flexible(
-                            child: const SizedBox(
+                          const Flexible(
+                            child: SizedBox(
                               height: 45,
                             ),
                           ),
@@ -73,8 +74,8 @@ class FirstQuestionScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w800,
                                 fontSize: 30),
                           ),
-                          Flexible(
-                            child: const SizedBox(
+                          const Flexible(
+                            child: SizedBox(
                               height: 20,
                             ),
                           ),
@@ -89,8 +90,8 @@ class FirstQuestionScreen extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Flexible(
-                            child: const SizedBox(
+                          const Flexible(
+                            child: SizedBox(
                               height: 50,
                             ),
                           ),
@@ -106,7 +107,7 @@ class FirstQuestionScreen extends StatelessWidget {
                                     status: controller.selectedOptionindex ==
                                         index);
                               },
-                              separatorBuilder: (cont, index) => Flexible(
+                              separatorBuilder: (cont, index) => const Flexible(
                                 child: Flexible(
                                   child: SizedBox(
                                         height: 10,
@@ -114,12 +115,12 @@ class FirstQuestionScreen extends StatelessWidget {
                                 ),
                               ),
                               itemCount: question.options.length),
-                           Spacer(flex: 6,),
+                           const Spacer(flex: 6,),
                           NextButton(
                             onTap: () {
                               log('IS last question ${controller.isLastQuestion()}');
                               if (controller.isLastQuestion()) {
-                                Get.offAll( HomeScreen());
+                                Get.offAll( const HomeScreen());
                               } else {
                                 controller.showNextQuestion();
                               }

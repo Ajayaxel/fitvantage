@@ -26,7 +26,7 @@ class CardS extends StatelessWidget {
           height: 169,
           width: 167,
           decoration: BoxDecoration(
-              color: status ? Color(0xff7FFA88) : const Color(0xff24262B),
+              color: status ? const Color(0xff7FFA88) : const Color(0xff24262B),
               borderRadius: BorderRadius.circular(24)),
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -43,14 +43,14 @@ class CardS extends StatelessWidget {
                 Text(
                   subtitile,
                   style: GoogleFonts.montserrat(
-                      color: Color(0xff9EA0A5),
+                      color: const Color(0xff9EA0A5),
                       fontWeight: FontWeight.w400,
                       fontSize: 16),
                 ),
-                Spacer(),
+                const Spacer(),
                 Align(
                     alignment: Alignment.bottomRight,
-                    child: SvgPicture.asset("assets/setup/leaf.svg",color:status?Color(0xffffffff):Color(0xff50535B),))
+                    child: SvgPicture.asset("assets/setup/leaf.svg",color:status?const Color(0xffffffff):const Color(0xff50535B),))
               ],
             ),
           ),

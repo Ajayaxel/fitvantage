@@ -41,7 +41,7 @@ class ForgetPassword extends StatelessWidget {
                       fontWeight: FontWeight.w800,
                       fontSize: 28),
                 ),
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
                 FittedBox(
                   child: Text(
                       "Lorem ipsum dolor sit amet,\n onsectetur adipiscing elit and support.",
@@ -52,9 +52,9 @@ class ForgetPassword extends StatelessWidget {
                       ),
                     ),
                 ),
-                  SizedBox(height: 30,),
+                  const SizedBox(height: 30,),
                          InputFileds(input: "Enter email or phone"),
-                         Spacer(),
+                         const Spacer(),
                     
                  GestureDetector(
                 onTap: () {
@@ -66,7 +66,7 @@ class ForgetPassword extends StatelessWidget {
                    child: Container(
                     height: 56,
                     
-                    padding: EdgeInsets.only(left: 24, right: 24),
+                    padding: const EdgeInsets.only(left: 24, right: 24),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: Colors.black),

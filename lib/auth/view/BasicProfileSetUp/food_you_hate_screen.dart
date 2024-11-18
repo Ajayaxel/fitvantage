@@ -4,7 +4,8 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/constwidget/questions_box.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/update_profile_screen.dart';
-import 'package:my_app/home/view/home_screen.dart';
+import 'package:my_app/home/view/bootmNav/bottm_nav.dart';
+
 
 
 
@@ -35,7 +36,7 @@ class _FoodYouHateScreenState extends State<FoodYouHateScreen> {
         ),
         SafeArea(
           child: Padding(
-            padding: EdgeInsets.only(left: 24, right: 24, bottom: 35),
+            padding: const EdgeInsets.only(left: 24, right: 24, bottom: 35),
             child: Column(
              
               children: [
@@ -64,7 +65,7 @@ class _FoodYouHateScreenState extends State<FoodYouHateScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.to(HomeScreen());
+                        Get.to(const BottmNav());
                       },
                       child: Text(
                         "Skip",
@@ -91,7 +92,7 @@ class _FoodYouHateScreenState extends State<FoodYouHateScreen> {
                         fontSize: 33),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 FittedBox(
@@ -107,8 +108,8 @@ class _FoodYouHateScreenState extends State<FoodYouHateScreen> {
                     ),
                   ),
                 ),
-                Flexible(
-                  child: const SizedBox(
+                const Flexible(
+                  child: SizedBox(
                     height: 50,
                   ),
                 ),
@@ -121,8 +122,8 @@ class _FoodYouHateScreenState extends State<FoodYouHateScreen> {
                     });
                   },
                 ),
-                Flexible(
-                    child: const SizedBox(
+                const Flexible(
+                    child: SizedBox(
                   height: 21,
                 )),
                 QuestionsOptionsbox(
@@ -134,17 +135,17 @@ class _FoodYouHateScreenState extends State<FoodYouHateScreen> {
                     });
                   },
                 ),
-                Spacer(flex: 6,),
+                const Spacer(flex: 6,),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => UpdateProfileScreen()));
+                            builder: (context) => const UpdateProfileScreen()));
                   },
                   child: Container(
                     height: 56,
-                    padding: EdgeInsets.only(left: 24, right: 24),
+                    padding: const EdgeInsets.only(left: 24, right: 24),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: const Color.fromARGB(31, 108, 105, 105)),

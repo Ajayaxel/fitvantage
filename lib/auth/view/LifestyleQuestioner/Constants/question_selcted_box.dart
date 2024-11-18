@@ -22,13 +22,13 @@ class QuestionSelctedBox extends StatelessWidget {
       onTap: onTap,
       child: Flexible(
         child: Container(
-          padding: EdgeInsets.only(left: 16, right: 16),
+          padding: const EdgeInsets.only(left: 16, right: 16),
            height: 56,
           // width: 327,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(19),
-              border: status ? Border.all(color: Color(0xff7FFA88)) : null,
-              color: status ? Color(0xff7FFA88) : const Color(0xff24262B)),
+              border: status ? Border.all(color: const Color(0xff7FFA88)) : null,
+              color: status ? const Color(0xff7FFA88) : const Color(0xff24262B)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -47,9 +47,9 @@ class QuestionSelctedBox extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.2),
                       border: status
-                          ? Border.all(color: Color(0xff))
-                          : Border.all(color: Color(0xffffffff)),
-                      color: status ? Color(0) : Color(0xff24262B)),
+                          ? Border.all(color: const Color(0x000000ff))
+                          : Border.all(color: const Color(0xffffffff)),
+                      color: status ? const Color(0x00000000) : const Color(0xff24262B)),
                   child: status
                       ? SvgPicture.asset(
                           "assets/setup/Vector (2).svg",

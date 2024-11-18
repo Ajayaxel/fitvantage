@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/height_setuo_screen.dart';
+import 'package:my_app/home/view/bootmNav/bottm_nav.dart';
 
-import 'package:my_app/home/view/home_screen.dart';
 
 
 class WeightSetupScreen extends StatefulWidget {
@@ -33,7 +33,7 @@ class _WeightSetupScreenState extends State<WeightSetupScreen> {
         ),
         SafeArea(
           child: Padding(
-            padding: EdgeInsets.only(left: 24,right: 24,bottom: 35),
+            padding: const EdgeInsets.only(left: 24,right: 24,bottom: 35),
             child: Column(
               children: [
                 const SizedBox(
@@ -46,7 +46,7 @@ class _WeightSetupScreenState extends State<WeightSetupScreen> {
                       onTap:(){
                         Navigator.pop(context);
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                         size: 23,
@@ -61,7 +61,7 @@ class _WeightSetupScreenState extends State<WeightSetupScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                         Get.to(HomeScreen());
+                         Get.to(const BottmNav());
                       },
                       child: Text(
                         "Skip",
@@ -100,8 +100,8 @@ class _WeightSetupScreenState extends State<WeightSetupScreen> {
                     ),
                   ),
                 ),
-                Flexible(
-                  child: const SizedBox(
+                const Flexible(
+                  child: SizedBox(
                     height: 97,
                   ),
                 ),
@@ -136,7 +136,7 @@ class _WeightSetupScreenState extends State<WeightSetupScreen> {
                     Text(
                       "kg",
                       style: GoogleFonts.montserrat(
-                        color: Color(0xffFFFFFF).withOpacity(0.65),
+                        color: const Color(0xffFFFFFF).withOpacity(0.65),
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
                       ),
@@ -165,13 +165,13 @@ class _WeightSetupScreenState extends State<WeightSetupScreen> {
                   ),
                   
                 ),
-                Spacer(flex: 2,),
+                const Spacer(flex: 2,),
                 GestureDetector(
                    onTap: () {
                         Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => HeightSetuoScreen()));
+                          builder: (context) => const HeightSetuoScreen()));
                    },
                   child: Container(
                     height: 56,

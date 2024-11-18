@@ -26,7 +26,7 @@ class LifeStyleQustionairModel {
     Map<String, dynamic> toJson() => {
         "code": code,
         "message": message,
-        "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
+        "data": data == null ? [] : List<dynamic>.from(data.map((x) => x.toJson())),
     };
 }
 
@@ -54,7 +54,7 @@ class Category {
         "category_id": categoryId,
         "category_name": categoryName,
         "category_description": categoryDescription,
-        "questions": questions == null ? [] : List<dynamic>.from(questions!.map((x) => x.toJson())),
+        "questions": questions == null ? [] : List<dynamic>.from(questions.map((x) => x.toJson())),
     };
 }
 
@@ -82,7 +82,7 @@ class Question {
         "question_id": questionId,
         "question_name": questionName,
         "question_description": questionDescription,
-        "options": options == null ? [] : List<dynamic>.from(options!.map((x) => x.toJson())),
+        "options": options == null ? [] : List<dynamic>.from(options.map((x) => x.toJson())),
     };
 }
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/Loging/reset_passord_page.dart';
 import 'package:my_app/auth/view/Loging/widget/backbuttons.dart';
-import 'package:my_app/auth/view/Loging/widget/input_buttons.dart';
 
 class OtpPage extends StatelessWidget {
   const OtpPage({super.key});

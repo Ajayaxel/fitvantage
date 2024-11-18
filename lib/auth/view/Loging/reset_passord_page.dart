@@ -66,7 +66,7 @@ class ResetPassordPage extends StatelessWidget {
                   height: 16,
                 ),
                 InputFileds(input: "Confirm Password"),
-                Spacer(),
+                const Spacer(),
                const Flexible(
                  child: SizedBox(
                     height: 306,

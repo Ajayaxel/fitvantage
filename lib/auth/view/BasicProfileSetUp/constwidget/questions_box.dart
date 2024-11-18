@@ -29,7 +29,7 @@ class QuestionsOptionsbox extends StatelessWidget {
         ),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            border:status? Border.all(color:  Color(0xff7FFA88)):null,
+            border:status? Border.all(color:  const Color(0xff7FFA88)):null,
             color: const Color(0xffFFFFFF).withOpacity(0.3)),
         child: Row(
           children: [
@@ -40,7 +40,7 @@ class QuestionsOptionsbox extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.2),
               border: Border.all(color: Colors.white),
-              color:status? Color(0xff2DC38C): Color(0xffFFFFFF).withOpacity(0.3)),
+              color:status? const Color(0xff2DC38C): const Color(0xffFFFFFF).withOpacity(0.3)),
              child:status? SvgPicture.asset("assets/setup/tic.svg",fit: BoxFit.cover,):null
           ),
             const SizedBox(

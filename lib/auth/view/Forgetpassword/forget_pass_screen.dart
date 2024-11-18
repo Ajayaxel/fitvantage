@@ -72,7 +72,7 @@ class ForgetPassScreen extends StatelessWidget {
               defaultPinTheme: defaultPinTheme,
               focusedPinTheme: defaultPinTheme.copyWith(
                   decoration: defaultPinTheme.decoration!
-                      .copyWith(border: Border.all(color:Color(0xffE0E0E0)))),
+                      .copyWith(border: Border.all(color:const Color(0xffE0E0E0)))),
               onCompleted: (value) => debugPrint(value),
             ),
           ),

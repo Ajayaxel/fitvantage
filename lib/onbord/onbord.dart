@@ -125,7 +125,7 @@ class _OnboardState extends State<Onboard> {
                 }
                 setState(() {});
               },
-              children: [
+              children: const [
                 OnbordContent(),
                 OnbordContent(),
                 OnbordContent(
@@ -139,7 +139,7 @@ class _OnboardState extends State<Onboard> {
             right: 16,
             bottom: 24,
             child: Container(
-                margin: EdgeInsets.only(left: 15, right: 15),
+                margin: const EdgeInsets.only(left: 15, right: 15),
                 // alignment: Alignment(0, 0.9),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -153,13 +153,13 @@ class _OnboardState extends State<Onboard> {
                         style: GoogleFonts.leagueSpartan(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xff171917)),
+                            color: const Color(0xff171917)),
                       ),
                     ),
                     SmoothPageIndicator(
                       controller: pageController,
                       count: 3,
-                      effect: ExpandingDotsEffect(
+                      effect: const ExpandingDotsEffect(
                           dotWidth: 8,
                           dotHeight: 8,
                           // radius: 5,
@@ -170,7 +170,7 @@ class _OnboardState extends State<Onboard> {
                       onTap: () {
                         pageController.animateToPage(
                             (pageController.page ?? 0).toInt() + 1,
-                            duration: Duration(milliseconds: 200),
+                            duration: const Duration(milliseconds: 200),
                             curve: Curves.decelerate);
                       },
                       child: Text(
@@ -178,7 +178,7 @@ class _OnboardState extends State<Onboard> {
                         style: GoogleFonts.leagueSpartan(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xff171917)),
+                            color: const Color(0xff171917)),
                       ),
                     ),
                   ],

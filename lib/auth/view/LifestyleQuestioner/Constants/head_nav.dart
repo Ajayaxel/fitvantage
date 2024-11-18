@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_app/home/view/Homepages/home_screen.dart';
 
-import 'package:my_app/home/view/home_screen.dart';
+
 
 import 'package:my_app/lifestylequestiner/controller/life_style_questionair_controller.dart';
 
@@ -49,7 +50,7 @@ class HeadNavgtion extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Get.to(HomeScreen());
+            Get.to(const HomeScreen());
           },
           child: Text(
             "Skip",

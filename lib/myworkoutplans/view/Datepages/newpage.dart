@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class NewPage extends StatelessWidget {
   final DateTime selectedDate;
-  const NewPage({Key? key, required this.selectedDate}) : super(key: key);
+  const NewPage({super.key, required this.selectedDate});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Selected Date'),
+        title: const Text('Selected Date'),
       ),
       body: Center(
         child: Text(

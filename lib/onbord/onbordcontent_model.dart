@@ -45,7 +45,7 @@ class OnbordContent extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 52,),
+          const SizedBox(height: 52,),
           Visibility(
             visible: showGetStarted,
             replacement: const SizedBox(height: 56,),
@@ -59,7 +59,7 @@ class OnbordContent extends StatelessWidget {
             child: Container(
               height: 56,
             
-              padding: EdgeInsets.only(left: 24, right: 24),
+              padding: const EdgeInsets.only(left: 24, right: 24),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: Colors.black),

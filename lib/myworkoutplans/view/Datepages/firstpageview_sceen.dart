@@ -22,7 +22,7 @@ class _MyHomePageState extends State<TimerScrren> {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          BackgroundImage(),
+          const BackgroundImage(),
           Center(
             child: CircularCountDownTimer(
               // Countdown duration in Seconds.
@@ -104,7 +104,7 @@ class _MyHomePageState extends State<TimerScrren> {
               },
             ),
           ),
-           Positioned(
+           const Positioned(
             left: 15,
             top: 19,
                  
@@ -149,7 +149,7 @@ class _MyHomePageState extends State<TimerScrren> {
               child: Container(
                 height: 90,
                 width: 350,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color:Colors.white70,
                     borderRadius: BorderRadius.all(Radius.circular(18))),
                 child: Row(
@@ -159,16 +159,16 @@ class _MyHomePageState extends State<TimerScrren> {
   width: 80,
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(12),
-    image: DecorationImage(
+    image: const DecorationImage(
       image: NetworkImage("https://cbx-prod.b-cdn.net/COLOURBOX8559718.jpg?width=800&height=800&quality=70"), // Replace with your image URL
       fit: BoxFit.cover,
     ),
   ),
 ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
-                    Column(
+                    const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -186,10 +186,10 @@ class _MyHomePageState extends State<TimerScrren> {
                                 fontSize: 14)),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 55,
                     ),
-                    Icon(Icons.play_arrow, color: Colors.white, size: 36),
+                    const Icon(Icons.play_arrow, color: Colors.white, size: 36),
                   ],
                 ),
               ),

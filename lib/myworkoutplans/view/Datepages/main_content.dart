@@ -49,7 +49,7 @@ class _OnboardState extends State<MainContent> {
               //   }
               //   setState(() {});
               // },
-              children: [Workoutlist(), TimerScrren(),Second()],
+              children: const [Workoutlist(), TimerScrren(),Second()],
             ),
           ),
           Positioned(
@@ -57,9 +57,9 @@ class _OnboardState extends State<MainContent> {
             right: 16,
             bottom: 24,
             child: Container(
-                margin: EdgeInsets.only(left: 15, right: 15),
+                margin: const EdgeInsets.only(left: 15, right: 15),
                 // alignment: Alignment(0, 0.9),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // SmoothPageIndicator(

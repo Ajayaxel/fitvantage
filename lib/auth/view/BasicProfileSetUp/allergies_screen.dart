@@ -4,7 +4,8 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/constwidget/questions_box.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/food_you_hate_screen.dart';
-import 'package:my_app/home/view/home_screen.dart';
+import 'package:my_app/home/view/bootmNav/bottm_nav.dart';
+
 
 
 
@@ -37,7 +38,7 @@ class _AllergiesScreenState extends State<AllergiesScreen> {
         ),
         SafeArea(
           child: Padding(
-            padding: EdgeInsets.only(left: 24,right: 24,bottom: 35),
+            padding: const EdgeInsets.only(left: 24,right: 24,bottom: 35),
             child: Column(
               children: [
                 const SizedBox(
@@ -50,7 +51,7 @@ class _AllergiesScreenState extends State<AllergiesScreen> {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                         size: 23,
@@ -65,7 +66,7 @@ class _AllergiesScreenState extends State<AllergiesScreen> {
                     ),
                     GestureDetector(
                           onTap: () {
-                         Get.to(HomeScreen());
+                         Get.to(const BottmNav());
                       },
                       child: Text(
                         "Skip",
@@ -77,7 +78,7 @@ class _AllergiesScreenState extends State<AllergiesScreen> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 45,
                 ),
                 FittedBox(
@@ -92,7 +93,7 @@ class _AllergiesScreenState extends State<AllergiesScreen> {
                         fontSize: 33),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 FittedBox(
@@ -108,8 +109,8 @@ class _AllergiesScreenState extends State<AllergiesScreen> {
                     ),
                   ),
                 ),
-                Flexible(
-                  child: const SizedBox(
+                const Flexible(
+                  child: SizedBox(
                     height: 50,
                   ),
                 ),
@@ -118,27 +119,27 @@ class _AllergiesScreenState extends State<AllergiesScreen> {
                     selectedIndex=0;
                   });
                 },),
-                Flexible(child: const SizedBox(height: 21,)),
+                const Flexible(child: SizedBox(height: 21,)),
                     QuestionsOptionsbox(text: 'No', status: selectedIndex==1,onTap: (){
                       setState(() {
                         selectedIndex=1;
                       });
                     },),
                 
-                  Flexible(child: SizedBox(height: 328,)),
-                Spacer(flex: 5,),
+                  const Flexible(child: SizedBox(height: 328,)),
+                const Spacer(flex: 5,),
 
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>FoodYouHateScreen()));
+                            builder: (context) =>const FoodYouHateScreen()));
                   },
                   child: Container(
                     height: 56,
                     width: 327,
-                    padding: EdgeInsets.only(left: 24, right: 24),
+                    padding: const EdgeInsets.only(left: 24, right: 24),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: const Color.fromARGB(31, 108, 105, 105)),

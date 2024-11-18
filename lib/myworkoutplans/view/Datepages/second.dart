@@ -17,7 +17,7 @@ class Second extends StatelessWidget {
           left: 0,
           bottom: 0,
           child: Image.asset(
-            "assets/Onbording/gym.gif",
+            "assets/loging/12501301-Weighted-Crunch-(behind-head)_Waist_720.gif",
             fit: BoxFit.cover,
           ),
         ),
@@ -44,7 +44,7 @@ class Second extends StatelessWidget {
                 Text(
                   "Step 3 of 3",
                   style: GoogleFonts.montserrat(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontWeight: FontWeight.w500,
                       fontSize: 15.4),
                 ),
@@ -52,7 +52,7 @@ class Second extends StatelessWidget {
                   "final work out",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontWeight: FontWeight.w800,
                       fontSize: 33),
                 ),
@@ -135,7 +135,7 @@ class Second extends StatelessWidget {
                       Container(
                         height: 100,
                         width: double.infinity,
-                        decoration: BoxDecoration(   color: Colors.grey[800],borderRadius: BorderRadius.all(Radius.circular(24))),
+                        decoration: BoxDecoration(   color: Colors.grey[800],borderRadius: const BorderRadius.all(Radius.circular(24))),
                      
                         child: Row(
                           children: [
@@ -164,10 +164,10 @@ class Second extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
-                            Column(
+                            const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -185,8 +185,8 @@ class Second extends StatelessWidget {
                                         fontSize: 14)),
                               ],
                             ),
-                            SizedBox(width: 100,),
-                            Expanded(
+                            const SizedBox(width: 100,),
+                            const Expanded(
                               child: Icon(Icons.play_arrow,
                                   color: Colors.white, size: 36),
                             ),

@@ -16,7 +16,7 @@ class Workoutlist extends StatelessWidget {
           left: 0,
           bottom: 0,
           child: Image.asset(
-            "assets/Onbording/gym.gif",
+            "assets/Onbording/12501301-Weighted-Crunch-(behind-head)_Waist_1080.gif",
             fit: BoxFit.cover,
           ),
         ),
@@ -96,9 +96,9 @@ class Workoutlist extends StatelessWidget {
                                   return Container(
                                     padding: const EdgeInsets.all(20),
                                     height: 300, // Adjust height as needed
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: Colors.black,
-                                      borderRadius: const BorderRadius.vertical(
+                                      borderRadius: BorderRadius.vertical(
                                         top: Radius.circular(20),
                                       ),
                                     ),
@@ -133,7 +133,7 @@ class Workoutlist extends StatelessWidget {
                                               fontSize: 16,
                                             ),
                                           ),
-                                          subtitle: Text(
+                                          subtitle: const Text(
                                             "HARDER",
                                             style: TextStyle(
                                               color: Colors.yellow,
@@ -166,7 +166,7 @@ class Workoutlist extends StatelessWidget {
                                               fontSize: 16,
                                             ),
                                           ),
-                                          subtitle: Text(
+                                          subtitle: const Text(
                                             "EASIER",
                                             style: TextStyle(
                                               color: Colors.blue,
@@ -267,7 +267,7 @@ class Workoutlist extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 10),
-                            Column(
+                            const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -290,7 +290,7 @@ class Workoutlist extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(width: 100),
-                            Expanded(
+                            const Expanded(
                               child: Icon(Icons.play_arrow,
                                   color: Colors.white, size: 36),
                             ),

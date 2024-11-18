@@ -64,12 +64,12 @@ class SpecifySupplementScrenn extends StatelessWidget {
                   child: Text(
                     "See All Supplements",
                     style: GoogleFonts.montserrat(
-                        color: Color(0xff7FFA88),
+                        color: const Color(0xff7FFA88),
                         fontSize: 14,
                         fontWeight: FontWeight.w500),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
                 Flex(
@@ -77,11 +77,11 @@ class SpecifySupplementScrenn extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Container(
-                        margin: EdgeInsets.all(5), // Gap between boxes
+                        margin: const EdgeInsets.all(5), // Gap between boxes
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
-                              color: Color(0xff24262B)),
+                              color: const Color(0xff24262B)),
                           height: 48,
                           width: 88,
                           child: Center(
@@ -95,11 +95,11 @@ class SpecifySupplementScrenn extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.all(5), // Gap between boxes
+                      margin: const EdgeInsets.all(5), // Gap between boxes
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
-                            color: Color(0xff24262B)),
+                            color: const Color(0xff24262B)),
                         height: 48,
                         width: 85,
                         child: Center(
@@ -115,11 +115,11 @@ class SpecifySupplementScrenn extends StatelessWidget {
                     FittedBox(
                       child: Flexible(
                         child: Container(
-                          margin: EdgeInsets.all(5), // Gap between boxes
+                          margin: const EdgeInsets.all(5), // Gap between boxes
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(16),
-                                color: Color(0xff24262B)),
+                                color: const Color(0xff24262B)),
                             height: 48,
                             child: Center(
                               child: Text('BCAAs',
@@ -139,11 +139,11 @@ class SpecifySupplementScrenn extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Container(
-                        margin: EdgeInsets.all(5), // Gap between boxes
+                        margin: const EdgeInsets.all(5), // Gap between boxes
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
-                              color: Color(0xff24262B)),
+                              color: const Color(0xff24262B)),
                           height: 48,
                           width: 88,
                           child: Center(
@@ -158,11 +158,11 @@ class SpecifySupplementScrenn extends StatelessWidget {
                     ),
                     Flexible(
                       child: Container(
-                        margin: EdgeInsets.all(5), // Gap between boxes
+                        margin: const EdgeInsets.all(5), // Gap between boxes
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
-                              color: Color(0xff24262B)),
+                              color: const Color(0xff24262B)),
                           height: 48,
                           //  width: 88,
                           child: Center(
@@ -177,11 +177,11 @@ class SpecifySupplementScrenn extends StatelessWidget {
                     ),
                     Flexible(
                       child: Container(
-                        margin: EdgeInsets.all(5), // Gap between boxes
+                        margin: const EdgeInsets.all(5), // Gap between boxes
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
-                              color: Color(0xff24262B)),
+                              color: const Color(0xff24262B)),
                           height: 48,
                           // width: 88,
                           child: Center(
@@ -201,11 +201,11 @@ class SpecifySupplementScrenn extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Container(
-                        margin: EdgeInsets.all(5), // Gap between boxes
+                        margin: const EdgeInsets.all(5), // Gap between boxes
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
-                              color: Color(0xff24262B)),
+                              color: const Color(0xff24262B)),
                           height: 48,
                           //  width: 88,
                           child: Center(
@@ -220,11 +220,11 @@ class SpecifySupplementScrenn extends StatelessWidget {
                     ),
                     Flexible(
                       child: Container(
-                        margin: EdgeInsets.all(5), // Gap between boxes
+                        margin: const EdgeInsets.all(5), // Gap between boxes
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
-                              color: Color(0xff24262B)),
+                              color: const Color(0xff24262B)),
                           height: 48,
                           //width: 88,
                           child: Center(
@@ -239,11 +239,11 @@ class SpecifySupplementScrenn extends StatelessWidget {
                     ),
                     Flexible(
                       child: Container(
-                        margin: EdgeInsets.all(5), // Gap between boxes
+                        margin: const EdgeInsets.all(5), // Gap between boxes
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
-                              color: Color(0xff24262B)),
+                              color: const Color(0xff24262B)),
                           height: 48,
                           child: Center(
                             child: Text('Omega 8',
@@ -261,11 +261,11 @@ class SpecifySupplementScrenn extends StatelessWidget {
                   direction: Axis.horizontal,
                   children: [
                     Container(
-                      margin: EdgeInsets.all(5), // Gap between boxes
+                      margin: const EdgeInsets.all(5), // Gap between boxes
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
-                            color: Color(0xff24262B)),
+                            color: const Color(0xff24262B)),
                         height: 48,
                         width: 88,
                         child: Center(
@@ -279,9 +279,9 @@ class SpecifySupplementScrenn extends StatelessWidget {
                     ),
                   ],
                 ),
-                  Spacer(),
+                  const Spacer(),
                 NextButton(onTap: () {
-                  Get.to(DietScreenThree());
+                  Get.to(const DietScreenThree());
                 })
               ],
             ),

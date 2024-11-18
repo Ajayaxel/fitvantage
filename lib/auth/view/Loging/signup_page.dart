@@ -113,11 +113,11 @@ class _SignupPageState extends State<SignupPage> {
                     height: 56,
 
                     // padding: const EdgeInsets.only(left: 20, top: 3.3),
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                         left: 20, top: 18, bottom: 16, right: 20),
                     decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.6),
-                        borderRadius: BorderRadius.all(Radius.circular(12))),
+                        borderRadius: const BorderRadius.all(Radius.circular(12))),
                     child: TextFormField(
                       controller: emailController,
                       decoration: InputDecoration(
@@ -126,7 +126,7 @@ class _SignupPageState extends State<SignupPage> {
                         hintText: "Email or Phone",
                         hintStyle: GoogleFonts.montserrat(
                             fontSize: 16,
-                            color: Color(0xff0A0B0A).withOpacity(0.4),
+                            color: const Color(0xff0A0B0A).withOpacity(0.4),
                             fontWeight: FontWeight.w500),
                       ),
                       validator: (value) {
@@ -137,18 +137,18 @@ class _SignupPageState extends State<SignupPage> {
                       },
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Container(
                     height: 56,
 
                     // padding: const EdgeInsets.only(left: 20, top: 3.3),
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                         left: 20, top: 18, bottom: 16, right: 20),
                     decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.6),
-                        borderRadius: BorderRadius.all(Radius.circular(12))),
+                        borderRadius: const BorderRadius.all(Radius.circular(12))),
                     child: TextFormField(
                       controller: passwordController,
                       decoration: InputDecoration(
@@ -157,7 +157,7 @@ class _SignupPageState extends State<SignupPage> {
                         hintText: "Password",
                         hintStyle: GoogleFonts.montserrat(
                             fontSize: 16,
-                            color: Color(0xff0A0B0A).withOpacity(0.4),
+                            color: const Color(0xff0A0B0A).withOpacity(0.4),
                             fontWeight: FontWeight.w500),
                       ),
                       validator: (value) {
@@ -168,7 +168,7 @@ class _SignupPageState extends State<SignupPage> {
                       },
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Align(
@@ -178,7 +178,7 @@ class _SignupPageState extends State<SignupPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ForgetPassword()));
+                                  builder: (context) => const ForgetPassword()));
                         },
                         child: Text(
                           "Forgot Password?",
@@ -196,11 +196,11 @@ class _SignupPageState extends State<SignupPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => StartSetupScreen()));
+                              builder: (context) => const StartSetupScreen()));
                     },
                     child: Container(
                       height: 56,
-                      padding: EdgeInsets.only(left: 24, right: 24),
+                      padding: const EdgeInsets.only(left: 24, right: 24),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           color: Colors.black),
@@ -288,7 +288,7 @@ class _SignupPageState extends State<SignupPage> {
                     ],
                   ),
                 
-                     SizedBox(
+                     const SizedBox(
                       height: 97,
                     ),
                   
@@ -298,7 +298,7 @@ class _SignupPageState extends State<SignupPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => LoginErPage()));
+                              builder: (context) => const LoginErPage()));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -316,7 +316,7 @@ class _SignupPageState extends State<SignupPage> {
                               "Sign Up",
                               maxLines: 1,
                               style: GoogleFonts.montserrat(
-                                  color: Color(0xff7FFA88),
+                                  color: const Color(0xff7FFA88),
                                   fontWeight: FontWeight.w400,
                                   fontSize: 16),
                             ),

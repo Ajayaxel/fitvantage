@@ -3,8 +3,9 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/age_setup_screen.dart';
+import 'package:my_app/home/view/bootmNav/bottm_nav.dart';
 
-import 'package:my_app/home/view/home_screen.dart';
+
 
 
 class GenderScreen extends StatefulWidget {
@@ -63,7 +64,7 @@ class _GenderScreenState extends State<GenderScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                         Get.to(HomeScreen());
+                         Get.to(const BottmNav());
                       },
                       child: Text(
                         "Skip",

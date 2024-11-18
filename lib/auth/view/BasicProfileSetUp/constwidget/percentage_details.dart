@@ -24,7 +24,7 @@ class PercentageDeatils extends StatelessWidget {
             icon,
             color: Colors.white,
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           

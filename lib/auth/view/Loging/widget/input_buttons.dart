@@ -18,10 +18,10 @@ class InputFileds extends StatelessWidget {
    
      // padding: const EdgeInsets.only(left: 20, top: 3.3),
      padding:
-         EdgeInsets.only(left: 20, top: 18, bottom: 16, right: 20),
+         const EdgeInsets.only(left: 20, top: 18, bottom: 16, right: 20),
      decoration: BoxDecoration(
          color: Colors.white.withOpacity(0.6),
-         borderRadius: BorderRadius.all(Radius.circular(12))),
+         borderRadius: const BorderRadius.all(Radius.circular(12))),
      child: TextFormField(
       
        decoration: InputDecoration(
@@ -30,7 +30,7 @@ class InputFileds extends StatelessWidget {
          hintText: input,
          hintStyle: GoogleFonts.montserrat(
              fontSize: 16,
-             color: Color(0xff0A0B0A).withOpacity(0.4),
+             color: const Color(0xff0A0B0A).withOpacity(0.4),
              fontWeight: FontWeight.w500),
        ),
        validator: (value) {

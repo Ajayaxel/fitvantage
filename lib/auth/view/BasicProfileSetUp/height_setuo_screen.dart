@@ -3,7 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/diet_setup_screen.dart';
-import 'package:my_app/home/view/home_screen.dart';
+import 'package:my_app/home/view/bootmNav/bottm_nav.dart';
+
 
 
 
@@ -36,7 +37,7 @@ class _HeightSetuoScreenState extends State<HeightSetuoScreen> {
         ),
         SafeArea(
           child: Padding(
-            padding: EdgeInsets.only(left: 24,right: 24,bottom: 35),
+            padding: const EdgeInsets.only(left: 24,right: 24,bottom: 35),
             child: Column(
               children: [
                 const SizedBox(
@@ -49,7 +50,7 @@ class _HeightSetuoScreenState extends State<HeightSetuoScreen> {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                         size: 23,
@@ -64,7 +65,7 @@ class _HeightSetuoScreenState extends State<HeightSetuoScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                         Get.to(HomeScreen());
+                         Get.to(const BottmNav());
                       },
                       child: Text(
                         "Skip",
@@ -76,7 +77,7 @@ class _HeightSetuoScreenState extends State<HeightSetuoScreen> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 45,
                 ),
                 FittedBox(
@@ -89,7 +90,7 @@ class _HeightSetuoScreenState extends State<HeightSetuoScreen> {
                         fontSize: 33),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 FittedBox(
@@ -104,7 +105,7 @@ class _HeightSetuoScreenState extends State<HeightSetuoScreen> {
                     ),
                   ),
                 ),
-                Flexible(
+                const Flexible(
                   child: SizedBox(
                     height: 97,
                   ),
@@ -122,7 +123,7 @@ class _HeightSetuoScreenState extends State<HeightSetuoScreen> {
                     width: 46,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 1,
                 ),
                 Row(
@@ -131,23 +132,23 @@ class _HeightSetuoScreenState extends State<HeightSetuoScreen> {
                     Text(
                       "$count",
                       style: GoogleFonts.montserrat(
-                        color: Color(0xff7FFA88),
+                        color: const Color(0xff7FFA88),
                         fontSize: 64,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    SizedBox(width:12,),
+                    const SizedBox(width:12,),
                     Text(
                       "Cm",
                       style: GoogleFonts.montserrat(
-                        color: Color(0xffFFFFFF).withOpacity(0.65),
+                        color: const Color(0xffFFFFFF).withOpacity(0.65),
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 2,
                 ),
                 GestureDetector(
@@ -163,12 +164,12 @@ class _HeightSetuoScreenState extends State<HeightSetuoScreen> {
                     width: 46,
                   ),
                 ),
-                Flexible(
+                const Flexible(
                   child: SizedBox(
                     height: 260,
                   ),
                 ),
-                Spacer(
+                const Spacer(
                   flex: 2,
                 ),
                 GestureDetector(
@@ -176,12 +177,12 @@ class _HeightSetuoScreenState extends State<HeightSetuoScreen> {
                         Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => DietSetupScreen()));
+                          builder: (context) => const DietSetupScreen()));
                    },
                   child: Container(
                     height: 56,
                     width: 327,
-                    padding: EdgeInsets.only(left: 24, right: 24),
+                    padding: const EdgeInsets.only(left: 24, right: 24),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: const Color.fromARGB(31, 108, 105, 105)),

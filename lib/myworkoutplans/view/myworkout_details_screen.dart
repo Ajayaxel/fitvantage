@@ -5,6 +5,7 @@ import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:my_app/auth/view/LifestyleQuestioner/Constants/backround_image.dart';
+
 import 'package:my_app/myworkoutplans/view/Datepages/main_content.dart';
 
 class MyworkoutDetailsScreen extends StatefulWidget {
@@ -29,12 +30,12 @@ void _showBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
     sheetAnimationStyle: AnimationStyle(duration: Durations.extralong1,curve: Curves.bounceInOut),
-    shape: RoundedRectangleBorder(
+    shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
     ),
     backgroundColor: Colors.white,
     builder: (BuildContext context) {
-      return Container(
+      return SizedBox(
         height: MediaQuery.of(context).size.height * 0.3, // Adjust height as needed
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -42,33 +43,33 @@ void _showBottomSheet(BuildContext context) {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               // Heading at the top of the bottom sheet
-              Text(
+              const Text(
                 'Exercise Options', // Change to your desired heading
                 style: TextStyle(
                   fontSize: 20, // Font size of the heading
                   fontWeight: FontWeight.bold, // Make it bold
                 ),
               ),
-              SizedBox(height: 16), // Space between heading and ListTiles
+              const SizedBox(height: 16), // Space between heading and ListTiles
               ListTile(
-                leading: Icon(Icons.info, color: Colors.greenAccent),
-                title: Text("Exercise Details"),
+                leading: const Icon(Icons.info, color: Colors.greenAccent),
+                title: const Text("Exercise Details"),
                 onTap: () {
                   // Perform any action you want when this option is clicked
                   Navigator.pop(context); // Close the bottom sheet
                 },
               ),
               ListTile(
-                leading: Icon(Icons.edit, color: Colors.blueAccent),
-                title: Text("Edit Exercise"),
+                leading: const Icon(Icons.edit, color: Colors.blueAccent),
+                title: const Text("Edit Exercise"),
                 onTap: () {
                   // Perform any action you want when this option is clicked
                   Navigator.pop(context); // Close the bottom sheet
                 },
               ),
               ListTile(
-                leading: Icon(Icons.delete, color: Colors.redAccent),
-                title: Text("Delete Exercise"),
+                leading: const Icon(Icons.delete, color: Colors.redAccent),
+                title: const Text("Delete Exercise"),
                 onTap: () {
                   // Perform any action you want when this option is clicked
                   Navigator.pop(context); // Close the bottom sheet
@@ -89,7 +90,7 @@ void _showBottomSheet(BuildContext context) {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          BackgroundImage(),
+          const BackgroundImage(),
           Padding(
             padding:
                 const EdgeInsets.only(left: 18, right: 18, bottom: 20, top: 15),
@@ -98,11 +99,17 @@ void _showBottomSheet(BuildContext context) {
               children: [
                 Row(
                   children: [
-                    const Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Colors.white,
+                    GestureDetector(
+                        onTap: () {
+                           Navigator.pop(context);
+                        },
+                         
+                      child: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                      ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Text(
                       "My workout plan",
                       style: GoogleFonts.manrope(
@@ -148,7 +155,7 @@ void _showBottomSheet(BuildContext context) {
                     onDateChange: _onDateChange, // Function to change the date
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -179,8 +186,8 @@ void _showBottomSheet(BuildContext context) {
                     ),
                   ],
                 ),
-                SizedBox(height: 30),
-                _selectedDate.isAfter(DateTime.now())?Text('No data'):
+                const SizedBox(height: 30),
+                _selectedDate.isAfter(DateTime.now())?const Text('No data'):
                 
                 Expanded(
                   child: GestureDetector(
@@ -188,7 +195,7 @@ void _showBottomSheet(BuildContext context) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MainContent()));
+                              builder: (context) => const MainContent()));
                   },
                     child: ListView(
                       children: [
@@ -235,7 +242,7 @@ void _showBottomSheet(BuildContext context) {
                               ),
                               trailing: GestureDetector(
                                 onTap: () => _showBottomSheet(context), // Show bottom sheet on icon tap
-                                child: Icon(
+                                child: const Icon(
                                   Icons.more_vert,
                                   color: Colors.white54,
                                   size: 25,
@@ -273,7 +280,7 @@ void _showBottomSheet(BuildContext context) {
                               ),
                               trailing: GestureDetector(
                                 onTap: () => _showBottomSheet(context), // Show bottom sheet on icon tap
-                                child: Icon(
+                                child: const Icon(
                                   Icons.more_vert,
                                   color: Colors.white54,
                                   size: 25,
@@ -309,7 +316,7 @@ void _showBottomSheet(BuildContext context) {
                               ),
                               trailing: GestureDetector(
                                 onTap: () => _showBottomSheet(context), // Show bottom sheet on icon tap
-                                child: Icon(
+                                child: const Icon(
                                   Icons.more_vert,
                                   color: Colors.white54,
                                   size: 25,
@@ -345,7 +352,7 @@ void _showBottomSheet(BuildContext context) {
                               ),
                               trailing: GestureDetector(
                                 onTap: () => _showBottomSheet(context), // Show bottom sheet on icon tap
-                                child: Icon(
+                                child: const Icon(
                                   Icons.more_vert,
                                   color: Colors.white54,
                                   size: 25,
@@ -402,7 +409,7 @@ void _showBottomSheet(BuildContext context) {
                               ),
                               trailing: GestureDetector(
                                 onTap: () => _showBottomSheet(context), // Show bottom sheet on icon tap
-                                child: Icon(
+                                child: const Icon(
                                   Icons.more_vert,
                                   color: Colors.white54,
                                   size: 25,
@@ -440,7 +447,7 @@ void _showBottomSheet(BuildContext context) {
                               ),
                               trailing: GestureDetector(
                                 onTap: () => _showBottomSheet(context), // Show bottom sheet on icon tap
-                                child: Icon(
+                                child: const Icon(
                                   Icons.more_vert,
                                   color: Colors.white54,
                                   size: 25,
@@ -476,7 +483,7 @@ void _showBottomSheet(BuildContext context) {
                               ),
                               trailing: GestureDetector(
                                 onTap: () => _showBottomSheet(context), // Show bottom sheet on icon tap
-                                child: Icon(
+                                child: const Icon(
                                   Icons.more_vert,
                                   color: Colors.white54,
                                   size: 25,
@@ -512,7 +519,7 @@ void _showBottomSheet(BuildContext context) {
                               ),
                               trailing: GestureDetector(
                                 onTap: () => _showBottomSheet(context), // Show bottom sheet on icon tap
-                                child: Icon(
+                                child: const Icon(
                                   Icons.more_vert,
                                   color: Colors.white54,
                                   size: 25,

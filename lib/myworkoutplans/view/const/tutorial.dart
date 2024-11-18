@@ -4,6 +4,8 @@ import 'package:my_app/auth/view/LifestyleQuestioner/Constants/backround_image.d
 import 'package:video_player/video_player.dart';
 
 class VideoScreen extends StatefulWidget {
+  const VideoScreen({super.key});
+
   @override
   _VideoScreenState createState() => _VideoScreenState();
 }
@@ -69,7 +71,7 @@ class _VideoScreenState extends State<VideoScreen> {
                         child: VideoPlayer(_controller),
                       ),
                     )
-                  : CircularProgressIndicator(),
+                  : const CircularProgressIndicator(),
             ),
           ],
         ),
@@ -81,7 +83,7 @@ class _VideoScreenState extends State<VideoScreen> {
 class FullScreenVideo extends StatelessWidget {
   final VideoPlayerController controller;
 
-  FullScreenVideo({required this.controller});
+  const FullScreenVideo({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

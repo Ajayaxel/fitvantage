@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 
 class FadedEdges extends StatelessWidget {
   const FadedEdges(
-      {Key? key,
+      {super.key,
       required this.child,
       this.colors,
       this.stops,
-      this.isHorizontal = false})
-      : super(key: key);
+      this.isHorizontal = false});
   final Widget child;
   final List<Color>? colors;
   final List<double>? stops;
