@@ -46,10 +46,14 @@ class LifestyleScoreTab extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildScoreSection('81', 'Awesome', Colors.yellow, screenWidth),
-                  _buildScoreSection('61', 'Doing Well', Colors.white, screenWidth),
-                  _buildScoreSection('41', 'On Track', Colors.white, screenWidth),
-                  _buildScoreSection('0', 'Off Track', Colors.grey, screenWidth),
+                  _buildScoreSection(
+                      '81', 'Awesome', Colors.yellow, screenWidth),
+                  _buildScoreSection(
+                      '61', 'Doing Well', Colors.white, screenWidth),
+                  _buildScoreSection(
+                      '41', 'On Track', Colors.white, screenWidth),
+                  _buildScoreSection(
+                      '0', 'Off Track', Colors.grey, screenWidth),
                 ],
               ),
             ),
@@ -63,21 +67,27 @@ class LifestyleScoreTab extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildProgressCircle('MOVEMENT', 0.6, Colors.yellow, screenWidth),
-                _buildProgressCircle('NUTRITION', 0.52, Colors.yellow, screenWidth),
+                _buildProgressCircle(
+                    'MOVEMENT', 0.6, Colors.yellow, screenWidth),
+                _buildProgressCircle(
+                    'NUTRITION', 0.52, Colors.yellow, screenWidth),
                 _buildProgressCircle('STRESS', 0.6, Colors.yellow, screenWidth),
                 _buildProgressCircle('SLEEP', 0.6, Colors.yellow, screenWidth),
               ],
             ),
             SizedBox(height: screenHeight * 0.03),
             SizedBox(
-              height: screenHeight - appBarHeight - (screenHeight * 0.35),
+              height: screenHeight - appBarHeight - (screenHeight * 0.24),
               child: PageView(
                 children: [
-                  _buildSwipeableContent('MOVEMENT', 0.6, Colors.yellow, screenWidth),
-                  _buildSwipeableContent('NUTRITION', 0.52, Colors.yellow, screenWidth),
-                  _buildSwipeableContent('STRESS', 0.6, Colors.yellow, screenWidth),
-                  _buildSwipeableContent('SLEEP', 0.6, Colors.yellow, screenWidth),
+                  _buildSwipeableContent(
+                      'MOVEMENT', 0.6, Colors.yellow, screenWidth),
+                  _buildSwipeableContent(
+                      'NUTRITION', 0.52, Colors.yellow, screenWidth),
+                  _buildSwipeableContent(
+                      'STRESS', 0.6, Colors.yellow, screenWidth),
+                  _buildSwipeableContent(
+                      'SLEEP', 0.6, Colors.yellow, screenWidth),
                 ],
               ),
             ),
@@ -87,7 +97,8 @@ class LifestyleScoreTab extends StatelessWidget {
     );
   }
 
-  Widget _buildScoreSection(String score, String label, Color color, double screenWidth) {
+  Widget _buildScoreSection(
+      String score, String label, Color color, double screenWidth) {
     return Column(
       children: [
         Text(
@@ -100,13 +111,15 @@ class LifestyleScoreTab extends StatelessWidget {
         ),
         Text(
           label,
-          style: GoogleFonts.manrope(color: color, fontSize: screenWidth * 0.03),
+          style:
+              GoogleFonts.manrope(color: color, fontSize: screenWidth * 0.03),
         ),
       ],
     );
   }
 
-  Widget _buildProgressCircle(String label, double progress, Color color, double screenWidth) {
+  Widget _buildProgressCircle(
+      String label, double progress, Color color, double screenWidth) {
     return Column(
       children: [
         Stack(
@@ -135,13 +148,15 @@ class LifestyleScoreTab extends StatelessWidget {
         SizedBox(height: screenWidth * 0.02),
         Text(
           label,
-          style: GoogleFonts.manrope(color: Colors.white, fontSize: screenWidth * 0.03),
+          style: GoogleFonts.manrope(
+              color: Colors.white, fontSize: screenWidth * 0.03),
         ),
       ],
     );
   }
 
-  Widget _buildSwipeableContent(String label, double progress, Color color, double screenWidth) {
+  Widget _buildSwipeableContent(
+      String label, double progress, Color color, double screenWidth) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
       child: Column(
@@ -173,7 +188,8 @@ class LifestyleScoreTab extends StatelessWidget {
               SizedBox(width: screenWidth * 0.04),
               const Text(
                 "A quick chat with your Habit Coach can\nhelp you get aligned with your goals.",
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
               ),
             ],
           ),
@@ -183,33 +199,32 @@ class LifestyleScoreTab extends StatelessWidget {
               padding: EdgeInsets.all(screenWidth * 0.03),
               child: Dottext(text: 'Meditate Regularly'),
             ),
-            const Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: GestureDetector(
-              onTap: () {
-                Get.to(() => const LifeStyleScrren());
-              },
-              child: Container(
-                height: screenWidth * 0.13,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: Text(
-                    "REASSESS $label SCORE",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      color: Colors.redAccent,
-                      fontSize: screenWidth * 0.04,
-                    ),
+          // const Spacer(),
+          GestureDetector(
+            onTap: () {
+              Get.to(() => const LifeStyleScrren());
+            },
+            child: Container(
+              // height: screenWidth * 0.13,
+              padding: EdgeInsets.symmetric(vertical: 16,horizontal: 16),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Text(
+                  "REASSESS $label SCORE",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    color: Colors.redAccent,
+                    fontSize: screenWidth * 0.04,
                   ),
                 ),
               ),
             ),
           ),
+          SizedBox(height: 20,),
         ],
       ),
     );
@@ -217,7 +232,6 @@ class LifestyleScoreTab extends StatelessWidget {
 }
 
 //dot text//
-
 
 class Dottext extends StatelessWidget {
   final String text;
@@ -230,7 +244,8 @@ class Dottext extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth * 0.035; // Adjust font size based on screen width
+    double fontSize =
+        screenWidth * 0.035; // Adjust font size based on screen width
     double spacing = screenWidth * 0.05; // Adjust spacing
 
     return Row(

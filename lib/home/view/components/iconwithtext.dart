@@ -20,7 +20,7 @@ class IconWithText extends StatelessWidget {
           child: Icon(
             icon,
             color: Colors.white,
-            size: 28,
+            size: 24,
           ),
         ),
         const SizedBox(height: 8),

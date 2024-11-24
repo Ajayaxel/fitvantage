@@ -12,7 +12,7 @@ class TransfromController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return const DefaultTabController(
       length: 3,
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -20,24 +20,11 @@ class TransfromController extends StatelessWidget {
           child: Stack(
             children: [
               // Background image
-              const BackgroundImage(),
-              
-
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 10,right: 10,top: 15),
-              //   child: Text(
-              //     "Weight Loss",
-              //     style: GoogleFonts.manrope(
-              //         color: Colors.white,
-              //         fontSize: 16,
-              //         fontWeight: FontWeight.w700),
-              //   ),
-              // ),
-
-              // Main content with TabBar and TabBarView
+              BackgroundImage(),
+          
               CustomScrollView(
                 slivers: [
-                  const SliverAppBar(
+                  SliverAppBar(
                     backgroundColor: Colors.transparent,
                     floating: true,
                     pinned: false,
@@ -60,8 +47,8 @@ class TransfromController extends StatelessWidget {
                   SliverFillRemaining(
                     child: TabBarView(
                       children: [
-                        const AtHomePage(),
-                        const TransformScreen(),
+                        AtHomePage(),
+                        TransformScreen(),
                         AtCenterpage(),
                       ],
                     ),

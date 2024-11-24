@@ -1,4 +1,4 @@
-import 'package:fl_chart/fl_chart.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/home/view/profilepages/profile_edite_sections.dart';
@@ -9,7 +9,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen>
-    with SingleTickerProviderStateMixin {
+  with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Color?> _colorAnimation;
   late Animation<AlignmentGeometry> _alignmentAnimation;
@@ -58,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           onTap: () {
             Navigator.of(context).pop();
           },
-          child: Icon(Icons.arrow_back, color: Colors.white)),
+          child: const Icon(Icons.arrow_back, color: Colors.white)),
       ),
       extendBodyBehindAppBar: true,
       body: AnimatedBuilder(
@@ -226,7 +226,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       backgroundColor: Colors.black,
@@ -248,9 +248,9 @@ class _ProfileScreenState extends State<ProfileScreen>
               const SizedBox(height: 10),
               TextField(
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search, color: Colors.white70),
+                  prefixIcon: const Icon(Icons.search, color: Colors.white70),
                   hintText: 'Search for your city',
-                  hintStyle: TextStyle(color: Colors.white54),
+                  hintStyle: const TextStyle(color: Colors.white54),
                   filled: true,
                   fillColor: Colors.white.withOpacity(0.1),
                   border: OutlineInputBorder(
@@ -258,7 +258,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     borderSide: BorderSide.none,
                   ),
                 ),
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
               const SizedBox(height: 16),
               Text(
