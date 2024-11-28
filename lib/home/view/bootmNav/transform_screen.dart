@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/home/view/bootmNav/transformconst/pages/Bottmshet/bottm_sheet.dart';
 import 'package:my_app/home/view/lifestyleScorescreens/habit_screen.dart';
+import 'package:my_app/videocall/videocall.dart';
 
 class TransformScreen extends StatelessWidget {
   const TransformScreen({super.key});
@@ -42,7 +43,14 @@ class TransformScreen extends StatelessWidget {
                   child: const Icon(Icons.contact_emergency_outlined, color: Colors.white),
                 ),
                 const SizedBox(width: 15),
-                const Icon(Icons.chat, color: Colors.white),
+              GestureDetector(
+                onTap: () {
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>  VideocallScreen()),
+                    );
+                },
+                child: const Icon(Icons.video_call, color: Colors.white)),
               ],
             ),
           ),
@@ -71,8 +79,9 @@ class TransformScreen extends StatelessWidget {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.6),
+              color: Colors.black.withOpacity(0.1),
               borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.white70)
             ),
             padding: const EdgeInsets.all(16),
             // ignore: prefer_const_constructors
@@ -86,7 +95,7 @@ class TransformScreen extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -97,7 +106,7 @@ class TransformScreen extends StatelessWidget {
                     'with cult plate ratio of 25 : 25 : 50 of Carbs : Protein : Fibre\n\n'
                     'and go with NO CARB dinner',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18, color: Colors.black),
+                    style: TextStyle(fontSize: 18, color: Color(0xff7FFA88)),
                   ),
                 ),
               ],

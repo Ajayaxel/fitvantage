@@ -1,7 +1,7 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
 
 class CarouleScreen extends StatefulWidget {
   const CarouleScreen({super.key});
@@ -18,16 +18,16 @@ class _CarouleScreenState extends State<CarouleScreen> {
 
   final List<Map<String, String>> _carouselText = [
     {
-      "title": "Build Your \"Fite Plate\"",
-      "subtitle": "I will balance my breakfast and lunch",
+      "title": "Personalize your fitness platter",
+      "subtitle": "I will fuel my day with balanced meals.",
       "description":
-          "with fit plate ratio\nof 25 : 25 : 50 of\nCarbs : Protein :\nFibre and go with ..."
+          "with the FITvantage platter ratio of25:25:50—carbs,protein, and fiber—for breakfast and lunch, and opt for a no-carb dinner."
     },
     {
-      "title": "Achieve Your Goals",
-      "subtitle": "Stay healthy and fit",
+      "title": "Unlock your advantage",
+      "subtitle": "Achieve Balance and Strength",
       "description":
-          "Start your journey towards a balanced diet and a healthier lifestyle."
+          "your journey to wellness starts here"
     },
   ];
 
@@ -59,15 +59,27 @@ class _CarouleScreenState extends State<CarouleScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        _carouselText[index]["title"]!,
+                      DefaultTextStyle(
+                        textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
-                        textAlign: TextAlign.center,
+                        child: AnimatedTextKit(
+                          animatedTexts: [
+                            TypewriterAnimatedText(
+                              _carouselText[index]["title"]!,
+                              curve: Curves.linear,
+
+                              speed: const Duration(
+                                  milliseconds:
+                                      150), // Adjust speed for smoother wrapping
+                            ),
+                          ],
+                        ),
                       ),
+                
                       const SizedBox(height: 8),
                       Text(
                         _carouselText[index]["subtitle"]!,
@@ -78,15 +90,31 @@ class _CarouleScreenState extends State<CarouleScreen> {
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 16),
-                      Text(
-                        _carouselText[index]["description"]!,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize:26,
-                          fontWeight: FontWeight.w900,
+                      //
+
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: DefaultTextStyle(
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 26,
+                            fontWeight: FontWeight.w900,
+                          ),
+                          child: AnimatedTextKit(
+                            animatedTexts: [
+                              TypewriterAnimatedText(
+                                _carouselText[index]["description"]!,
+                                speed: const Duration(
+                                    milliseconds:
+                                        150), // Adjust speed for smoother wrapping
+                              ),
+                            ],
+                          ),
                         ),
-                        textAlign: TextAlign.center,
                       ),
+
+      
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () {
@@ -101,8 +129,8 @@ class _CarouleScreenState extends State<CarouleScreen> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 10),
                         ),
-                        child: Text(
-                          "EXPOLORE",
+                        child: const Text(
+                          "EXPLORE",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),

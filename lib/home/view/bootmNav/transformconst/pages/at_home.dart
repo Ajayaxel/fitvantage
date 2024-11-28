@@ -64,7 +64,7 @@ class AtHomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HabitScreen()),
+                              builder: (context) => const HabitScreen()),
                         );
                       },
                       child: Text(
@@ -95,55 +95,57 @@ class AtHomePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 40),
-                    Dividerwidget(text: 'WHAT YOU GET'),
-                    ExpertCard(
+                    Dividerwidget(text: 'What you’ll unlock'),
+                    const ExpertCard(
                       title: "Nutrition",
                       subtitle: "Expert",
                       imageUrl: "assets/Onbording/fitness-banner.png",
-                      bulletPoints: const [
-                        "Weekly 1:1 online Nutrition\nconsultations & plans",
-                        "Homely meal plans, No fad diets",
-                        "Adapts to your lifestyle & budget",
+                      bulletPoints: [
+                        "Weekly 1:1 consultations with customized nutrition plans.",
+                        "Real, homely meal plans—no quick fixes, just sustainable health.",
+                        "Custom nutrition advice that fits your lifestyle and budget"
                       ],
-                      gradientStartColor: const Color(0xFF0D324D),
-                      gradientEndColor: const Color(0xFF7F5A83),
+                      gradientStartColor: Color(0xFF0D324D),
+                      gradientEndColor: Color(0xFF7F5A83),
                     ),
-                    ExpertCard(
+                    const ExpertCard(
                       title: "Mindset",
                       subtitle: "Expert",
                       imageUrl: "assets/Onbording/fitness-banner.png",
-                      bulletPoints: const [
-                        "Weekly 1:1 online Nutrition consultations & plans",
-                        "Adapts to your lifestyle & budget",
+                      bulletPoints: [
+                        "1:1 online consultations to strengthen your mental clarity and focus.",
+                        "Personalized mindset strategies to help you overcome challenges and stay positive.",
+                        "Empowering you with techniques to manage stress, build resilience, and improve mental health."
                       ],
-                      gradientStartColor: const Color(0xFF0D324D),
+                      gradientStartColor: Color(0xFF0D324D),
                       gradientEndColor:
-                          const Color.fromARGB(255, 132, 246, 112),
+                          Color.fromARGB(255, 132, 246, 112),
                     ),
-                    ExpertCard(
+                    const ExpertCard(
                       title: "Fitness",
                       subtitle: "Expert",
                       imageUrl: "assets/Onbording/fitness-banner.png",
-                      bulletPoints: const [
-                        "Weekly 1:1 online Nutrition consultations & plans",
-                        "Homely meal plans, No fad diets",
-                        "Adapts to your lifestyle & budget",
+                      bulletPoints: [
+                      "1:1 online consultations, tailored assessments, and progressive workout routines.",
+                      "Live interactive training with your expert coach, anytime and anywhere.",
+                      "Fitness plans designed to safely accommodate injuries and health conditions."
+
                       ],
-                      gradientStartColor: const Color(0xFF0D324D),
-                      gradientEndColor: const Color.fromARGB(255, 203, 28, 223),
+                      gradientStartColor: Color(0xFF0D324D),
+                      gradientEndColor: Color.fromARGB(255, 203, 28, 223),
                     ),
-                    Dividerwidget(text: "WE'VE GOT YOU MORE"),
-                    ExpertCard(
+                    Dividerwidget(text: "There’s more to unlock"),
+                    const ExpertCard(
                       title: "Medical Doctor",
                       subtitle: "Expert",
                       imageUrl: "assets/Onbording/fitness-banner.png",
-                      bulletPoints: const [
-                        "Weekly 1:1 online Nutrition consultations & plans",
-                        "Homely meal plans, No fad diets",
-                        "Adapts to your lifestyle & budget",
+                      bulletPoints: [
+                      "1:1 online consultations with a trusted medical doctor for expert care and advice.",
+                      "Tailored health plans designed to support your medical needs and promote wellness.",
+                      "Comprehensive medical support for managing chronic conditions and improving overall health."
                       ],
-                      gradientStartColor: const Color(0xFF0D324D),
-                      gradientEndColor: const Color.fromARGB(225, 77, 103, 247),
+                      gradientStartColor: Color(0xFF0D324D),
+                      gradientEndColor: Color.fromARGB(225, 77, 103, 247),
                     ),
                     Dividerwidget(text: "AND YOU ALSO GET"),
                     const SmallGroupClassesScreen(),

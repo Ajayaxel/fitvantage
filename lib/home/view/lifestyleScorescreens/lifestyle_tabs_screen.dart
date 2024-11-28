@@ -194,12 +194,12 @@ class LifestyleScoreTab extends StatelessWidget {
             ],
           ),
           SizedBox(height: screenWidth * 0.04),
-          for (int i = 0; i < 6; i++)
+          for (int i = 0; i < 9; i++)
             Padding(
               padding: EdgeInsets.all(screenWidth * 0.03),
               child: Dottext(text: 'Meditate Regularly'),
             ),
-          // const Spacer(),
+           const Spacer(),
           GestureDetector(
             onTap: () {
               Get.to(() => const LifeStyleScrren());

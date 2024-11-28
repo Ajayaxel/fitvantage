@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:io';
@@ -90,9 +89,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> with SingleTicker
                       Navigator.of(context).pop();
                     },
                     child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
-                  Text("Edit profile",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.white),),
-                  Spacer(),
-                   Text("SAVE",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w700,color: Colors.white),),
+                  const Text("Edit profile",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.white),),
+                  const Spacer(),
+                   const Text("SAVE",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w700,color: Colors.white),),
 
                 ],),
                 const SizedBox(height: 20,),

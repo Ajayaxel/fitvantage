@@ -131,7 +131,7 @@ class AtCenterpage extends StatelessWidget {
             const SizedBox(height: 16),
             CarouselScreen(),
             WeekSnapshotScreen(),
-            ReviewScreen(),
+           // ReviewScreen(),
           ],
         ),
       ),

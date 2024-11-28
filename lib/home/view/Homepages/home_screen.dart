@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:glassmorphism_widgets/glassmorphism_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_app/home/view/Homepages/icons_screen.dart';
 import 'package:my_app/home/view/Homepages/profile_conatiner_home.dart';
 import 'package:my_app/home/view/components/caroule_screen.dart';
 import 'package:my_app/home/view/components/center_carousle_scrren.dart';
@@ -134,7 +135,10 @@ class _TestingPageState extends State<HomeScreen>
                     SizedBox(height: screenHeight * 0.02),
                     ElevatedButton(
                       onPressed: () {
-                        // Action for the button
+                       Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>  IconsScreen()));
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.black,
@@ -384,7 +388,7 @@ class _TestingPageState extends State<HomeScreen>
                     ),
                     // Fit Edit section carousel
                     Text(
-                      "FIT.EDIT",
+                      "FIT.PLAN",
                       textAlign: TextAlign.start,
                       style: GoogleFonts.montserrat(
                         fontWeight: FontWeight.w900,
@@ -393,7 +397,7 @@ class _TestingPageState extends State<HomeScreen>
                       ),
                     ),
                     Text(
-                      "Everything you need to stay inspired\n& stay on top of your game",
+                      "Your complete source of inspiration to\nstay on top of your game.",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.montserrat(
                         fontWeight: FontWeight.w500,

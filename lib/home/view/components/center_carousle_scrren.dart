@@ -22,12 +22,12 @@ class _CarouleScreenState extends State<CenterCarousleScrren> {
       "description": "Start your journey towards a balanced life."
     },
     {
-      "title": "Match made at Fit",
-      "description": "Achieve a balanced diet and a healthier lifestyle."
+      "title": "Made for You at Fit",
+      "description": "Achieve the perfect balance of diet and wellness."
     },
     {
-      "title": "Stay Active",
-      "description": "Daily fitness tips to keep you moving."
+      "title": "Keep Moving",
+      "description": "Keep your body moving and your energy up with daily tips."
     },
     {
       "title": "Train Hard",
