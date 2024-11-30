@@ -16,7 +16,7 @@ import package_info_plus
 import path_provider_foundation
 import shared_preferences_foundation
 import sign_in_with_apple
-import sqflite_darwin
+import sqflite
 import video_player_avfoundation
 import wakelock_plus
 import zego_express_engine
