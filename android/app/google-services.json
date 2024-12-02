@@ -1,44 +1,26 @@
 {
   "project_info": {
-    "project_number": "101994162280",
-    "project_id": "test-1ac28",
-    "storage_bucket": "test-1ac28.appspot.com"
+    "project_number": "67092376481",
+    "project_id": "fitvantage-1f04b",
+    "storage_bucket": "fitvantage-1f04b.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:101994162280:android:77020a049668cc0beb33dd",
+        "mobilesdk_app_id": "1:67092376481:android:ca1857f608bd7c792cb9e0",
         "android_client_info": {
-          "package_name": "com.example.my_app"
+          "package_name": "com.fitvantage.app"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "101994162280-4ufnfi2tluf9n96omb57o5vcnr01mjef.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.my_app",
-            "certificate_hash": "74b90d491f81cf2066aa7b34657b4686e2c30ffc"
-          }
-        },
-        {
-          "client_id": "101994162280-n5a54jjrtffncf8jgdju039funqv86j2.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCDqRj3KOrwfjiXlYb2TCu_669C9vgF4YM"
+          "current_key": "AIzaSyBoekCJcDjs6hY9gt4dNytJM4iR0dsrZg4"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "101994162280-n5a54jjrtffncf8jgdju039funqv86j2.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

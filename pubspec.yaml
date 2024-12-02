@@ -66,14 +66,17 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.14.1
+  flutter_launcher_icons: ^0.13.1
   flutter_lints: ^3.0.0
 
-flutter_icons:
-  android: "launcher_icon" # Android launcher icon
-  ios: true               # Enable iOS launcher icon
-  image_path: "assets/icons/profile_img.png" # Path to the app icon
-  min_sdk_android: 21     # Minimum Android SDK (default: 21)
+flutter_launcher_icons:
+#  android: "launcher_icon" # Android launcher icon
+  ios: true
+  android: true
+  image_path: "assets/icons/icon.png" # Path to the app icon
+  adaptive_icon_foreground: "assets/icons/icon.png"
+  min_sdk_android: 21
+
 
 
  
