@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,7 +10,6 @@ import 'package:my_app/auth/controller/auth_controller.dart';
 import 'package:my_app/auth/view/BasicProfileSetUp/start_setup_screen.dart';
 import 'package:my_app/auth/view/Loging/forget_password.dart';
 import 'package:my_app/auth/view/Loging/login_er_page.dart';
-
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -25,19 +26,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     AuthController authController = Get.find();
-    ever(authController.signInWithGoogleEither, (value) {
-      value?.fold(
-        () => null,
-        (either) => either.fold((exception) {
-          Get.snackbar(
-            'Error',
-            exception.message,
-          );
-        }, (r) {
-          Get.offAll(const StartSetupScreen());
-        }),
-      );
-    });
+
     return Scaffold(
       body: Stack(
         children: [
@@ -117,7 +106,8 @@ class _SignupPageState extends State<SignupPage> {
                         left: 20, top: 18, bottom: 16, right: 20),
                     decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.6),
-                        borderRadius: const BorderRadius.all(Radius.circular(12))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12))),
                     child: TextFormField(
                       controller: emailController,
                       decoration: InputDecoration(
@@ -148,7 +138,8 @@ class _SignupPageState extends State<SignupPage> {
                         left: 20, top: 18, bottom: 16, right: 20),
                     decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.6),
-                        borderRadius: const BorderRadius.all(Radius.circular(12))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12))),
                     child: TextFormField(
                       controller: passwordController,
                       decoration: InputDecoration(
@@ -178,7 +169,8 @@ class _SignupPageState extends State<SignupPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ForgetPassword()));
+                                  builder: (context) =>
+                                      const ForgetPassword()));
                         },
                         child: Text(
                           "Forgot Password?",
@@ -193,10 +185,13 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const StartSetupScreen()));
+                     authController.signInWithEmailAndPassword(
+                          email: emailController.value.text,
+                          password: passwordController.value.text);
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const StartSetupScreen()));
                     },
                     child: Container(
                       height: 56,
@@ -287,12 +282,9 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ],
                   ),
-                
-                     const SizedBox(
-                      height: 97,
-                    ),
-                  
-                  
+                  const SizedBox(
+                    height: 97,
+                  ),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -330,8 +322,23 @@ class _SignupPageState extends State<SignupPage> {
             ),
           ),
           Center(
-            child: GetBuilder<AuthController>(
+            child:AuthLoading() ,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+
+class AuthLoading extends StatelessWidget {
+  const AuthLoading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<AuthController>(
               builder: (controller) {
+                log('isLoading ${controller.isLoading}');
                 return Visibility(
                   visible: controller.isLoading,
                   child: Container(
@@ -343,10 +350,6 @@ class _SignupPageState extends State<SignupPage> {
                       )),
                 );
               },
-            ),
-          )
-        ],
-      ),
-    );
+            );
   }
 }

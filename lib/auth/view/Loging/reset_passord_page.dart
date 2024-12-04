@@ -61,11 +61,11 @@ class ResetPassordPage extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                InputFileds(input: "New Password"),
+                InputFields(input: "New Password"),
                 const SizedBox(
                   height: 16,
                 ),
-                InputFileds(input: "Confirm Password"),
+                InputFields(input: "Confirm Password"),
                 const Spacer(),
                const Flexible(
                  child: SizedBox(

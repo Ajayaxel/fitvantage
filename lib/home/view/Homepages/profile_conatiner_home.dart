@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_app/auth/controller/auth_controller.dart';
 import 'package:my_app/home/view/profilepages/profile_screen.dart';
 
 class ProfileConainerHome extends StatelessWidget {
@@ -79,13 +80,18 @@ class ProfileConainerHome extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              Text(
-                "CLAIM",
-                style: GoogleFonts.manrope(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w900,
-                  decoration: TextDecoration.none, // Removes underline
+              GestureDetector(
+                onTap: () {
+                  AuthController().signOut();
+                },
+                child: Text(
+                  "CLAIM",
+                  style: GoogleFonts.manrope(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w900,
+                    decoration: TextDecoration.none, // Removes underline
+                  ),
                 ),
               ),
             ],

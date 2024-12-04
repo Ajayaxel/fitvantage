@@ -53,7 +53,7 @@ class ForgetPassword extends StatelessWidget {
                     ),
                 ),
                   const SizedBox(height: 30,),
-                         InputFileds(input: "Enter email or phone"),
+                         InputFields(input: "Enter email or phone"),
                          const Spacer(),
                     
                  GestureDetector(

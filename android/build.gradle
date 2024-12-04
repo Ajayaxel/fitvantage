@@ -1,5 +1,7 @@
+
+
 buildscript {
-ext.kotlin_version = '2.0.10'
+ext.kotlin_version = '2.0.20'
 repositories {
     google()
     jcenter()
@@ -13,6 +15,14 @@ dependencies {
 
 }
 }
+plugins {
+  // ...
+
+  // Add the dependency for the Google services Gradle plugin
+  id 'com.google.gms.google-services' version '4.4.2' apply false
+
+}
+
 
 allprojects {
     repositories {
@@ -32,3 +42,5 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
+
+

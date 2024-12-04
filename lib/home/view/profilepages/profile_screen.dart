@@ -1,4 +1,4 @@
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/home/view/profilepages/profile_edite_sections.dart';
@@ -9,7 +9,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen>
-  with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Color?> _colorAnimation;
   late Animation<AlignmentGeometry> _alignmentAnimation;
@@ -54,11 +54,11 @@ class _ProfileScreenState extends State<ProfileScreen>
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading:  GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: const Icon(Icons.arrow_back, color: Colors.white)),
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: const Icon(Icons.arrow_back, color: Colors.white)),
       ),
       extendBodyBehindAppBar: true,
       body: AnimatedBuilder(
@@ -84,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'AJAY',
+                  FirebaseAuth.instance.currentUser?.displayName ?? '',
                   style: GoogleFonts.manrope(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -99,12 +99,12 @@ class _ProfileScreenState extends State<ProfileScreen>
                     const SizedBox(width: 8),
                     GestureDetector(
                       onTap: () {
-                          Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditProfileScreen(),
-                    ),
-                  );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditProfileScreen(),
+                          ),
+                        );
                       },
                       child: Text(
                         'VIEW PROFILE',
@@ -277,7 +277,6 @@ class _ProfileScreenState extends State<ProfileScreen>
               _buildCityOption('Kozhikode'),
               _buildCityOption('Thiruvananthapuram'),
               _buildCityOption('Kannur'),
-          
             ],
           ),
         );

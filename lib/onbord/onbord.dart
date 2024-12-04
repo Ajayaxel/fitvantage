@@ -75,8 +75,13 @@
 //   }
 // }
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_app/auth/view/auth_listener.dart';
+import 'package:my_app/home/view/Homepages/home_screen.dart';
+import 'package:my_app/home/view/bootmNav/bottm_nav.dart';
 import 'package:my_app/onbord/onbordcontent_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -96,96 +101,98 @@ class _OnboardState extends State<Onboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green,
-      body: Stack(
-        children: [
-          Positioned(
-            top: -5,
-            right: -5,
-            left: -5,
-            bottom: -10,
-            child: Image.asset(
-              "assets/Onbording/Aurora background.png",
-              fit: BoxFit.cover,
-            ),
-          ),
-          Positioned(
-            bottom: 119,
-            left: 0,
-            right: 0,
-            top: 0,
-            child: PageView(
-              controller: pageController,
-              onPageChanged: (index) {
-                if (index == 2) {
-                  buttontext = "";
-                  buttonNext = "";
-                } else {
-                  buttontext = "Skip";
-                  buttonNext = "Next";
-                }
-                setState(() {});
-              },
-              children: const [
-                OnbordContent(),
-                OnbordContent(),
-                OnbordContent(
-                  showGetStarted: true,
-                )
-              ],
-            ),
-          ),
-          Positioned(
-            left: 16,
-            right: 16,
-            bottom: 24,
-            child: Container(
-                margin: const EdgeInsets.only(left: 15, right: 15),
-                // alignment: Alignment(0, 0.9),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        pageController.jumpToPage(2);
-                      },
-                      child: Text(
-                        buttontext,
-                        style: GoogleFonts.leagueSpartan(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: const Color(0xff171917)),
-                      ),
-                    ),
-                    SmoothPageIndicator(
-                      controller: pageController,
-                      count: 3,
-                      effect: const ExpandingDotsEffect(
-                          dotWidth: 8,
-                          dotHeight: 8,
-                          // radius: 5,
-                          activeDotColor: Color(0xff6CCE73),
-                          dotColor: Color(0xff6CCE73)),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        pageController.animateToPage(
-                            (pageController.page ?? 0).toInt() + 1,
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.decelerate);
-                      },
-                      child: Text(
-                        buttonNext,
-                        style: GoogleFonts.leagueSpartan(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: const Color(0xff171917)),
-                      ),
-                    ),
+      body: AuthenticationWrapper(
+          home: BottmNav(),
+          login: Stack(
+            children: [
+              Positioned(
+                top: -5,
+                right: -5,
+                left: -5,
+                bottom: -10,
+                child: Image.asset(
+                  "assets/Onbording/Aurora background.png",
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Positioned(
+                bottom: 119,
+                left: 0,
+                right: 0,
+                top: 0,
+                child: PageView(
+                  controller: pageController,
+                  onPageChanged: (index) {
+                    if (index == 2) {
+                      buttontext = "";
+                      buttonNext = "";
+                    } else {
+                      buttontext = "Skip";
+                      buttonNext = "Next";
+                    }
+                    setState(() {});
+                  },
+                  children: const [
+                    OnbordContent(),
+                    OnbordContent(),
+                    OnbordContent(
+                      showGetStarted: true,
+                    )
                   ],
-                )),
-          ),
-        ],
-      ),
+                ),
+              ),
+              Positioned(
+                left: 16,
+                right: 16,
+                bottom: 24,
+                child: Container(
+                    margin: const EdgeInsets.only(left: 15, right: 15),
+                    // alignment: Alignment(0, 0.9),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            pageController.jumpToPage(2);
+                          },
+                          child: Text(
+                            buttontext,
+                            style: GoogleFonts.leagueSpartan(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: const Color(0xff171917)),
+                          ),
+                        ),
+                        SmoothPageIndicator(
+                          controller: pageController,
+                          count: 3,
+                          effect: const ExpandingDotsEffect(
+                              dotWidth: 8,
+                              dotHeight: 8,
+                              // radius: 5,
+                              activeDotColor: Color(0xff6CCE73),
+                              dotColor: Color(0xff6CCE73)),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            pageController.animateToPage(
+                                (pageController.page ?? 0).toInt() + 1,
+                                duration: const Duration(milliseconds: 200),
+                                curve: Curves.decelerate);
+                          },
+                          child: Text(
+                            buttonNext,
+                            style: GoogleFonts.leagueSpartan(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: const Color(0xff171917)),
+                          ),
+                        ),
+                      ],
+                    )),
+              ),
+            ],
+          )),
     );
   }
 }

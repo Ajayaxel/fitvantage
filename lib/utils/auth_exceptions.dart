@@ -63,47 +63,59 @@ class MainFailure412unauthorized extends AppException {
   MainFailure412unauthorized({this.unauthorizedMessage})
       : super(unauthorizedMessage ?? 'Unauthorized ');
 }
+
 class NoInternet extends AppException {
   final String? noInternetmessage;
 
   NoInternet({this.noInternetmessage})
       : super(noInternetmessage ?? 'No Internet');
 }
+
 class Accesdenoted extends AppException {
   final String? mainFailuremessage;
 
   Accesdenoted({this.mainFailuremessage})
       : super(mainFailuremessage ?? 'Accesdenoted');
 }
+
 class NotFound extends AppException {
   final String? mainFailuremessage;
 
   NotFound({this.mainFailuremessage})
       : super(mainFailuremessage ?? 'Not Found');
 }
+
 class ClientFailure extends AppException {
   final String? mainFailuremessage;
 
   ClientFailure({this.mainFailuremessage})
       : super(mainFailuremessage ?? 'Client eror');
 }
+
 class ServerFailure extends AppException {
   final String? mainFailuremessage;
 
   ServerFailure({this.mainFailuremessage})
       : super(mainFailuremessage ?? 'Server is not found');
 }
+
 class Unknown extends AppException {
   final String? mainFailuremessage;
 
-  Unknown({this.mainFailuremessage})
+  Unknown({this.mainFailuremessage}) : super(mainFailuremessage ?? 'Unknown');
+}
+
+class FirebaseException extends AppException {
+  final String? mainFailuremessage;
+
+  FirebaseException({this.mainFailuremessage})
       : super(mainFailuremessage ?? 'Unknown');
 }
 
 //fiter sections
 
 class ExceptionFilter {
-  static AppException filterException(dynamic e)  {
+  static AppException filterException(dynamic e) {
     if (e is DioException) {
       //1
       if (e.response?.statusCode == 412) {
@@ -119,30 +131,27 @@ class ExceptionFilter {
             unauthorizedMessage: e.response?.data['message']);
         //4
       } else if (e.response == null) {
-        return  NoInternet();
+        return NoInternet();
       } else if (e.response!.statusCode != null &&
           e.response!.statusCode! >= 400 &&
           e.response!.statusCode! < 500) {
         if (e.response!.statusCode == 403) {
-          return Accesdenoted(
-              mainFailuremessage: e.response?.data['message']);
+          return Accesdenoted(mainFailuremessage: e.response?.data['message']);
         } else if (e.response!.statusCode == 404) {
-          return NotFound(
-              mainFailuremessage: e.response?.data['message']);
+          return NotFound(mainFailuremessage: e.response?.data['message']);
         }
-        return ClientFailure(
-            mainFailuremessage: e.response?.data['message']);
+        return ClientFailure(mainFailuremessage: e.response?.data['message']);
       } else if (e.response!.statusCode != null &&
           e.response!.statusCode! >= 500 &&
           e.response!.statusCode! < 600) {
-        return ServerFailure(
-            mainFailuremessage: e.response?.data['message']);
+        return ServerFailure(mainFailuremessage: e.response?.data['message']);
       } else {
-        return ClientFailure(
-            mainFailuremessage: e.response?.data['message']);
+        return ClientFailure(mainFailuremessage: e.response?.data['message']);
       }
+    } else if (e is FirebaseAuthException) {
+      return FirebaseException(mainFailuremessage: e.message);
     } else {
-      return  Unknown();
+      return Unknown();
     }
   }
 }

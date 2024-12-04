@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -9,7 +10,7 @@ import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
 class AuthRepo {
   final FirebaseAuth auth = FirebaseAuth.instance;
-
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
  User ? getCurrentUser()  {
     return  auth.currentUser;
   }
@@ -97,4 +98,60 @@ return Left(AppException('somthing went wrong'));
     }
    
   }
+
+  Future<Either<AppException,User?>> signInWithEmailAndPassword({required String password, required String email}) async {
+
+
+     try {
+      log('Api call sign in with email and password---->');
+      UserCredential result = await auth.signInWithEmailAndPassword(
+        email: email, 
+        password: password
+      );
+
+      
+      return Right(result.user) ;
+    }  catch (e) {
+      log('Login Error: ${e}');
+      return Left(ExceptionFilter.filterException(e));
+    }
+
+   
+   
+  }
+
+  Future<Either<AppException,User?>> registerWithEmailAndPassword({required String password, required String email,required String name}) async {
+
+
+     try {
+      log('Api call sign in with email and password---->');
+      UserCredential result = await auth.createUserWithEmailAndPassword(
+        email: email, 
+        password: password
+      );
+
+       await result.user?.updateDisplayName(name);
+ await _firestore.collection('users').doc(result.user!.uid).set({
+        'uid': result.user!.uid,
+        'email': email,
+        'userName': name,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+
+    
+      
+      return Right(result.user) ;
+    }  catch (e) {
+      log('Login Error: ${e}');
+      return Left(ExceptionFilter.filterException(e));
+    }
+
+   
+   
+  }
+
+
+  Future<void> signOut() async {
+  await FirebaseAuth.instance.signOut();
+}
 }
