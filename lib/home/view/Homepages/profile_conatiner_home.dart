@@ -81,7 +81,7 @@ class ProfileConainerHome extends StatelessWidget {
               ),
               const Spacer(),
               GestureDetector(
-                onTap: () {
+                onLongPress: () {
                   AuthController().signOut();
                 },
                 child: Text(
