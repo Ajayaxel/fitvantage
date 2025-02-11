@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:my_app/auth/model/auth.dart';
-import 'package:my_app/home/view/bootmNav/bottm_nav.dart';
+
 import 'package:my_app/utils/auth_exceptions.dart';
 
 class AuthController extends GetxController {
@@ -46,7 +46,7 @@ class AuthController extends GetxController {
           l.message,
         );
       }, (r) {
-        Get.offAll(const BottmNav());
+      // bootmnav navigtion  Get.offAll(const ());
       });
     });
   }
@@ -69,7 +69,7 @@ class AuthController extends GetxController {
           l.message,
         );
       }, (r) {
-        Get.offAll(const BottmNav());
+       // Get.offAll(const BottmNav());
       });
     });
   }

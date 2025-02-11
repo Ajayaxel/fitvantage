@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:my_app/auth/view/LifestyleQuestioner/Constants/backround_image.dart';
+
 import 'package:my_app/videocall/call_page.dart';
 
 class VideocallScreen extends StatelessWidget {
@@ -19,7 +19,7 @@ class VideocallScreen extends StatelessWidget {
       resizeToAvoidBottomInset: true, // Ensures UI resizes with the keyboard
       body: Stack(
         children: [
-          BackgroundImage(),
+        
           SingleChildScrollView(
             padding: const EdgeInsets.all(20.0),
             child: SizedBox(
