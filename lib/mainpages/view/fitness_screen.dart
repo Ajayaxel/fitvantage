@@ -34,7 +34,8 @@ class FitnessPage extends StatelessWidget {
               const SizedBox(
                 height: 40,
               ),
-              const Newyearcards(startColor: Color(0xff7FFA88), endColor: Color(0xff244B27)),
+              const Newyearcards(
+                  startColor: Color(0xff7FFA88), endColor: Color(0xff244B27)),
               //liner conatner end//
               const SizedBox(
                 height: 20.0,
@@ -105,7 +106,7 @@ class FitnessPage extends StatelessWidget {
                 height: 16,
               ),
               Image.asset("assets/Fitness/Group 121.png"),
-                const SizedBox(
+              const SizedBox(
                 height: 60,
               ),
             ],
@@ -115,10 +116,11 @@ class FitnessPage extends StatelessWidget {
     );
   }
 }
-// resuble cards 
+
+// resuble cards
 class Newyearcards extends StatelessWidget {
   final Color startColor; // Start color for the gradient
-  final Color endColor;   // End color for the gradient
+  final Color endColor; // End color for the gradient
 
   const Newyearcards({
     super.key,
@@ -137,7 +139,7 @@ class Newyearcards extends StatelessWidget {
           end: Alignment.centerRight,
           colors: [
             startColor, // Use parameterized color
-            endColor,   // Use parameterized color
+            endColor, // Use parameterized color
           ],
         ),
       ),
@@ -207,8 +209,6 @@ class Newyearcards extends StatelessWidget {
     );
   }
 }
-
-
 
 class TopRatedcenter extends StatelessWidget {
   final String imageid; // Declare imageid as a final property
@@ -298,7 +298,7 @@ class GymLocationCards extends StatelessWidget {
       height: 160, // Adjust card height as needed
 
       child: ListView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+   
         scrollDirection: Axis.horizontal,
         itemCount: locations.length,
         itemBuilder: (context, index) {
@@ -405,7 +405,11 @@ class GymLocationCard extends StatelessWidget {
                       timing: '05:30 AM - 10:00 PM',
                       rating: 4.2,
                       reviews: 151,
-                      imageUrl: imageUrl,
+                      carouselImages: const [
+                        "assets/Athome/Rectangle 31 (1).png",
+                        "assets/Athome/Rectangle 31.png",
+                       "assets/Athome/Rectangle 11.png"
+                      ],
                     ),
                   ),
                 );

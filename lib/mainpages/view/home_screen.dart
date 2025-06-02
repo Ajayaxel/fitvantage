@@ -1,11 +1,14 @@
-import 'package:carousel_slider/carousel_options.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/mainpages/view/consts/categorie_boxes.dart';
 import 'package:my_app/mainpages/view/consts/cutsom_carousel.dart';
 import 'package:my_app/mainpages/view/consts/program_cards.dart';
 
-import 'package:my_app/notifications/notification_screen.dart';
+import 'package:my_app/mainpages/notifications/notification_screen.dart';
+import 'package:my_app/mainpages/view/consts/sports_cards.dart';
+import 'package:my_app/mainpages/view/consts/workout_poster.dart';
+import 'package:my_app/mainpages/view/fitness_screen.dart';
 import 'package:my_app/profilepages/view/profile_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -166,6 +169,68 @@ class _HomePageState extends State<HomePage> {
               title: 'Massive Upper body',
               subtitle: '7 Week . 5x/week',
             ),
+            const Padding(
+              padding: EdgeInsets.only(left: 16, right: 16),
+              child: Text("Center near you",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  )),
+            ),
+          
+            const Padding(
+              padding: EdgeInsets.only(left: 16 , top: 15),
+              child: GymLocationCards(),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 16, right: 16 , top: 15,bottom: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Explore Format workouts",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),),
+                  Text(
+                    "View All",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            WorkoutPoster(),
+                        const Padding(
+              padding: EdgeInsets.only(left: 16, right: 16 , top: 15,bottom: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Explore Sports Format ",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),),
+                  Text(
+                    "View All",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SportsCards(),
+            const SizedBox(height: 15,),
+
           ],
         ),
       ),

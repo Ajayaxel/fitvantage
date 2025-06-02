@@ -1,7 +1,8 @@
+import 'dart:async'; // Add this import for Timer
 import 'package:flutter/material.dart';
 import 'package:my_app/constsatnce/const_button.dart';
 
-class GymDetailPage extends StatelessWidget {
+class GymDetailPage extends StatefulWidget {
   final String gymName;
   final double price;
   final String distance;
@@ -9,10 +10,10 @@ class GymDetailPage extends StatelessWidget {
   final String timing;
   final double rating;
   final int reviews;
-  final String imageUrl;
+  final List<String> carouselImages;
 
   const GymDetailPage({
-    Key? key,
+    super.key,
     required this.gymName,
     required this.price,
     required this.distance,
@@ -20,25 +21,70 @@ class GymDetailPage extends StatelessWidget {
     required this.timing,
     required this.rating,
     required this.reviews,
-    required this.imageUrl,
-  }) : super(key: key);
+    required this.carouselImages,
+  });
+
+  @override
+  State<GymDetailPage> createState() => _GymDetailPageState();
+}
+
+class _GymDetailPageState extends State<GymDetailPage> {
+  late final PageController _pageController;
+  late Timer _timer;
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+
+    // Auto-scroll every 3 seconds
+    _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
+      if (_currentPage < widget.carouselImages.length - 1) {
+        _currentPage++;
+      } else {
+        _currentPage = 0;
+      }
+      _pageController.animateToPage(
+        _currentPage,
+        duration: const Duration(milliseconds: 350),
+        curve: Curves.easeIn,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image
-          Container(
-            height: MediaQuery.of(context).size.height * 0.5,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(imageUrl),
-                fit: BoxFit.cover,
-              ),
+          // Full-width image carousel with PageController
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.8,
+            width: double.infinity,
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: widget.carouselImages.length,
+              itemBuilder: (context, index) {
+                return Image.asset(
+                  widget.carouselImages[index],
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                );
+              },
+              onPageChanged: (index) {
+                _currentPage = index;
+              },
             ),
           ),
-          
+
           // Back Button
           Positioned(
             top: 40,
@@ -52,8 +98,8 @@ class GymDetailPage extends StatelessWidget {
           // Content
           DraggableScrollableSheet(
             initialChildSize: 0.6,
-            minChildSize: 0.6,
-            maxChildSize: 0.9,
+            minChildSize: 0.4,
+            maxChildSize: 0.7,
             builder: (context, scrollController) {
               return Container(
                 decoration: const BoxDecoration(
@@ -71,7 +117,7 @@ class GymDetailPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              gymName,
+                              widget.gymName,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,
@@ -82,7 +128,7 @@ class GymDetailPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  '\$$price',
+                                  '\$${widget.price}',
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 24,
@@ -121,7 +167,7 @@ class GymDetailPage extends StatelessWidget {
                                   const Icon(Icons.location_on, color: Colors.white),
                                   const SizedBox(width: 8),
                                   Text(
-                                    '$distance - $location',
+                                    '${widget.distance} - ${widget.location}',
                                     style: const TextStyle(color: Colors.white),
                                   ),
                                   const Spacer(),
@@ -134,7 +180,7 @@ class GymDetailPage extends StatelessWidget {
                                   const Icon(Icons.access_time, color: Colors.white),
                                   const SizedBox(width: 8),
                                   Text(
-                                    'Gym Timing : $timing',
+                                    'Gym Timing : ${widget.timing}',
                                     style: const TextStyle(color: Colors.white),
                                   ),
                                 ],
@@ -145,7 +191,7 @@ class GymDetailPage extends StatelessWidget {
                                   const Icon(Icons.star, color: Colors.white),
                                   const SizedBox(width: 8),
                                   Text(
-                                    '$rating Rating - $reviews Reviews',
+                                    '${widget.rating} Rating - ${widget.reviews} Reviews',
                                     style: const TextStyle(color: Colors.white),
                                   ),
                                 ],
@@ -153,15 +199,13 @@ class GymDetailPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 40),
-                       Constbutton(onTap: () {
-                        //  Navigator.push(
-                        //    context,
-                        //    MaterialPageRoute(
-                        //      builder: (context) => null(),
-                        //    ),
-                        //  );
-                       }, text: 'Start Workout',),
+                        const SizedBox(height:50),
+                        Constbutton(
+                          onTap: () {
+                            // Start workout logic
+                          },
+                          text: 'Start Workout',
+                        ),
                       ],
                     ),
                   ),
@@ -174,3 +218,5 @@ class GymDetailPage extends StatelessWidget {
     );
   }
 }
+
+

@@ -1,14 +1,13 @@
 import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:my_app/mainpages/view/consts/cutsom_carousel.dart';
+import 'package:my_app/blocs/lifestyle/lifestyle_bloc.dart';
 import 'package:my_app/mainpages/view/main_screen.dart';
-
 import 'package:my_app/onbord/view/onbord.dart';
-
-
+import 'package:my_app/presentation/pages/lifestylequestionnaire/questionnaire_screen.dart';
+import 'package:my_app/repositories/lifestyle_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,26 +27,33 @@ void main() async {
               storageBucket: 'fitvantage-1f04b.firebasestorage.app',
             ));
   runApp(
-    const MyApp(),
+     MyApp(),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
-  // This widget is the root of your application.
+class MyApp extends StatelessWidget {
+  final repo = LifestyleRepository();
+
+  MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Fitness App',
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xff010A04),
         fontFamily: "Lufga",
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const OnboardingScreen(),
+      home: BlocProvider(
+        create: (_) => LifestyleBloc(repo),
+        child: MainScreen(),
+      ),
     );
   }
 }
+
+
+
