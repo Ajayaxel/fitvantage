@@ -3,6 +3,7 @@ import 'package:my_app/mainpages/view/fitenss_screen_togle.dart';
 import 'package:my_app/mainpages/view/home_screen.dart';
 import 'package:my_app/mainpages/view/scan_screen.dart';
 import 'package:my_app/mainpages/view/sport_screen.dart';
+import 'package:my_app/presentation/pages/transform/transform_screen.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class _BottomNavBarState extends State<MainScreen> {
     const ToggleScreen(),
     const ScanPage(),
     const SportScreen(),
-    OptionsPage(),
+    const TransformScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -109,7 +110,7 @@ class _BottomNavBarState extends State<MainScreen> {
                     ? const Color(0xff7FFA88)
                     : Colors.white,
               ),
-              label: 'Option',
+              label: 'Transform',
             ),
           ],
         ),
@@ -125,17 +126,3 @@ class _BottomNavBarState extends State<MainScreen> {
 
 
 
-class OptionsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Text(
-          'Options Page',
-          style: TextStyle(color: Colors.white, fontSize: 24),
-        ),
-      ),
-    );
-  }
-}

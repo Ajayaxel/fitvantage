@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/profilepages/view/profile_avthar.dart';
 
 class ProfileSetting extends StatefulWidget {
   const ProfileSetting({super.key});
@@ -44,19 +45,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
           child: Column(
             children: [
               // Profile Image
-              Center(
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage('assets/profile/profileAvathr.png'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
+              const ProfileAvatarWidget(),
               const SizedBox(height: 24),
 
               // Premium Card

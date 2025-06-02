@@ -175,9 +175,6 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-
-
 Widget _buildSocialIcon(String iconPath) {
   return Container(
     height: 50,
