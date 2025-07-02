@@ -123,7 +123,7 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                   
+
                         const SizedBox(height: 10),
                         const Text(
                           'Lorem ipsum dolor sit amet consectetur.\nDui tristique erat',
