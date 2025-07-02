@@ -112,7 +112,7 @@ return Left(AppException('somthing went wrong'));
       
       return Right(result.user) ;
     }  catch (e) {
-      log('Login Error: ${e}');
+      log('Login Error: $e');
       return Left(ExceptionFilter.filterException(e));
     }
 
@@ -142,7 +142,7 @@ return Left(AppException('somthing went wrong'));
       
       return Right(result.user) ;
     }  catch (e) {
-      log('Login Error: ${e}');
+      log('Login Error: $e');
       return Left(ExceptionFilter.filterException(e));
     }
 

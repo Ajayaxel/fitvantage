@@ -1,8 +1,6 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:my_app/auth/model/auth.dart';
 
 import 'package:my_app/utils/auth_exceptions.dart';

@@ -379,6 +379,15 @@ class _PedometerHomePageState extends State<PedometerHomePage>
            
               Column(
                 children: [
+                   GestureDetector(
+                     onTap: () {
+                       Navigator.of(context).pop();
+                     },
+                     child: const Padding(
+                       padding: EdgeInsets.only(left: 20, right: 20),
+                       child: Align(alignment: Alignment.topLeft, child: Icon(Icons.arrow_back_ios_new, color: Colors.white,)),
+                     ),
+                   ),
                   _buildHeader(),
                   if (_errorMessage.isNotEmpty) _buildErrorMessage(),
                   Expanded(
@@ -507,9 +516,10 @@ class _PedometerHomePageState extends State<PedometerHomePage>
 
   Widget _buildHeader() {
     return Padding(
-      padding: const EdgeInsets.all(30),
+      padding: const EdgeInsets.only( left: 20, right: 20),
       child: Column(
         children: [
+         
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

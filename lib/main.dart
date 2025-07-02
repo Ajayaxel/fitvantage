@@ -2,12 +2,15 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:my_app/blocs/auth/auth_bloc.dart';
 import 'package:my_app/blocs/lifestyle/lifestyle_bloc.dart';
-import 'package:my_app/mainpages/view/main_screen.dart';
-import 'package:my_app/onbord/view/onbord.dart';
-import 'package:my_app/presentation/pages/lifestylequestionnaire/questionnaire_screen.dart';
+import 'package:my_app/blocs/mealplan/bloc/mealplan_bloc.dart';
+import 'package:my_app/blocs/mealplan/bloc/mealplan_event.dart';
+import 'package:my_app/presentation/pages/spalshscreen/splash_screen.dart';
+import 'package:my_app/repositories/auth_repository.dart';
+
 import 'package:my_app/repositories/lifestyle_repository.dart';
+import 'package:my_app/repositories/meal_plan_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,27 +36,36 @@ void main() async {
 
 
 class MyApp extends StatelessWidget {
-  final repo = LifestyleRepository();
+   final lifestyleRepo = LifestyleRepository();
+  final mealPlanRepo = MealPlanRepository();
+    final authRepository = AuthRepository();
 
   MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xff010A04),
-        fontFamily: "Lufga",
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: BlocProvider(
-        create: (_) => LifestyleBloc(repo),
-        child: MainScreen(),
+Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => LifestyleBloc(lifestyleRepo),
+        ),
+        BlocProvider(
+          create: (_) => MealPlanBloc(mealPlanRepo)..add(FetchMealPlans()),
+        ),
+        BlocProvider(
+         create: (_) => AuthBloc(authRepository),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xff010A04),
+          fontFamily: "Lufga",
+          useMaterial3: true,
+        ),
+        home: const SplashScreen(),
       ),
     );
   }
 }
-
-
 

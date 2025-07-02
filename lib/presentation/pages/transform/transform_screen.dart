@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_app/blocs/lifestyle/lifestyle_bloc.dart';
 import 'package:my_app/blocs/lifestyle/lifestyle_event.dart';
-import 'package:my_app/constsatnce/const_button.dart';
+import 'package:my_app/presentation/pages/bookaclass/book_class_screen.dart';
+import 'package:my_app/presentation/pages/habitcard/habit_cards_screen.dart';
+import 'package:my_app/presentation/pages/mealplan/ai_meals_screen.dart';
+import 'package:my_app/presentation/pages/mealplan/meal_plan_screen.dart';
+import 'package:my_app/presentation/pages/steps_tracking_cards.dart';
+import 'package:my_app/presentation/pages/subscription/subscripton_screen.dart';
+import 'package:my_app/presentation/widgets/const_button.dart';
 import 'package:my_app/presentation/pages/lifestylequestionnaire/questionnaire_screen.dart';
-import 'package:my_app/presentation/pages/pedometer/step_screen.dart';
 import 'package:my_app/repositories/lifestyle_repository.dart';
 
 class TransformScreen extends StatelessWidget {
@@ -14,102 +18,152 @@ class TransformScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
-        body: Column(
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const PedometerHomePage()));
-              },
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                margin: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 10,
-                      offset: Offset(0, 5),
-                    ),
-                  ],
-                ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                const StepTrackerCard(),
+                const SizedBox(height: 30),
+        
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Heart Rate Info
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          FontAwesomeIcons.heartPulse,
-                          color: Colors.red,
-                          size: 30,
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          '78 BPM',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    // Step Count Info
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          FontAwesomeIcons.personWalking,
-                          color: Colors.greenAccent,
-                          size: 30,
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          '4,230 Steps',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const MealPlanScreen(),
+                            ),
+                          );
+                        },
+                        child: Stack(
+                          children: [
+                            Image.asset(
+                              'assets/Fitness/meals.png',
+                              fit: BoxFit.cover,
+                              height: 184,
+                            ),
+                            Positioned(
+                              bottom: 6,
+                              left: 22,
+                              right: 22,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => const AiMealsScreen(),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 1),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xff7FFA88),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: const Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "View Now",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      CircleAvatar(
+                                        radius: 12,
+                                        backgroundColor: Colors.black,
+                                        child: Icon(Icons.arrow_outward,
+                                            color: Colors.white, size: 16),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const HabitCardsScreen(),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          'assets/Fitness/habitcards.png',
+                          fit: BoxFit.cover,
+                          height: 184,
+                        )),
                   ],
                 ),
-              ),
-            ),
-            const Spacer(),
-            Constbutton(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => BlocProvider(
-                      create: (_) => LifestyleBloc(LifestyleRepository())
-                        ..add(FetchLifestyleQuestions()),
-                      child: LifestyleQuestionPage(),
+                const SizedBox(height: 20),
+        
+                GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const BookClassScreen()));
+                    },
+                    child: Image.asset(
+                      "assets/Fitness/Group 48095513 (1).png",
+                      fit: BoxFit.cover,
+                      height: 205,
+                    )),
+                const SizedBox(height: 10),
+        
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const SubscriptionScreen()));
+                  },
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Image.asset(
+                      "assets/Fitness/subscription.png",
+                      fit: BoxFit.cover,
+                      height: 185,
+                      width: 170,
                     ),
                   ),
-                );
-              },
-              text: "Start Assessment",
+                ),
+                const SizedBox(height: 20),
+        
+                // Start Assessment Button
+                Constbutton(
+                  text: "Start Assessment",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => BlocProvider(
+                          create: (_) => LifestyleBloc(LifestyleRepository())
+                            ..add(FetchLifestyleQuestions()),
+                          child: const LifestyleQuestionPage(),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 24),
+              ],
             ),
-            const SizedBox(
-              height: 20,
-            )
-          ],
-        ));
+          ),
+        ),
+      ),
+    );
   }
 }
