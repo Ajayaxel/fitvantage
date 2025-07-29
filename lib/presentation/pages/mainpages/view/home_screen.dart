@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/presentation/pages/chat/chat_screen.dart';
 import 'package:my_app/presentation/widgets/homewidegt/caroulse.dart';
 import 'package:my_app/presentation/widgets/homewidegt/chose_paln.dart';
 import 'package:my_app/presentation/widgets/homewidegt/fitnesscard.dart';
@@ -94,6 +95,22 @@ class HomeScreen extends StatelessWidget {
                     height: 16,
                   ),
                   const FitnessCard(),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ChatScreen()));
+                    },
+                    child: Image.asset(
+                      "assets/Homeimages/call.png",
+                      fit: BoxFit.cover,
+                      height: 138,
+                    ),
+                  ),
                   const SizedBox(
                     height: 16,
                   ),

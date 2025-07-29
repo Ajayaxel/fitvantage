@@ -69,13 +69,14 @@ dependencies:
   # pedometer pub
   health: ^12.2.0
   pedometer: ^4.1.1
-  permission_handler: ^12.0.0+1
+  permission_handler: ^11.0.0+1
   sensors_plus: ^3.0.1
   camera: ^0.10.0
   intl: ^0.18.1
   shimmer: ^3.0.0
   shared_preferences: ^2.5.3
   http: ^1.4.0
+  # zego_uikit_prebuilt_call: ^4.17.3
 
 dev_dependencies:
   flutter_test:
@@ -118,6 +119,9 @@ flutter:
     - assets/Athome/
     - assets/loging/
     - assets/Homeimages/
+    - assets/Tranfrom/
+    - assets/workout/
+    - assets/vantagepass/
     
 
 

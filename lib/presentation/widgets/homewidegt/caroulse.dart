@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/presentation/pages/mainpages/notifications/notification_screen.dart';
 import 'package:my_app/presentation/pages/profilepages/profile_screen.dart';
+import 'package:my_app/presentation/pages/vantagepass/vantage_pass.dart';
 import 'package:my_app/presentation/widgets/shodow.dart';
 
 class CaroselHome extends StatefulWidget {
@@ -158,7 +159,14 @@ class _CaroselHomeState extends State<CaroselHome> {
                                 borderRadius: BorderRadius.circular(5 * scale),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const VantagePass(),
+                                ),
+                              );
+                            },
                             child: Text(
                               "EXPLORE NOW",
                               style: TextStyle(

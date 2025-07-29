@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:my_app/presentation/pages/pedometer/step_screen.dart';
 
 class StepTrackerCard extends StatefulWidget {
   const StepTrackerCard({super.key});
@@ -73,85 +74,95 @@ class _StepTrackerCardState extends State<StepTrackerCard>
                     ),
                   ),
                 ),
-                Container(
-                  width: double.infinity,
-                  height: 210,
-                  padding: const EdgeInsets.only(top: 10, left: 10),
-                  decoration: BoxDecoration(
-                    // color: Color(0xff161816),
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "StepTracker:",
-                            style: TextStyle(color: Colors.white, fontSize: 25),
-                          ),
-                          const Text(
-                            "Today",
-                            style: TextStyle(color: Colors.white, fontSize: 25),
-                          ),
-                          const Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                "667",
-                                style: TextStyle(
-                                  fontSize: 48,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(width: 8),
-                              Padding(
-                                padding: EdgeInsets.only(bottom: 8),
-                                child: Text(
-                                  "Steps",
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const StepTrackerHomePage(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 210,
+                    padding: const EdgeInsets.only(top: 10, left: 10),
+                    decoration: BoxDecoration(
+                      // color: Color(0xff161816),
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "StepTracker:",
+                              style: TextStyle(color: Colors.white, fontSize: 25),
+                            ),
+                            const Text(
+                              "Today",
+                              style: TextStyle(color: Colors.white, fontSize: 25),
+                            ),
+                            const Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  "667",
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 48,
+                                    fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 9, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: const Color(0xff7FFA88),
-                              borderRadius: BorderRadius.circular(22),
-                            ),
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "View now",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                SizedBox(width: 10),
-                                CircleAvatar(
-                                  backgroundColor: Colors.black,
-                                  child: Icon(Icons.arrow_outward,
-                                      color: Colors.white, size: 18),
+                                SizedBox(width: 8),
+                                Padding(
+                                  padding: EdgeInsets.only(bottom: 8),
+                                  child: Text(
+                                    "Steps",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
-                          )
-                        ],
-                      ),
-                      Image.asset(
-                        'assets/Fitness/Group 48095507 (1).png',
-                        fit: BoxFit.contain,
-                      ),
-                    ],
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 9, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: const Color(0xff7FFA88),
+                                borderRadius: BorderRadius.circular(22),
+                              ),
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "View now",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  SizedBox(width: 10),
+                                  CircleAvatar(
+                                    backgroundColor: Colors.black,
+                                    child: Icon(Icons.arrow_outward,
+                                        color: Colors.white, size: 18),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        Image.asset(
+                          'assets/Fitness/Group 48095507 (1).png',
+                          fit: BoxFit.contain,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

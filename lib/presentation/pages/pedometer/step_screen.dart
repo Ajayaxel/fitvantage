@@ -3,32 +3,34 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_app/presentation/widgets/circural_progress.dart';
 import 'package:pedometer/pedometer.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class PedometerHomePage extends StatefulWidget {
-  const PedometerHomePage({super.key});
+class StepTrackerHomePage extends StatefulWidget {
+  const StepTrackerHomePage({Key? key}) : super(key: key);
 
   @override
-  _PedometerHomePageState createState() => _PedometerHomePageState();
+  State<StepTrackerHomePage> createState() => _StepTrackerHomePageState();
 }
 
-class _PedometerHomePageState extends State<PedometerHomePage>
+class _StepTrackerHomePageState extends State<StepTrackerHomePage>
     with TickerProviderStateMixin {
-  late AnimationController _progressAnimationController;
+  late AnimationController _progressController;
+  late AnimationController _stepController;
   late AnimationController _floatingDotsController;
   late Animation<double> _progressAnimation;
+  late Animation<int> _stepAnimation;
 
-  int stepOffset = 0; // 👈 New offset for real reset
+  // Real-time data variables
+  int stepOffset = 0;
   int currentSteps = 0;
   int goalSteps = 10000;
   int currentBPM = 72;
-  int caloriesBurned = 0;
-  int selectedIndex = 0;
+  double caloriesBurned = 0.0;
   bool goalAchieved = false;
   bool showSuccessMessage = false;
 
+  // Stream subscriptions for real-time data
   StreamSubscription<StepCount>? _stepCountStream;
   StreamSubscription<PedestrianStatus>? _pedestrianStatusStream;
   Timer? _bpmTimer;
@@ -48,8 +50,13 @@ class _PedometerHomePageState extends State<PedometerHomePage>
   }
 
   void _initializeAnimations() {
-    _progressAnimationController = AnimationController(
-      duration: const Duration(seconds: 2),
+    _progressController = AnimationController(
+      duration: const Duration(milliseconds: 2000),
+      vsync: this,
+    );
+
+    _stepController = AnimationController(
+      duration: const Duration(milliseconds: 1500),
       vsync: this,
     );
 
@@ -60,13 +67,22 @@ class _PedometerHomePageState extends State<PedometerHomePage>
 
     _progressAnimation = Tween<double>(
       begin: 0.0,
-      end: 1.0,
+      end: 0.0,
     ).animate(CurvedAnimation(
-      parent: _progressAnimationController,
+      parent: _progressController,
       curve: Curves.easeInOut,
+    ));
+
+    _stepAnimation = IntTween(
+      begin: 0,
+      end: 0,
+    ).animate(CurvedAnimation(
+      parent: _stepController,
+      curve: Curves.easeOut,
     ));
   }
 
+  // Request permissions for step counting
   Future<void> _requestPermissions() async {
     if (await Permission.activityRecognition.request().isGranted) {
       setState(() {
@@ -81,6 +97,7 @@ class _PedometerHomePageState extends State<PedometerHomePage>
     }
   }
 
+  // Initialize pedometer
   void _initPedometer() {
     try {
       _initPlatformState();
@@ -91,6 +108,7 @@ class _PedometerHomePageState extends State<PedometerHomePage>
     }
   }
 
+  // Initialize platform state for pedometer
   void _initPlatformState() async {
     try {
       _pedestrianStatusStream = Pedometer.pedestrianStatusStream.listen(
@@ -111,6 +129,7 @@ class _PedometerHomePageState extends State<PedometerHomePage>
     if (!mounted) return;
   }
 
+  // Handle step count updates
   void _onStepCount(StepCount event) {
     setState(() {
       currentSteps = event.steps - stepOffset;
@@ -119,15 +138,17 @@ class _PedometerHomePageState extends State<PedometerHomePage>
       _calculateCalories();
       _checkGoalAchievement();
     });
-    _updateProgressAnimation();
+    _updateAnimations();
   }
 
+  // Handle pedestrian status changes
   void _onPedestrianStatusChanged(PedestrianStatus event) {
     setState(() {
       _status = event.status;
     });
   }
 
+  // Handle step count errors
   void _onStepCountError(error) {
     setState(() {
       _steps = 'Step Count not available';
@@ -135,6 +156,7 @@ class _PedometerHomePageState extends State<PedometerHomePage>
     });
   }
 
+  // Handle pedestrian status errors
   void _onPedestrianStatusError(error) {
     setState(() {
       _status = 'Pedestrian Status not available';
@@ -142,10 +164,12 @@ class _PedometerHomePageState extends State<PedometerHomePage>
     });
   }
 
+  // Calculate calories burned
   void _calculateCalories() {
-    caloriesBurned = (currentSteps * 0.04).round();
+    caloriesBurned = (currentSteps * 0.04);
   }
 
+  // Check if goal is achieved
   void _checkGoalAchievement() {
     if (currentSteps >= goalSteps && !goalAchieved) {
       setState(() {
@@ -167,13 +191,35 @@ class _PedometerHomePageState extends State<PedometerHomePage>
     }
   }
 
-  void _updateProgressAnimation() {
+  // Update animations with new data
+  void _updateAnimations() {
     double progress = (currentSteps / goalSteps).clamp(0.0, 1.0);
-    _progressAnimationController.animateTo(progress);
+
+    // Update progress animation
+    _progressAnimation = Tween<double>(
+      begin: _progressAnimation.value,
+      end: progress,
+    ).animate(CurvedAnimation(
+      parent: _progressController,
+      curve: Curves.easeInOut,
+    ));
+
+    // Update step animation
+    _stepAnimation = IntTween(
+      begin: _stepAnimation.value,
+      end: currentSteps,
+    ).animate(CurvedAnimation(
+      parent: _stepController,
+      curve: Curves.easeOut,
+    ));
+
+    _progressController.forward(from: 0);
+    _stepController.forward(from: 0);
   }
 
+  // Simulate BPM changes
   void _startBPMSimulation() {
-   
+    _bpmTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
       if (mounted) {
         setState(() {
           if (_status == 'walking') {
@@ -183,10 +229,10 @@ class _PedometerHomePageState extends State<PedometerHomePage>
           }
         });
       }
-   
+    });
   }
 
-
+  // Show success dialog when goal is achieved
   void _showSuccessDialog() {
     showDialog(
       context: context,
@@ -196,7 +242,7 @@ class _PedometerHomePageState extends State<PedometerHomePage>
           backgroundColor: const Color(0xFF1A1A1A),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-            side: const BorderSide(color: Color(0xFF00FF88), width: 2),
+            side: const BorderSide(color: Color(0xFF4CAF50), width: 2),
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -205,7 +251,7 @@ class _PedometerHomePageState extends State<PedometerHomePage>
                 width: 80,
                 height: 80,
                 decoration: const BoxDecoration(
-                  color: Color(0xFF00FF88),
+                  color: Color(0xFF4CAF50),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
@@ -220,7 +266,7 @@ class _PedometerHomePageState extends State<PedometerHomePage>
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF00FF88),
+                  color: Color(0xFF4CAF50),
                 ),
               ),
               const SizedBox(height: 10),
@@ -234,7 +280,7 @@ class _PedometerHomePageState extends State<PedometerHomePage>
                 '🎉 Keep up the great work! 🎉',
                 style: TextStyle(
                   fontSize: 18,
-                  color: Color(0xFF00FF88),
+                  color: Color(0xFF4CAF50),
                 ),
               ),
             ],
@@ -247,7 +293,7 @@ class _PedometerHomePageState extends State<PedometerHomePage>
               child: const Text(
                 'Continue',
                 style: TextStyle(
-                  color: Color(0xFF00FF88),
+                  color: Color(0xFF4CAF50),
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
@@ -259,101 +305,23 @@ class _PedometerHomePageState extends State<PedometerHomePage>
     );
   }
 
-  void _showGoalEditDialog() {
-    TextEditingController goalController = TextEditingController();
-    goalController.text = goalSteps.toString();
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-            side: const BorderSide(color: Colors.white, width: 1),
-          ),
-          title: const Text(
-            'Set Your Goal',
-            style: TextStyle(
-              color: Color(0xFF00FF88),
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Enter your daily step goal:',
-                style: TextStyle(color: Colors.white),
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: goalController,
-                keyboardType: TextInputType.number,
-                style: const TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Color(0xFF00FF88)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Color(0xFF00FF88), width: 2),
-                  ),
-                  hintText: 'Enter steps',
-                  hintStyle: const TextStyle(color: Colors.grey),
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
-            ),
-            TextButton(
-              onPressed: () {
-                int newGoal = int.tryParse(goalController.text) ?? goalSteps;
-                if (newGoal > 0) {
-                  setState(() {
-                    goalSteps = newGoal;
-                    goalAchieved = currentSteps >= goalSteps;
-                  });
-                  _updateProgressAnimation();
-                }
-                Navigator.of(context).pop();
-              },
-              child: const Text(
-                'Set Goal',
-                style: TextStyle(
-                  color: Color(0xFF00FF88),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
+  // Reset step counter
   void _resetSteps() {
     setState(() {
-      stepOffset += currentSteps ; // ✅ Set new offset so next steps are relative
+      stepOffset += currentSteps;
       currentSteps = 0;
       currentBPM = 72;
       goalAchieved = false;
       showSuccessMessage = false;
-      caloriesBurned = 0;
+      caloriesBurned = 0.0;
     });
-    _updateProgressAnimation();
+    _updateAnimations();
   }
 
   @override
   void dispose() {
-    _progressAnimationController.dispose();
+    _progressController.dispose();
+    _stepController.dispose();
     _floatingDotsController.dispose();
     _stepCountStream?.cancel();
     _pedestrianStatusStream?.cancel();
@@ -365,70 +333,351 @@ class _PedometerHomePageState extends State<PedometerHomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xFF000000), Color(0xFF111111)],
-          ),
-        ),
-        child: SafeArea(
-          child: Stack(
-            children: [
-           
-              Column(
-                children: [
-                   GestureDetector(
-                     onTap: () {
-                       Navigator.of(context).pop();
-                     },
-                     child: const Padding(
-                       padding: EdgeInsets.only(left: 20, right: 20),
-                       child: Align(alignment: Alignment.topLeft, child: Icon(Icons.arrow_back_ios_new, color: Colors.white,)),
-                     ),
-                   ),
-                  _buildHeader(),
-                  if (_errorMessage.isNotEmpty) _buildErrorMessage(),
-                  Expanded(
-                    child: SingleChildScrollView(
+      body: SafeArea(
+        child: Stack(
+          children: [
+            LayoutBuilder(
+              builder: (context, constraints) {
+                double screenWidth = constraints.maxWidth;
+                bool isMobile = screenWidth < 600;
+                return SingleChildScrollView(
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: isMobile ? 20 : 40,
+                      ),
                       child: Column(
                         children: [
-                          _buildCircularProgress(),
-                          const SizedBox(height: 30),
-                          _buildStatsCards(),
-                          const SizedBox(height: 20),
-                          if (!_isPermissionGranted) _buildPermissionButton(),
-                          const SizedBox(height: 20),
-                          IconButton(
-                            onPressed: _resetSteps,
-                            icon: const Icon(Icons.refresh),
-                            color: Colors.white,
-                            iconSize: 30,
+                          const SizedBox(
+                            height: 25,
                           ),
+                          _buildHeader(isMobile),
+                          if (_errorMessage.isNotEmpty)
+                            _buildErrorMessage()
+                          else
+                            const SizedBox(
+                              height: 130,
+                            ),
+                          _buildStepsDisplay(isMobile),
+                          _buildSemicircularProgress(isMobile),
+                          const SizedBox(
+                            height: 100,
+                          ),
+                          _buildStatsCards(isMobile),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          if (!_isPermissionGranted) ...[
+                            _buildPermissionButton(),
+                          ],
+                          SizedBox(height: isMobile ? 40 : 60),
                         ],
                       ),
                     ),
                   ),
-                  _buildBottomNavigation(),
-                ],
-              ),
-              if (showSuccessMessage) _buildSuccessBanner(),
-            ],
-          ),
+                );
+              },
+            ),
+            if (showSuccessMessage) _buildSuccessBanner(),
+          ],
         ),
       ),
     );
   }
-// resusing comapontes 
+
+  Widget _buildHeader(bool isMobile) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: _buildHeaderButton(Icons.arrow_back_ios_new, isMobile),
+        ),
+        Column(
+          children: [
+            Text(
+              'StepTracker',
+              style: TextStyle(
+                fontSize: isMobile ? 24 : 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            Text(
+              'Your Daily Fitness Companion',
+              style: TextStyle(
+                fontSize: isMobile ? 14 : 16,
+                color: const Color(0xFF94CD7B),
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+        GestureDetector(
+          onTap: _resetSteps,
+          child: _buildHeaderButton(Icons.refresh, isMobile),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildHeaderButton(IconData icon, bool isMobile) {
+    return Container(
+      width: isMobile ? 48 : 56,
+      height: isMobile ? 48 : 56,
+      decoration: const BoxDecoration(
+        color: Color(0xFF1A1A1A),
+        shape: BoxShape.circle,
+      ),
+      child: Icon(
+        icon,
+        color: Colors.white,
+        size: isMobile ? 20 : 24,
+      ),
+    );
+  }
+
+  Widget _buildStepsDisplay(bool isMobile) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.directions_walk,
+          color: Colors.white,
+          size: isMobile ? 32 : 40,
+        ),
+        SizedBox(width: isMobile ? 20 : 30),
+        AnimatedBuilder(
+          animation: _stepAnimation,
+          builder: (context, child) {
+            return RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: _stepAnimation.value.toString(),
+                    style: TextStyle(
+                      fontSize: isMobile ? 64 : 80,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  TextSpan(
+                    text: ' steps',
+                    style: TextStyle(
+                      fontSize: isMobile ? 20 : 24,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xFF666666),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+        // SizedBox(height: isMobile ? 10 : 15),
+        // Text(
+        //   'Status: $_status',
+        //   style: TextStyle(
+        //     fontSize: isMobile ? 14 : 16,
+        //     color: _status == 'walking' ? const Color(0xFF4CAF50) : const Color(0xFF666666),
+        //     fontWeight: FontWeight.w500,
+        //   ),
+        // ),
+      ],
+    );
+  }
+
+  Widget _buildSemicircularProgress(bool isMobile) {
+    double size = isMobile ? 300 : 350;
+    double progress = currentSteps / goalSteps;
+    int progressPercent = (progress * 100).round();
+    int stepsLeft = math.max(0, goalSteps - currentSteps);
+
+    return Container(
+      width: size,
+      height: size / 2 + 40,
+      child: Stack(
+        children: [
+          // Progress Arc
+          AnimatedBuilder(
+            animation: _progressAnimation,
+            builder: (context, child) {
+              return CustomPaint(
+                size: Size(size, size / 2 + 40),
+                painter: SemicircularProgressPainter(
+                  progress: _progressAnimation.value,
+                  strokeWidth: isMobile ? 20 : 25,
+                ),
+              );
+            },
+          ),
+          // Center content
+          Positioned(
+            bottom: 20,
+            left: 0,
+            right: 0,
+            child: Column(
+              children: [
+                AnimatedBuilder(
+                  animation: _progressAnimation,
+                  builder: (context, child) {
+                    int animatedPercent =
+                        (_progressAnimation.value * 100).round();
+                    return Text(
+                      '$animatedPercent%',
+                      style: TextStyle(
+                        fontSize: isMobile ? 40 : 48,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    );
+                  },
+                ),
+                Text(
+                  stepsLeft > 0 ? '$stepsLeft steps left' : 'Goal achieved!',
+                  style: TextStyle(
+                    fontSize: isMobile ? 14 : 16,
+                    color: goalAchieved
+                        ? const Color(0xFF4CAF50)
+                        : const Color(0xFF666666),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Start and end labels
+          Positioned(
+            bottom: -5,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '0',
+                  style: TextStyle(
+                    fontSize: isMobile ? 12 : 14,
+                    color: const Color(0xFF666666),
+                  ),
+                ),
+                Text(
+                  goalSteps.toString(),
+                  style: TextStyle(
+                    fontSize: isMobile ? 12 : 14,
+                    color: const Color(0xFF666666),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatsCards(bool isMobile) {
+    return Row(
+      children: [
+        Expanded(
+          child: _buildStatCard(
+            icon: Icons.favorite_outline,
+            title: 'Heart Rate',
+            value: '$currentBPM bpm',
+            showHeartChart: true,
+            isMobile: isMobile,
+          ),
+        ),
+        SizedBox(width: isMobile ? 16 : 20),
+        Expanded(
+          child: _buildStatCard(
+            icon: Icons.local_fire_department_outlined,
+            title: 'Calories',
+            value: '${caloriesBurned.toStringAsFixed(1)} cal',
+            showHeartChart: false,
+            isMobile: isMobile,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStatCard({
+    required IconData icon,
+    required String title,
+    required String value,
+    required bool showHeartChart,
+    required bool isMobile,
+  }) {
+    return Container(
+      padding: EdgeInsets.all(isMobile ? 16 : 20),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1A1A1A),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFF2A2A2A)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center, // center vertically
+        crossAxisAlignment: CrossAxisAlignment.center, // center horizontally
+        children: [
+          Row(
+            mainAxisAlignment:
+                MainAxisAlignment.center, // center items horizontally in row
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                color: Colors.white,
+                size: isMobile ? 18 : 20,
+              ),
+              SizedBox(width: isMobile ? 6 : 8),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: isMobile ? 12 : 14,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: isMobile ? 16 : 20),
+          SizedBox(
+            height: isMobile ? 32 : 40,
+            child: showHeartChart
+                ? CustomPaint(
+                    painter: HeartRateChartPainter(),
+                    size: Size(double.infinity, isMobile ? 32 : 40),
+                  )
+                : CustomPaint(
+                    painter: CalorieGaugePainter(
+                      progress: (caloriesBurned / 400).clamp(0.0, 1.0),
+                    ),
+                    size: Size(double.infinity, isMobile ? 32 : 40),
+                  ),
+          ),
+          SizedBox(height: isMobile ? 16 : 20),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: isMobile ? 20 : 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildErrorMessage() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        // ignore: deprecated_member_use
         color: Colors.red.withOpacity(0.1),
-        // ignore: deprecated_member_use
         border: Border.all(color: Colors.red.withOpacity(0.3)),
         borderRadius: BorderRadius.circular(10),
       ),
@@ -451,8 +700,8 @@ class _PedometerHomePageState extends State<PedometerHomePage>
     return ElevatedButton(
       onPressed: _requestPermissions,
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF00FF88),
-        foregroundColor: Colors.black,
+        backgroundColor: const Color(0xFF4CAF50),
+        foregroundColor: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25),
@@ -475,12 +724,12 @@ class _PedometerHomePageState extends State<PedometerHomePage>
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
-            colors: [Color(0xFF00FF88), Color(0xFF00CC66)],
+            colors: [Color(0xFF4CAF50), Color(0xFF2E7D32)],
           ),
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF00FF88).withValues(alpha: 0.5),
+              color: const Color(0xFF4CAF50).withOpacity(0.5),
               blurRadius: 20,
               spreadRadius: 2,
             ),
@@ -488,13 +737,13 @@ class _PedometerHomePageState extends State<PedometerHomePage>
         ),
         child: Row(
           children: [
-            const Icon(Icons.celebration, color: Colors.black, size: 30),
+            const Icon(Icons.celebration, color: Colors.white, size: 30),
             const SizedBox(width: 10),
             const Expanded(
               child: Text(
                 'Goal Achieved! 🎉',
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -506,353 +755,7 @@ class _PedometerHomePageState extends State<PedometerHomePage>
                   showSuccessMessage = false;
                 });
               },
-              icon: const Icon(Icons.close, color: Colors.black),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildHeader() {
-    return Padding(
-      padding: const EdgeInsets.only( left: 20, right: 20),
-      child: Column(
-        children: [
-         
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'StepTracker',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w800,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    'Your Daily Fitness Companion',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Color(0xFF00FF88),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: _status == 'walking' ? const Color(0xFF00FF88) : const Color(0xFF333333),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Text(
-                  _status == 'walking' ? 'ACTIVE' : 'IDLE',
-                  style: TextStyle(
-                    color: _status == 'walking' ? Colors.black : Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCircularProgress() {
-    return GestureDetector(
-      onTap: _showGoalEditDialog,
-      child: SizedBox(
-        width: 280,
-        height: 280,
-        child: AnimatedBuilder(
-          animation: _progressAnimation,
-          builder: (context, child) {
-            double progress = (currentSteps / goalSteps).clamp(0.0, 1.0);
-            return CustomPaint(
-              painter: CircularProgressPainter(
-                progress: progress,
-                progressColor: goalAchieved ? const Color(0xFF00FFAA) : const Color(0xFF00FF88),
-                backgroundColor: const Color(0xFF333333),
-                strokeWidth: 12,
-              ),
-              child: Container(
-                width: 280,
-                height: 280,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: const RadialGradient(
-                    colors: [Color(0xFF1A1A1A), Color(0xFF000000)],
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: goalAchieved 
-                          ? const Color(0xFF00FF88).withValues(alpha: 0.3)
-                          : Colors.black.withValues(alpha: 0.8),
-                      blurRadius: 20,
-                      spreadRadius: 5,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        currentSteps.toString(),
-                        style: TextStyle(
-                          fontSize: 48,
-                          fontWeight: FontWeight.w900,
-                          color: goalAchieved ? const Color(0xFF00FFAA) : const Color(0xFF00FF88),
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      const Text(
-                        'STEPS',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF333333),
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                            color: const Color(0xFF00FF88).withValues(alpha: 0.3),
-                            width: 1,
-                          ),
-                        ),
-                        child: Text(
-                          'Goal: ${goalSteps.toString().replaceAllMapped(
-                            RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                            (Match m) => '${m[1]},',
-                          )}',
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF00FF88),
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        '${(progress * 100).toInt()}% Complete',
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Color(0xFF666666),
-                        ),
-                      ),
-                      if (goalAchieved)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF00FFAA),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Text(
-                              '✅ COMPLETED!',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStatsCards() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Row(
-        children: [
-          Expanded(
-            child: _buildStatCard(
-              emoji: '❤️',
-              value: currentBPM.toString(),
-              label: 'BPM',
-              subtitle: _status == 'walking' ? 'Active' : 'Resting',
-            ),
-          ),
-          const SizedBox(width: 15),
-          Expanded(
-            child: _buildStatCard(
-              emoji: '🔥',
-              value: caloriesBurned.toString(),
-              label: 'CALORIES',
-              subtitle: 'Burned',
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStatCard({
-   
-    required String emoji,
-    required String value,
-    required String label,
-    String? subtitle,
-  }) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF1A1A1A), Color(0xFF0D0D0D)],
-        ),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFF333333)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.3),
-            blurRadius: 15,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: const BoxDecoration(
-              color: Color(0xFF00FF88),
-              shape: BoxShape.circle,
-            ),
-            child: Center(
-              child: Text(
-                emoji,
-                style: const TextStyle(fontSize: 20),
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w800,
-              color: Colors.white,
-            ),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Color(0xFF888888),
-              fontWeight: FontWeight.w600,
-              letterSpacing: 1,
-            ),
-          ),
-          if (subtitle != null)
-            Text(
-              subtitle,
-              style: const TextStyle(
-                fontSize: 10,
-                color: Color(0xFF666666),
-              ),
-            ),
-        
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBottomNavigation() {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      decoration: const BoxDecoration(
-        border: Border(
-          top: BorderSide(color: Color(0xFF333333), width: 1),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _buildNavItem(0, '👟', 'Steps'),
-          _buildNavItem(1, '📊', 'Stats'),
-          _buildNavItem(2, '🎯', 'Goals'),
-          _buildNavItem(3, '⚙️', 'Settings'),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNavItem(int index, String icon, String label) {
-    bool isActive = selectedIndex == index;
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedIndex = index;
-        });
-        
-        // For testing: reset steps when tapping settings
-        // if (index == 3) {
-        //   _resetSteps();
-        // }
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        decoration: BoxDecoration(
-          color: isActive ? const Color(0xFF00FF88).withValues(alpha: 0.2) : Colors.transparent,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 30,
-              height: 30,
-              decoration: BoxDecoration(
-                color: isActive ? const Color(0xFF00FF88) : const Color(0xFF333333),
-                shape: BoxShape.circle,
-              ),
-              child: Center(
-                child: Text(
-                  icon,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: isActive ? Colors.black : const Color(0xFF888888),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 11,
-                color: isActive ? const Color(0xFF00FF88) : const Color(0xFF888888),
-                fontWeight: FontWeight.w600,
-              ),
+              icon: const Icon(Icons.close, color: Colors.white),
             ),
           ],
         ),
@@ -861,4 +764,145 @@ class _PedometerHomePageState extends State<PedometerHomePage>
   }
 }
 
+// Custom painter for semicircular progress
+class SemicircularProgressPainter extends CustomPainter {
+  final double progress;
+  final double strokeWidth;
 
+  SemicircularProgressPainter({
+    required this.progress,
+    required this.strokeWidth,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height - 20);
+    final radius = size.width / 2 - strokeWidth / 2;
+
+    // Background arc
+    final backgroundPaint = Paint()
+      ..color = const Color(0xFF2A2A2A)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round;
+
+    // Progress arc
+    final progressPaint = Paint()
+      ..color = const Color(0xFF4CAF50)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round;
+
+    const startAngle = math.pi;
+    const sweepAngle = math.pi;
+    final progressSweep = sweepAngle * progress;
+
+    // Draw background
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      startAngle,
+      sweepAngle,
+      false,
+      backgroundPaint,
+    );
+
+    // Draw progress
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      startAngle,
+      progressSweep,
+      false,
+      progressPaint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+}
+
+// Custom painter for heart rate chart
+class HeartRateChartPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = const Color(0xFF4CAF50)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2;
+
+    final path = Path();
+    final points = <Offset>[
+      Offset(0, size.height * 0.8),
+      Offset(size.width * 0.1, size.height * 0.8),
+      Offset(size.width * 0.2, size.height * 0.2),
+      Offset(size.width * 0.3, size.height * 0.9),
+      Offset(size.width * 0.4, size.height * 0.1),
+      Offset(size.width * 0.5, size.height * 0.8),
+      Offset(size.width * 0.6, size.height * 0.8),
+      Offset(size.width * 0.7, size.height * 0.2),
+      Offset(size.width * 0.8, size.height * 0.9),
+      Offset(size.width * 0.9, size.height * 0.1),
+      Offset(size.width, size.height * 0.8),
+    ];
+
+    path.moveTo(points[0].dx, points[0].dy);
+    for (int i = 1; i < points.length; i++) {
+      path.lineTo(points[i].dx, points[i].dy);
+    }
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+// Custom painter for calorie gauge
+class CalorieGaugePainter extends CustomPainter {
+  final double progress;
+
+  CalorieGaugePainter({required this.progress});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height);
+    final radius = size.height;
+
+    // Background arc
+    final backgroundPaint = Paint()
+      ..color = const Color(0xFF2A2A2A)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 8;
+
+    // Progress arc
+    final progressPaint = Paint()
+      ..color = const Color(0xFF4CAF50)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 8
+      ..strokeCap = StrokeCap.round;
+
+    const startAngle = math.pi;
+    const totalAngle = math.pi;
+    final progressAngle = totalAngle * progress;
+
+    // Draw background
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      startAngle,
+      totalAngle,
+      false,
+      backgroundPaint,
+    );
+
+    // Draw progress
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      startAngle,
+      progressAngle,
+      false,
+      progressPaint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+}

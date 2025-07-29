@@ -2,9 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/route_manager.dart';
 import 'package:my_app/blocs/auth/auth_bloc.dart';
 import 'package:my_app/blocs/auth/auth_event.dart';
 import 'package:my_app/blocs/auth/auth_state.dart';
+import 'package:my_app/presentation/pages/LogingPages/forgetpassword.dart';
 import 'package:my_app/presentation/pages/LogingPages/registerscrenn.dart';
 import 'package:my_app/presentation/pages/mainpages/view/main_screen.dart';
 import 'package:my_app/presentation/widgets/const_button.dart';
@@ -250,12 +252,23 @@ class LoginScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 8),
-                            const Text(
-                              "forgot password?",
-                              style: TextStyle(
-                                fontFamily: "Lufga",
-                                fontSize: 12,
-                                color: Color(0xff7FFA88),
+                            GestureDetector(
+                                     onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                       const ForgetPasswordPage(),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                "forgot password?",
+                                style: TextStyle(
+                                  fontFamily: "Lufga",
+                                  fontSize: 12,
+                                  color: Color(0xff7FFA88),
+                                ),
                               ),
                             ),
                           ],

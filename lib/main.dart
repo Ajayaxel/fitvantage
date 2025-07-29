@@ -6,6 +6,7 @@ import 'package:my_app/blocs/auth/auth_bloc.dart';
 import 'package:my_app/blocs/lifestyle/lifestyle_bloc.dart';
 import 'package:my_app/blocs/mealplan/bloc/mealplan_bloc.dart';
 import 'package:my_app/blocs/mealplan/bloc/mealplan_event.dart';
+import 'package:my_app/presentation/pages/mainpages/view/main_screen.dart';
 import 'package:my_app/presentation/pages/spalshscreen/splash_screen.dart';
 import 'package:my_app/repositories/auth_repository.dart';
 
@@ -63,7 +64,7 @@ Widget build(BuildContext context) {
           fontFamily: "Lufga",
           useMaterial3: true,
         ),
-        home: const SplashScreen(),
+        home: const MainScreen(),
       ),
     );
   }

@@ -45,27 +45,25 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-backgroundColor: Colors.black,
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Center(
-              child: Image.asset(
-                  "assets/Onbordingnew/Group 97.png",
-                 height: 110,
-                 width: 146,
-                  fit: BoxFit.cover,
-                ),
-            ),
-            const SizedBox(height: 20),
-             Center(child: Image.asset("assets/Onbordingnew/Group 98.png", fit: BoxFit.cover, ))
+        body: Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color(0xFF0A0B0A), // First color
+            Color(0xFF06200F), // Second color
           ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
         ),
-      )
-    );
+      ),
+      child: Center(
+        child: Image.asset(
+          "assets/Onbordingnew/Group 48095441.png",
+          width: 291,
+          height: 187,
+          fit: BoxFit.cover,
+        ),
+      ),
+    ));
   }
 }
-
