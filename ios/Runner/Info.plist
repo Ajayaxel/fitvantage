@@ -2,34 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <!--health kit permissions-->
-	<key>NSHealthShareUsageDescription</key>
-    <string>This app needs access to your health data to track steps and other activities.</string>
-	<key>NSHealthUpdateUsageDescription</key>
-    <string>This app writes activity data to your HealthKit store.</string>
-    <!--health kit permissions end-->
-	<!--pedometers-->
-	<key>NSMotionUsageDescription</key>
-    <string>This app needs access to motion data to count your steps.</string>
-	<!--pedometers end-->
-	<!--permission_handler-->
-    <key>NSCameraUsageDescription</key>
-<string>This app requires access to the camera to take pictures or videos.</string>
-<key>NSMotionUsageDescription</key>
-<string>This app needs access to motion data to count your steps.</string>
-<key>NSHealthShareUsageDescription</key>
-<string>This app needs access to your health data to track your activity.</string>
-<key>NSHealthUpdateUsageDescription</key>
-<string>This app writes activity data to your HealthKit store.</string>
-
-	<!--permission_handler end-->
-	<!--camera-->
-	<key>NSCameraUsageDescription</key>
-<string>This app requires access to the camera to take pictures and record videos.</string>
-<!--camera end-->
-
-
-
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -52,10 +24,32 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera to take pictures and record videos.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>This app needs access to your health data to track steps and other activities.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>This app writes activity data to your HealthKit store.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>This app needs access to motion data to count your steps.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This identifier will be used to deliver personalized notifications.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+		<string>fetch</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

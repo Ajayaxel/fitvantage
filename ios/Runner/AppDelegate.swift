@@ -1,5 +1,7 @@
 import Flutter
 import UIKit
+import Firebase
+import UserNotifications
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -11,3 +13,5 @@ import UIKit
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
+
+

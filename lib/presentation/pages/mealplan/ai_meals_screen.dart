@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/presentation/pages/mainpages/notifications/notification_screen.dart';
+import 'package:my_app/presentation/pages/mealplan/genrate_ai_meals_plan.dart';
 
 class AiMealsScreen extends StatefulWidget {
   const AiMealsScreen({super.key});
@@ -180,6 +181,10 @@ class _AiMealsScreenState extends State<AiMealsScreen> {
             ),
             GestureDetector(
               onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const GenerateAiMealsPlanScreen()),
+                );
                 // Handle Generate action
               },
               child: Center(

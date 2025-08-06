@@ -1,29 +1,17 @@
-
-
 buildscript {
-ext.kotlin_version = '2.0.20'
-repositories {
-    google()
-    jcenter()
+    ext.kotlin_version = '2.0.20'
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.4.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.4.1' // ✅ Latest version
+    }
 }
-
-dependencies {
-    classpath 'com.android.tools.build:gradle:8.4.0' // Upgrade to at least 8.4.0
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    classpath 'com.google.gms:google-services:4.4.2'
-    classpath 'com.android.tools.build:gradle:8.0.2'
-  
-
-}
-}
-plugins {
-  // ...
-
-  // Add the dependency for the Google services Gradle plugin
-  id 'com.google.gms.google-services' version '4.4.2' apply false
-
-}
-
 
 allprojects {
     repositories {
@@ -43,5 +31,6 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
+
 
 

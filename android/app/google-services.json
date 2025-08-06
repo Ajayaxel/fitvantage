@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "67092376481",
-    "project_id": "fitvantage-1f04b",
-    "storage_bucket": "fitvantage-1f04b.firebasestorage.app"
+    "project_number": "1083011169086",
+    "project_id": "push-notification-3a9b3",
+    "storage_bucket": "push-notification-3a9b3.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:67092376481:android:ca1857f608bd7c792cb9e0",
+        "mobilesdk_app_id": "1:1083011169086:android:0cb90300c7fb169e354a6f",
         "android_client_info": {
           "package_name": "com.fitvantage.app"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBoekCJcDjs6hY9gt4dNytJM4iR0dsrZg4"
+          "current_key": "AIzaSyA0W8C4ug1hKSRoWc2MGFL04jlJERi-umE"
         }
       ],
       "services": {

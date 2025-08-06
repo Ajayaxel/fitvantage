@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/presentation/pages/bookapponitemnts/book_appoinment.dart';
 import 'package:my_app/presentation/pages/chat/chat_screen.dart';
 import 'package:my_app/presentation/widgets/homewidegt/caroulse.dart';
 import 'package:my_app/presentation/widgets/homewidegt/chose_paln.dart';
@@ -222,7 +223,65 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
             ),
-            const ChoosePlanPage()
+            const SizedBox(
+              height: 20,
+            ),
+
+            // const ChoosePlanPage()
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              decoration: BoxDecoration(
+                color: const Color(0xFF173F24), // dark green
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child:  Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Row(
+                    children: [
+                      Icon(Icons.flash_on, color: Colors.white),
+                      SizedBox(width: 8),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "1/3",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            "This Week Activity",
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const BookAppoinment(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "BOOK",
+                      style: TextStyle(color: Colors.white ,fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
