@@ -90,23 +90,7 @@ class RegisterScreen extends StatelessWidget {
               ),
 
               // Skip Button
-              Positioned(
-                top: screenHeight * 0.05,
-                right: 20,
-                child: GestureDetector(
-                  onTap: () {
-                    // Add your action here
-                  },
-                  child: const Text(
-                    'Skip',
-                    style: TextStyle(
-                        fontFamily: "Lufga",
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ),
+
               // Bottom Container
               Align(
                 alignment: Alignment.bottomCenter,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:my_app/presentation/pages/mainpages/view/fitenss_screen_togle.dart';
 import 'package:my_app/presentation/pages/mainpages/view/home_screen.dart';
 import 'package:my_app/presentation/pages/mainpages/view/scan_screen.dart';
@@ -7,7 +8,7 @@ import 'package:my_app/presentation/pages/transform/transform_screen.dart';
 
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  const MainScreen({super.key,});
 
   @override
   // ignore: library_private_types_in_public_api

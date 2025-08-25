@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:my_app/models/user_model.dart';
 import 'package:my_app/presentation/widgets/const_button.dart';
 
 import 'package:my_app/presentation/pages/mainpages/view/main_screen.dart';

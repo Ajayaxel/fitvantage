@@ -59,11 +59,13 @@ android {
         coreLibraryDesugaringEnabled true
     }
 
-    // ✅ Fix Firebase task order error
+    // ✅ Fix: Make sure preBuild depends on the correct google-services task
     applicationVariants.all { variant ->
         variant.outputs.all {
-            if (variant.buildType.name == "debug") {
-                preBuild.dependsOn("processDebugGoogleServices")
+            def buildTypeName = variant.buildType.name.capitalize()
+            def taskName = "process${buildTypeName}GoogleServices"
+            if (tasks.findByName(taskName)) {
+                preBuild.dependsOn(taskName)
             }
         }
     }
@@ -78,9 +80,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.android.gms:play-services-auth:21.2.0'
-
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
 }
+
 
 
 

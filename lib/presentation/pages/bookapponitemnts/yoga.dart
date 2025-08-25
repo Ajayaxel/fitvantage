@@ -181,9 +181,12 @@ class YogaDetailPage extends StatelessWidget {
                           ),
                     ),
                     const SizedBox(height: 20,),
-                    Constbutton(onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const BookingSucess()));
-                    }, text: "Book Now")
+                    Center(
+                      child: Constbutton(onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const BookingSucess()));
+                      }, text: "Book Now"),
+                    ),
+                    const SizedBox(height: 20,)
           
                   ],
                 ),

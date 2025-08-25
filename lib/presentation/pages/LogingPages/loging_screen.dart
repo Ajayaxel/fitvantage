@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/route_manager.dart';
 import 'package:my_app/blocs/auth/auth_bloc.dart';
 import 'package:my_app/blocs/auth/auth_event.dart';
 import 'package:my_app/blocs/auth/auth_state.dart';
@@ -66,11 +65,12 @@ class LoginScreen extends StatelessWidget {
     final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+    
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is AuthSuccess) {
+          if (state is AuthAuthenticated) {
             Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (_) => const  MainScreen()));
+                MaterialPageRoute(builder: (_) =>  const MainScreen()));
           } else if (state is AuthFailure) {
             showErrorDialog(context, state.error);
           }
@@ -89,24 +89,9 @@ class LoginScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
+          
 
-              // Skip Button
-              Positioned(
-                top: screenHeight * 0.05,
-                right: 20,
-                child: GestureDetector(
-                  onTap: () {},
-                  child: const Text(
-                    'Skip',
-                    style: TextStyle(
-                        fontFamily: "Lufga",
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ),
-
+          
               // Bottom Login Form
               Align(
                 alignment: Alignment.bottomCenter,
@@ -125,7 +110,7 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-
+          
                         const SizedBox(height: 10),
                         const Text(
                           'Lorem ipsum dolor sit amet consectetur.\nDui tristique erat',
@@ -138,7 +123,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-
+          
                         // Email Field
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -165,7 +150,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-
+          
                         // Password Field
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -193,7 +178,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-
+          
                         // Continue Button or Loading
                         state is AuthLoading
                             ? const SizedBox(height: 50)
@@ -205,7 +190,7 @@ class LoginScreen extends StatelessWidget {
                                       ));
                                 },
                                 text: 'Continue'),
-
+          
                         const SizedBox(height: 10),
                         const Text(
                           'Or Connect with',
@@ -216,7 +201,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 10),
-
+          
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -227,7 +212,7 @@ class LoginScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 20),
-
+          
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -279,7 +264,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
+          
               // Center loading on entire screen
               if (state is AuthLoading)
                 Positioned.fill(

@@ -4,8 +4,8 @@ import 'package:my_app/presentation/pages/profilepages/profile_avthar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileSetting extends StatefulWidget {
-  final String userName;
-  const ProfileSetting({super.key, required this.userName});
+  // final String userName;
+  const ProfileSetting({super.key, });
   @override
   State<ProfileSetting> createState() => _ProfileSettingState();
 }
@@ -27,7 +27,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          widget.userName,
+          'Profile Setting',
           style: const TextStyle(
             color: Colors.white,
             fontSize: 16,

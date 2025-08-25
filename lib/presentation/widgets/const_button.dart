@@ -15,7 +15,7 @@ class Constbutton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 48, // Set the height
-      width: 358, // Set the width
+      width: double.infinity, // Set the width
       child: ElevatedButton(
         onPressed: onTap, // Use the passed onTap function
         style: ElevatedButton.styleFrom(

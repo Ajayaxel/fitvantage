@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/models/user_model.dart';
 import 'package:my_app/presentation/pages/bookapponitemnts/book_appoinment.dart';
 import 'package:my_app/presentation/pages/chat/chat_screen.dart';
 import 'package:my_app/presentation/widgets/homewidegt/caroulse.dart';
-import 'package:my_app/presentation/widgets/homewidegt/chose_paln.dart';
+
 import 'package:my_app/presentation/widgets/homewidegt/fitnesscard.dart';
 import 'package:my_app/presentation/widgets/homewidegt/programcards.dart';
 import 'package:my_app/presentation/widgets/homewidegt/service_category.dart';
@@ -10,11 +11,12 @@ import 'package:my_app/presentation/widgets/homewidegt/testi_monial_cards.dart';
 import 'package:my_app/presentation/widgets/homewidegt/user_stories_screeen.dart';
 
 class HomeScreen extends StatelessWidget {
+  final UserModel? user;
   final List<String> images = [
     "assets/Homeimages/Group 166 (1).png",
     "assets/Homeimages/Group 167 (3).png",
   ];
-  HomeScreen({super.key});
+  HomeScreen({super.key, this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -109,6 +111,7 @@ class HomeScreen extends StatelessWidget {
                     child: Image.asset(
                       "assets/Homeimages/call.png",
                       fit: BoxFit.cover,
+                      width: double.infinity,
                       height: 138,
                     ),
                   ),

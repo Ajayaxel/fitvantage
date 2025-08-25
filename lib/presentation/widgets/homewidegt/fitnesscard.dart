@@ -10,7 +10,7 @@ class FitnessCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        width: 358,
+        width: 400,
         height: 450,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),

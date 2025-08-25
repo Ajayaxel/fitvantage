@@ -124,7 +124,7 @@ class _FitnessScreenState extends State<FitnessScreen> {
 
             // Main content changes based on selection
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: isAtHome
                   ? const AtHomeContent()
                   : AtCenterContent(screenWidth: screenWidth),

@@ -8,6 +8,7 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SplashScreenState createState() => _SplashScreenState();
 }
 
@@ -19,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> navigateUser() async {
-    await Future.delayed(const Duration(seconds: 2)); // Delay for splash effect
+    // await Future.delayed(const Duration(seconds: 2)); // Delay for splash effect
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     final hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
@@ -67,3 +68,4 @@ class _SplashScreenState extends State<SplashScreen> {
     ));
   }
 }
+
