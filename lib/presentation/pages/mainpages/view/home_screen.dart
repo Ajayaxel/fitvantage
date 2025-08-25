@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/models/user_model.dart';
 import 'package:my_app/presentation/pages/bookapponitemnts/book_appoinment.dart';
 import 'package:my_app/presentation/pages/chat/chat_screen.dart';
 import 'package:my_app/presentation/widgets/homewidegt/caroulse.dart';
@@ -11,12 +10,12 @@ import 'package:my_app/presentation/widgets/homewidegt/testi_monial_cards.dart';
 import 'package:my_app/presentation/widgets/homewidegt/user_stories_screeen.dart';
 
 class HomeScreen extends StatelessWidget {
-  final UserModel? user;
+  // final UserModel? user;
   final List<String> images = [
     "assets/Homeimages/Group 166 (1).png",
     "assets/Homeimages/Group 167 (3).png",
   ];
-  HomeScreen({super.key, this.user});
+  HomeScreen({super.key, });
 
   @override
   Widget build(BuildContext context) {

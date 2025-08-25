@@ -52,7 +52,8 @@ class MyApp extends StatelessWidget {
           create: (_) => LifestyleBloc(lifestyleRepo),
         ),
         BlocProvider(
-          create: (_) => AuthBloc(authRepository),
+      create: (context) => AuthBloc(
+        authRepository: AuthRepository()),
         ),
         BlocProvider(
           create: (_) => MealPlanBloc(MealPlanService()),
