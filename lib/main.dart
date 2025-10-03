@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
           fontFamily: "Lufga",
           useMaterial3: true,
         ),
-        home: MainScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

@@ -54,15 +54,15 @@ class _SportsScreenState extends State<SportsScreen> {
                             isSelected ? FontWeight.w600 : FontWeight.normal,
                         color: isSelected ? Colors.white : Colors.white54,
                         decoration: isSelected ? TextDecoration.underline : TextDecoration.none,
+                        decorationColor: isSelected ? Colors.white : Colors.transparent,
+                        decorationThickness: isSelected ? 2.0 : 0.0,
                       ),
                     ),
                   );
                 }),
               ),
             ),
-            const Divider(
-              color: Color(0xff888888),
-            ),
+   
             if (selectedIndex == 0) _buildBadmintonContent(),
             if (selectedIndex == 1) _buildSwimmingContent(),
             if (selectedIndex == 2) _buildTableTennisContent(),
