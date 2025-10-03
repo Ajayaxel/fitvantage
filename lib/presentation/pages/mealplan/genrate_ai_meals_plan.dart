@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/presentation/pages/mainpages/notifications/notification_screen.dart';
+import 'package:my_app/models/ai_meal_plan_models.dart';
 
 class GenerateAiMealsPlanScreen extends StatelessWidget {
-  const GenerateAiMealsPlanScreen({super.key});
+  final AiMealPlan mealPlan;
+  
+  const GenerateAiMealsPlanScreen({super.key, required this.mealPlan});
 
   @override
   Widget build(BuildContext context) {
@@ -57,54 +60,121 @@ class GenerateAiMealsPlanScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            Expanded(
-              child: ListView(
-                children: const [
-                  MealCard(
-                    imageUrl:
-                        'https://www.themealdb.com/images/media/meals/1520084413.jpg',
-                    title: 'Steak and Eggs',
-                    mealType: 'Breakfast',
-                    mealColor: Color(0xFF7B3F9B),
+            // Total Nutrition Summary
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1C1C1C),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Daily Nutrition Summary',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  SizedBox(height: 16),
-                  MealCard(
-                    imageUrl:
-                        'https://www.themealdb.com/images/media/meals/1548772327.jpg',
-                    title: 'Lean Steak and Kale',
-                    mealType: 'Lunch',
-                    mealColor: Color(0xFF255F4F),
-                  ),
-                  SizedBox(height: 16),
-                  MealCard(
-                    imageUrl:
-                        'https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg',
-                    title: 'Lean Beef Burger',
-                    mealType: 'Lunch',
-                    mealColor: Color(0xFF8C8A39),
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildNutritionItem('Calories', '${mealPlan.totalNutrition.calories}'),
+                      _buildNutritionItem('Protein', '${mealPlan.totalNutrition.protein}g'),
+                      _buildNutritionItem('Carbs', '${mealPlan.totalNutrition.carbs}g'),
+                      _buildNutritionItem('Fats', '${mealPlan.totalNutrition.fats}g'),
+                    ],
                   ),
                 ],
               ),
-            )
+            ),
+            const SizedBox(height: 24),
+            // Meals List
+            Expanded(
+              child: ListView.builder(
+                itemCount: mealPlan.meals.length,
+                itemBuilder: (context, index) {
+                  final meal = mealPlan.meals[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: MealCard(
+                      title: meal.name,
+                      mealType: meal.mealType,
+                      mealColor: _getMealTypeColor(meal.mealType),
+                      nutrition: meal.nutrition,
+                      description: meal.description,
+                      ingredients: meal.ingredients,
+                      instructions: meal.instructions,
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+
+  Widget _buildNutritionItem(String label, String value) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white70,
+            fontSize: 12,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Color _getMealTypeColor(String mealType) {
+    switch (mealType.toLowerCase()) {
+      case 'breakfast':
+        return const Color(0xFFFF6B6B);
+      case 'lunch':
+        return const Color(0xFF4ECDC4);
+      case 'dinner':
+        return const Color(0xFF45B7D1);
+      case 'snack':
+        return const Color(0xFF96CEB4);
+      default:
+        return const Color(0xFF6C5CE7);
+    }
+  }
 }
 
 class MealCard extends StatelessWidget {
-  final String imageUrl;
   final String title;
   final String mealType;
   final Color mealColor;
+  final AiNutrition nutrition;
+  final String description;
+  final List<String> ingredients;
+  final List<String> instructions;
 
   const MealCard({
     super.key,
-    required this.imageUrl,
     required this.title,
     required this.mealType,
     required this.mealColor,
+    required this.nutrition,
+    required this.description,
+    required this.ingredients,
+    required this.instructions,
   });
 
   @override
@@ -114,67 +184,119 @@ class MealCard extends StatelessWidget {
         color: const Color(0xFF1C1C1C),
         borderRadius: BorderRadius.circular(16),
       ),
-      padding: const EdgeInsets.all(12),
-      child: Row(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipOval(
-            child: Image.network(
-              imageUrl,
-              width: 64,
-              height: 64,
-              fit: BoxFit.cover,
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                decoration: BoxDecoration(
+                  color: mealColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  mealType,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              const Spacer(),
+              Text(
+                '${nutrition.calories} kcal',
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(height: 6),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: mealColor,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    mealType,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text('461 kcal',
-                        style: TextStyle(color: Colors.white70, fontSize: 12)),
-                    SizedBox(width: 16),
-                    Text('40 C',
-                        style: TextStyle(color: Colors.white70, fontSize: 12)),
-                    SizedBox(width: 16),
-                    Text('26 P',
-                        style: TextStyle(color: Colors.white70, fontSize: 12)),
-                    SizedBox(width: 16),
-                    Text('24 F',
-                        style: TextStyle(color: Colors.white70, fontSize: 12)),
-                  ],
-                ),
-              ],
+          const SizedBox(height: 8),
+          Text(
+            description,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 14,
             ),
-          )
+          ),
+          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNutritionInfo('Protein', '${nutrition.protein}g'),
+              _buildNutritionInfo('Carbs', '${nutrition.carbs}g'),
+              _buildNutritionInfo('Fats', '${nutrition.fats}g'),
+            ],
+          ),
+          const SizedBox(height: 16),
+          ExpansionTile(
+            title: const Text(
+              'Ingredients',
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            children: [
+              ...ingredients.map((ingredient) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2),
+                child: Text(
+                  '• $ingredient',
+                  style: const TextStyle(color: Colors.white70, fontSize: 14),
+                ),
+              )),
+            ],
+          ),
+          ExpansionTile(
+            title: const Text(
+              'Instructions',
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            children: [
+              ...instructions.asMap().entries.map((entry) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Text(
+                  '${entry.key + 1}. ${entry.value}',
+                  style: const TextStyle(color: Colors.white70, fontSize: 14),
+                ),
+              )),
+            ],
+          ),
         ],
       ),
+    );
+  }
+
+  Widget _buildNutritionInfo(String label, String value) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white70,
+            fontSize: 12,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -1,12 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/presentation/pages/mainpages/notifications/notification_screen.dart';
 import 'package:my_app/presentation/pages/mealplan/genrate_ai_meals_plan.dart';
+import 'package:my_app/bloc/bloc/ai_meal_plan_bloc.dart';
+import 'package:my_app/bloc/bloc/ai_meal_plan_event.dart';
+import 'package:my_app/bloc/bloc/ai_meal_plan_state.dart';
+import 'package:my_app/models/ai_meal_plan_models.dart';
+import 'package:my_app/repositories/ai_meal_plan_repository.dart';
 
 class AiMealsScreen extends StatefulWidget {
   const AiMealsScreen({super.key});
 
   @override
   State<AiMealsScreen> createState() => _AiMealsScreenState();
+}
+
+class AiMealsScreenWrapper extends StatelessWidget {
+  const AiMealsScreenWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => AiMealPlanBloc(AiMealPlanRepository()),
+      child: const AiMealsScreen(),
+    );
+  }
 }
 
 class _AiMealsScreenState extends State<AiMealsScreen> {
@@ -179,42 +197,135 @@ class _AiMealsScreenState extends State<AiMealsScreen> {
             const SizedBox(
               height: 50,
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const GenerateAiMealsPlanScreen()),
-                );
-                // Handle Generate action
-              },
-              child: Center(
-                child: Container(
-                    width: 265,
-                    padding: const EdgeInsets.symmetric(vertical: 18),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFF5EFFA4), Color(0xFF26FF70)],
+            BlocListener<AiMealPlanBloc, AiMealPlanState>(
+              listener: (context, state) {
+                if (state is AiMealPlanLoaded) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => GenerateAiMealsPlanScreen(mealPlan: state.mealPlan),
+                    ),
+                  );
+                } else if (state is AiMealPlanError) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                      backgroundColor: Colors.red,
+                      duration: const Duration(seconds: 5),
+                      action: SnackBarAction(
+                        label: 'Retry',
+                        textColor: Colors.white,
+                        onPressed: () {
+                          // Retry logic - get the last request and try again
+                          if (selectedGoalIndex != -1) {
+                            final selectedGoal = goals[selectedGoalIndex];
+                            final selectedDietary = <String>[];
+                            for (int i = 0; i < selectedPreferences.length; i++) {
+                              if (selectedPreferences[i]) {
+                                selectedDietary.add(dietaryPreferences[i]);
+                              }
+                            }
+                            
+                            final request = AiMealPlanRequest(
+                              goals: [selectedGoal],
+                              dietary: selectedDietary,
+                              calorieTarget: 1800,
+                              mealsPerDay: 4,
+                            );
+                            
+                            context.read<AiMealPlanBloc>().add(GenerateAiMealPlan(request));
+                          }
+                        },
                       ),
                     ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(width: 8),
-                        Text(
-                          "Generate My Meal Plan",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                  );
+                }
+              },
+              child: GestureDetector(
+                onTap: () {
+                  if (selectedGoalIndex == -1) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Please select a goal'),
+                        backgroundColor: Colors.orange,
+                      ),
+                    );
+                    return;
+                  }
+                  
+                  final selectedGoal = goals[selectedGoalIndex];
+                  final selectedDietary = <String>[];
+                  for (int i = 0; i < selectedPreferences.length; i++) {
+                    if (selectedPreferences[i]) {
+                      selectedDietary.add(dietaryPreferences[i]);
+                    }
+                  }
+                  
+                  final request = AiMealPlanRequest(
+                    goals: [selectedGoal],
+                    dietary: selectedDietary,
+                    calorieTarget: 1800, // Default value, can be made configurable
+                    mealsPerDay: 4, // Default value, can be made configurable
+                  );
+                  
+                  context.read<AiMealPlanBloc>().add(GenerateAiMealPlan(request));
+                },
+                child: BlocBuilder<AiMealPlanBloc, AiMealPlanState>(
+                  builder: (context, state) {
+                    final isLoading = state is AiMealPlanLoading;
+                    return Center(
+                      child: Container(
+                        width: 265,
+                        padding: const EdgeInsets.symmetric(vertical: 18),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFF5EFFA4), Color(0xFF26FF70)],
                           ),
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Icon(Icons.arrow_forward, color: Colors.black),
-                      ],
-                    )),
+                        child: isLoading
+                            ? const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.black,
+                                      strokeWidth: 2,
+                                    ),
+                                  ),
+                                  SizedBox(width: 12),
+                                  Text(
+                                    "AI is generating your meal plan...",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(width: 8),
+                                  Text(
+                                    "Generate My Meal Plan",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Icon(Icons.arrow_forward, color: Colors.black),
+                                ],
+                              ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
             const SizedBox(height: 24),

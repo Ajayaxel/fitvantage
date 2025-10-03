@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_app/blocs/lifestyle/lifestyle_bloc.dart';
-import 'package:my_app/blocs/lifestyle/lifestyle_event.dart';
+import 'package:my_app/bloc/lifestyle/lifestyle_bloc.dart';
+import 'package:my_app/bloc/lifestyle/lifestyle_event.dart';
 import 'package:my_app/presentation/myworkout/my_workout_screen.dart';
 import 'package:my_app/presentation/pages/bookaclass/book_class_screen.dart';
 import 'package:my_app/presentation/pages/habitcard/habit_cards_screen.dart';
@@ -428,7 +428,8 @@ class AtHomeContent extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const AiMealsScreen()));
+                      builder: (context) => const AiMealsScreenWrapper()));
+              print("AiMealsScreen");
             },
             child: Image.asset("assets/Tranfrom/meals.png")),
         const SizedBox(height: 20),

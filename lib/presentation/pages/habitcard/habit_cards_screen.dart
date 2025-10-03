@@ -160,9 +160,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:my_app/blocs/habitcards/bloc/habit_bloc.dart';
-import 'package:my_app/blocs/habitcards/bloc/habit_event.dart';
-import 'package:my_app/blocs/habitcards/bloc/habit_state.dart';
+import 'package:my_app/bloc/habitcards/bloc/habit_bloc.dart';
+import 'package:my_app/bloc/habitcards/bloc/habit_event.dart';
+import 'package:my_app/bloc/habitcards/bloc/habit_state.dart';
 import 'package:my_app/models/habit_card_model.dart';
 import 'package:my_app/repositories/habit_repository.dart';
 

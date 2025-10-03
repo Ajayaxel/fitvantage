@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_app/blocs/lifestyle/lifestyle_bloc.dart';
-import 'package:my_app/blocs/lifestyle/lifestyle_state.dart';
+import 'package:my_app/bloc/lifestyle/lifestyle_bloc.dart';
+import 'package:my_app/bloc/lifestyle/lifestyle_state.dart';
 import 'package:my_app/models/health_assessment_models.dart';
 
 

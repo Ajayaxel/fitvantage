@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_app/blocs/workout/bloc/workout_event.dart';
-import 'package:my_app/blocs/workout/bloc/workout_state.dart';
+import 'package:my_app/bloc/workout/bloc/workout_event.dart';
+import 'package:my_app/bloc/workout/bloc/workout_state.dart';
 import 'package:my_app/repositories/workout_repository.dart';
 
 class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {

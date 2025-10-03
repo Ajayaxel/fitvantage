@@ -2,15 +2,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_app/blocs/auth/auth_bloc.dart';
-import 'package:my_app/blocs/habitcards/bloc/habit_bloc.dart';
-import 'package:my_app/blocs/habitcards/bloc/habit_event.dart';
-import 'package:my_app/blocs/lifestyle/lifestyle_bloc.dart';
-import 'package:my_app/blocs/meal/bloc/meal_plan_bloc.dart';
-import 'package:my_app/blocs/workout/bloc/workout_bloc.dart';
-import 'package:my_app/blocs/workout/bloc/workout_event.dart';
+import 'package:my_app/bloc/bloc/ai_meal_plan_bloc.dart';
+import 'package:my_app/bloc/auth/auth_bloc.dart';
+import 'package:my_app/bloc/habitcards/bloc/habit_bloc.dart';
+import 'package:my_app/bloc/habitcards/bloc/habit_event.dart';
+import 'package:my_app/bloc/lifestyle/lifestyle_bloc.dart';
+import 'package:my_app/bloc/meal/bloc/meal_plan_bloc.dart';
+import 'package:my_app/bloc/workout/bloc/workout_bloc.dart';
+import 'package:my_app/bloc/workout/bloc/workout_event.dart';
 import 'package:my_app/presentation/pages/mainpages/view/main_screen.dart';
 import 'package:my_app/presentation/pages/spalshscreen/splash_screen.dart';
+import 'package:my_app/repositories/ai_meal_plan_repository.dart';
 import 'package:my_app/repositories/auth_repository.dart';
 import 'package:my_app/repositories/habit_repository.dart';
 import 'package:my_app/repositories/lifestyle_repository.dart';
@@ -61,6 +63,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) =>   WorkoutBloc(WorkoutRepository())..add(const FetchWorkouts()),
         ),
+        BlocProvider(
+          create: (_) => AiMealPlanBloc(AiMealPlanRepository()),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -69,7 +74,7 @@ class MyApp extends StatelessWidget {
           fontFamily: "Lufga",
           useMaterial3: true,
         ),
-        home: const SplashScreen(),
+        home: MainScreen(),
       ),
     );
   }

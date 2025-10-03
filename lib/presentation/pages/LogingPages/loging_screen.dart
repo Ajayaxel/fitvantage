@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_app/blocs/auth/auth_bloc.dart';
+import 'package:my_app/bloc/auth/auth_bloc.dart';
 import 'package:my_app/presentation/pages/LogingPages/forgetpassword.dart';
 import 'package:my_app/presentation/pages/LogingPages/registerscrenn.dart';
 import 'package:my_app/presentation/pages/mainpages/view/main_screen.dart';

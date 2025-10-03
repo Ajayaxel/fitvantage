@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:my_app/blocs/meal/bloc/meal_plan_bloc.dart';
-import 'package:my_app/blocs/meal/bloc/meal_plan_event.dart';
-import 'package:my_app/blocs/meal/bloc/meal_plan_state.dart';
+import 'package:my_app/bloc/meal/bloc/meal_plan_bloc.dart';
+import 'package:my_app/bloc/meal/bloc/meal_plan_event.dart';
+import 'package:my_app/bloc/meal/bloc/meal_plan_state.dart';
 import 'package:my_app/models/meals_model.dart';
 import 'package:my_app/services/meal_plan_service.dart';
 

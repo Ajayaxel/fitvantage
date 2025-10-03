@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_app/blocs/auth/auth_bloc.dart';
+import 'package:my_app/bloc/auth/auth_bloc.dart';
 import 'package:my_app/presentation/pages/LogingPages/loging_screen.dart';
 import 'package:my_app/presentation/widgets/const_button.dart';
 import 'package:my_app/presentation/widgets/eror_dialog.dart';

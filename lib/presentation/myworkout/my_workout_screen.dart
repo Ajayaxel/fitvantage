@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_app/blocs/workout/bloc/workout_bloc.dart';
-import 'package:my_app/blocs/workout/bloc/workout_event.dart';
-import 'package:my_app/blocs/workout/bloc/workout_state.dart';
+import 'package:my_app/bloc/workout/bloc/workout_bloc.dart';
+import 'package:my_app/bloc/workout/bloc/workout_event.dart';
+import 'package:my_app/bloc/workout/bloc/workout_state.dart';
 import 'package:my_app/models/workout_model.dart';
 import 'package:my_app/presentation/myworkout/last_pull_down_screen.dart';
 import 'package:my_app/repositories/workout_repository.dart';
