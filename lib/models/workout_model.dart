@@ -32,22 +32,30 @@ class Exercise {
   });
 
   factory Exercise.fromJson(Map<String, dynamic> json) {
-    return Exercise(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      timeInMinutes: json['time_in_minutes'],
-      sets: json['sets'],
-      reps: json['reps'],
-      images: json['images'],
-      workoutTypeId: json['workout_type_id'],
-      bodyPartId: json['body_part_id'],
-      isActive: json['is_active'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
-      getBodyPart: BodyPart.fromJson(json['get_body_part']),
-      getWorkoutType: WorkoutType.fromJson(json['get_workout_type']),
-    );
+    try {
+      return Exercise(
+        id: json['id'] ?? 0,
+        name: json['name'] ?? '',
+        description: json['description'] ?? '',
+        timeInMinutes: json['time_in_minutes']?.toString(),
+        sets: json['sets']?.toString() ?? '0',
+        reps: json['reps']?.toString(),
+        images: json['images']?.toString(),
+        workoutTypeId: json['workout_type_id']?.toString() ?? '0',
+        bodyPartId: json['body_part_id']?.toString() ?? '0',
+        isActive: json['is_active']?.toString() ?? '0',
+        createdAt: json['created_at']?.toString(),
+        updatedAt: json['updated_at']?.toString(),
+        getBodyPart: json['get_body_part'] != null 
+            ? BodyPart.fromJson(json['get_body_part']) 
+            : BodyPart(id: 0, name: 'Unknown', isActive: '0'),
+        getWorkoutType: json['get_workout_type'] != null 
+            ? WorkoutType.fromJson(json['get_workout_type']) 
+            : WorkoutType(id: 0, name: 'Unknown', ordinal: '0', isActive: '0'),
+      );
+    } catch (e) {
+      throw Exception('Error parsing Exercise: $e');
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -88,14 +96,18 @@ class BodyPart {
   });
 
   factory BodyPart.fromJson(Map<String, dynamic> json) {
-    return BodyPart(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      isActive: json['is_active'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
-    );
+    try {
+      return BodyPart(
+        id: json['id'] ?? 0,
+        name: json['name'] ?? 'Unknown',
+        description: json['description']?.toString(),
+        isActive: json['is_active']?.toString() ?? '0',
+        createdAt: json['created_at']?.toString(),
+        updatedAt: json['updated_at']?.toString(),
+      );
+    } catch (e) {
+      throw Exception('Error parsing BodyPart: $e');
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -130,15 +142,19 @@ class WorkoutType {
   });
 
   factory WorkoutType.fromJson(Map<String, dynamic> json) {
-    return WorkoutType(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      ordinal: json['ordinal'],
-      isActive: json['is_active'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
-    );
+    try {
+      return WorkoutType(
+        id: json['id'] ?? 0,
+        name: json['name'] ?? 'Unknown',
+        description: json['description']?.toString(),
+        ordinal: json['ordinal']?.toString() ?? '0',
+        isActive: json['is_active']?.toString() ?? '0',
+        createdAt: json['created_at']?.toString(),
+        updatedAt: json['updated_at']?.toString(),
+      );
+    } catch (e) {
+      throw Exception('Error parsing WorkoutType: $e');
+    }
   }
 
   Map<String, dynamic> toJson() {

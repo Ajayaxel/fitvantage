@@ -29,7 +29,10 @@ class _MyWorkoutScreenState extends State<MyWorkoutScreen> {
         appBar: AppBar(
           backgroundColor: const Color(0xff010A04),
           elevation: 0,
-          leading: const BackButton(color: Colors.white),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
           title: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -41,10 +44,21 @@ class _MyWorkoutScreenState extends State<MyWorkoutScreen> {
                   style: TextStyle(color: Colors.grey, fontSize: 12)),
             ],
           ),
-          actions: const [
+          actions: [
             Padding(
-              padding: EdgeInsets.only(right: 16.0),
-              child: Icon(Icons.settings, color: Colors.white),
+              padding: const EdgeInsets.only(right: 16.0),
+              child: IconButton(
+                icon: const Icon(Icons.settings, color: Colors.white),
+                onPressed: () {
+                  // Add settings functionality here
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Settings coming soon!'),
+                      backgroundColor: Color(0xff7FFA88),
+                    ),
+                  );
+                },
+              ),
             )
           ],
         ),
@@ -69,7 +83,7 @@ class _MyWorkoutScreenState extends State<MyWorkoutScreen> {
                       size: 60,
                     ),
                     const SizedBox(height: 16),
-                    Text(
+               const Text(
                       'Error loading workouts',
                       style: const TextStyle(color: Colors.white, fontSize: 18),
                     ),
@@ -381,43 +395,65 @@ class WorkoutTile extends StatelessWidget {
                       itemCount: exercises.length,
                       itemBuilder: (_, index) {
                         final item = exercises[index];
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Image.network(
-                                  item['image']!,
-                                  width: 70,
-                                  height: 70,
-                                  fit: BoxFit.cover,
-                                ),
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Replaced with ${item['label']}'),
+                                backgroundColor: const Color(0xff7FFA88),
                               ),
-                              const SizedBox(width: 16),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "HARDER",
-                                    style: TextStyle(
-                                      color: Color(0xff7FFA88),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12,
-                                    ),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 20),
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Image.network(
+                                    item['image']!,
+                                    width: 70,
+                                    height: 70,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container(
+                                        width: 70,
+                                        height: 70,
+                                        color: Colors.grey[700],
+                                        child: const Icon(
+                                          Icons.fitness_center,
+                                          color: Colors.white,
+                                        ),
+                                      );
+                                    },
                                   ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    item['label']!,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
+                                ),
+                                const SizedBox(width: 16),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      "HARDER",
+                                      style: TextStyle(
+                                        color: Color(0xff7FFA88),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              )
-                            ],
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      item['label']!,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -432,6 +468,49 @@ class WorkoutTile extends StatelessWidget {
     );
   }
 
+  void _showDeleteConfirmation(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF121212),
+          title: const Text(
+            'Delete Exercise',
+            style: TextStyle(color: Colors.white),
+          ),
+          content: const Text(
+            'Are you sure you want to delete this exercise from your workout?',
+            style: TextStyle(color: Colors.grey),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Exercise deleted successfully!'),
+                    backgroundColor: Color(0xff7FFA88),
+                  ),
+                );
+              },
+              child: const Text(
+                'Delete',
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _showBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -439,6 +518,7 @@ class WorkoutTile extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
+      isScrollControlled: true,
       builder: (BuildContext context) {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -474,7 +554,7 @@ class WorkoutTile extends StatelessWidget {
                   _showLogExerciseSheet(context, exercise);
                 },
               ),
-              const Divider(color: Colors.black),
+              const Divider(color: Colors.grey),
               _buildOption(
                 icon: Icons.sync_alt,
                 label: 'Replace Exercise',
@@ -483,11 +563,14 @@ class WorkoutTile extends StatelessWidget {
                   _replaceExerciseSheet(context);
                 },
               ),
-              const Divider(color: Colors.black),
+              const Divider(color: Colors.grey),
               _buildOption(
                 icon: Icons.delete_outline,
                 label: 'Delete Exercise',
-                onTap: () => Navigator.pop(context),
+                onTap: () {
+                  Navigator.pop(context);
+                  _showDeleteConfirmation(context);
+                },
               ),
               const SizedBox(height: 10),
             ],
@@ -640,66 +723,68 @@ class WorkoutTile extends StatelessWidget {
                           controller: controller,
                           itemCount: sets.length,
                           itemBuilder: (_, index) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const SizedBox(height: 30),
-                                Text("Set ${index + 1}",
-                                    style: const TextStyle(color: Colors.white)),
-                                const SizedBox(width: 60),
-                                SizedBox(
-                                  width: 60,
-                                  child: TextField(
-                                    keyboardType: TextInputType.number,
-                                    style: const TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      hintText: sets[index]['reps'],
-                                      hintStyle: const TextStyle(color: Colors.white),
-                                      suffixText: "reps",
-                                      suffixStyle: const TextStyle(color: Colors.white),
-                                      enabledBorder: const UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.grey),
+                            return Container(
+                              margin: const EdgeInsets.only(bottom: 16),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Set ${index + 1}",
+                                      style: const TextStyle(color: Colors.white)),
+                                  const SizedBox(width: 20),
+                                  SizedBox(
+                                    width: 60,
+                                    child: TextField(
+                                      keyboardType: TextInputType.number,
+                                      style: const TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        hintText: sets[index]['reps'],
+                                        hintStyle: const TextStyle(color: Colors.white),
+                                        suffixText: "reps",
+                                        suffixStyle: const TextStyle(color: Colors.white),
+                                        enabledBorder: const UnderlineInputBorder(
+                                          borderSide: BorderSide(color: Colors.grey),
+                                        ),
                                       ),
+                                      onChanged: (value) {
+                                        sets[index]['reps'] = value;
+                                      },
                                     ),
-                                    onChanged: (value) {
-                                      sets[index]['reps'] = value;
-                                    },
                                   ),
-                                ),
-                                const SizedBox(width: 10),
-                                const Text('x', style: TextStyle(color: Colors.white)),
-                                const SizedBox(width: 10),
-                                SizedBox(
-                                  width: 50,
-                                  child: TextField(
-                                    keyboardType: TextInputType.number,
-                                    style: const TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      hintText: "",
-                                      hintStyle: const TextStyle(color: Colors.white),
-                                      suffixText: isKg ? 'kgs' : 'lbs',
-                                      suffixStyle: const TextStyle(color: Colors.white),
-                                      enabledBorder: const UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.grey),
+                                  const SizedBox(width: 10),
+                                  const Text('x', style: TextStyle(color: Colors.white)),
+                                  const SizedBox(width: 10),
+                                  SizedBox(
+                                    width: 50,
+                                    child: TextField(
+                                      keyboardType: TextInputType.number,
+                                      style: const TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        hintText: "",
+                                        hintStyle: const TextStyle(color: Colors.white),
+                                        suffixText: isKg ? 'kgs' : 'lbs',
+                                        suffixStyle: const TextStyle(color: Colors.white),
+                                        enabledBorder: const UnderlineInputBorder(
+                                          borderSide: BorderSide(color: Colors.grey),
+                                        ),
                                       ),
+                                      onChanged: (value) {
+                                        sets[index]['weight'] = value;
+                                      },
                                     ),
-                                    onChanged: (value) {
-                                      sets[index]['weight'] = value;
-                                    },
                                   ),
-                                ),
-                                const Spacer(),
-                                IconButton(
-                                  icon: const Icon(Icons.delete_outline, color: Colors.white),
-                                  onPressed: () {
-                                    setState(() {
-                                      if (sets.length > 1) {
-                                        sets.removeAt(index);
-                                      }
-                                    });
-                                  },
-                                )
-                              ],
+                                  const SizedBox(width: 10),
+                                  IconButton(
+                                    icon: const Icon(Icons.delete_outline, color: Colors.white),
+                                    onPressed: () {
+                                      setState(() {
+                                        if (sets.length > 1) {
+                                          sets.removeAt(index);
+                                        }
+                                      });
+                                    },
+                                  )
+                                ],
+                              ),
                             );
                           },
                         ),
@@ -711,15 +796,23 @@ class WorkoutTile extends StatelessWidget {
                             sets.add({'reps': exercise.reps ?? '10', 'weight': ''});
                           });
                         },
-                        child: const Row(
-                          children: [
-                            Icon(Icons.add, color: Colors.white),
-                            SizedBox(width: 8),
-                            Text("ADD SET",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold)),
-                          ],
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(Icons.add, color: Colors.white),
+                              SizedBox(width: 8),
+                              Text("ADD SET",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)),
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -745,15 +838,30 @@ class WorkoutTile extends StatelessWidget {
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
-                                // Here you can save the exercise log data
-                                // You might want to add this to your BLoC or repository
-                                Navigator.pop(context);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Exercise logged successfully!'),
-                                    backgroundColor: Color(0xff7FFA88),
-                                  ),
+                                // Validate the form before saving
+                                bool hasValidData = sets.any((set) => 
+                                  set['reps']!.isNotEmpty && 
+                                  set['weight']!.isNotEmpty
                                 );
+                                
+                                if (hasValidData) {
+                                  // Here you can save the exercise log data
+                                  // You might want to add this to your BLoC or repository
+                                  Navigator.pop(context);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Exercise logged successfully!'),
+                                      backgroundColor: Color(0xff7FFA88),
+                                    ),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Please fill in at least one set with reps and weight'),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
                               },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(vertical: 14),
@@ -808,13 +916,13 @@ class WorkoutTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: GestureDetector(
-        onTap: () => {
+        onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => const LatPullDownScreen(),
             ),
-          ),
+          );
         },
         child: Row(
           children: [

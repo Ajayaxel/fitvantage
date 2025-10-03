@@ -14,6 +14,7 @@ class _LatPullDownScreenState extends State<LatPullDownScreen>
     with SingleTickerProviderStateMixin {
   int secondsLeft = 30;
   late Timer timer;
+  bool isTimerRunning = true;
 
   @override
   void initState() {
@@ -22,6 +23,7 @@ class _LatPullDownScreenState extends State<LatPullDownScreen>
   }
 
   void startTimer() {
+    isTimerRunning = true;
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (secondsLeft > 0) {
         setState(() {
@@ -29,8 +31,32 @@ class _LatPullDownScreenState extends State<LatPullDownScreen>
         });
       } else {
         timer.cancel();
+        isTimerRunning = false;
+        _onTimerComplete();
       }
     });
+  }
+
+  void _onTimerComplete() {
+    // Navigate to next exercise or show completion message
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Set completed! Ready for next set?'),
+        backgroundColor: Color(0xff7FFA88),
+        duration: Duration(seconds: 2),
+      ),
+    );
+    
+    // You can add navigation logic here to go to the next exercise
+    // For example: Navigator.push(context, MaterialPageRoute(builder: (context) => NextExerciseScreen()));
+  }
+
+  void _restartTimer() {
+    setState(() {
+      secondsLeft = 30;
+      isTimerRunning = true;
+    });
+    startTimer();
   }
 
   @override
@@ -76,6 +102,7 @@ class _LatPullDownScreenState extends State<LatPullDownScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                
                 Center(
                   child: Container(
                     width: 40,
@@ -492,18 +519,21 @@ static void _showLogExerciseSheet(BuildContext context) {
                     ),
                     child: Row(
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(
-                            "$secondsLeft\nsecs",
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                        GestureDetector(
+                          onTap: isTimerRunning ? null : _restartTimer,
+                          child: Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: isTimerRunning ? Colors.black : const Color(0xff7FFA88),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              isTimerRunning ? "$secondsLeft\nsecs" : "Restart\nTimer",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: isTimerRunning ? Colors.white : Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),

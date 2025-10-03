@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/presentation/myworkout/my_workout_screen.dart';
 
 class ExerciseInstructionScreen extends StatefulWidget {
   const ExerciseInstructionScreen({super.key});
@@ -12,6 +13,7 @@ class _ExerciseInstructionScreenState extends State<ExerciseInstructionScreen>
     with SingleTickerProviderStateMixin {
   double _progress = 0.0;
   late AnimationController _controller;
+  bool _isCompleted = false;
 
   @override
   void initState() {
@@ -27,7 +29,25 @@ class _ExerciseInstructionScreenState extends State<ExerciseInstructionScreen>
         });
       });
 
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed && !_isCompleted) {
+        _isCompleted = true;
+        _navigateToNextPage();
+      }
+    });
+
     _controller.forward();
+  }
+
+  void _navigateToNextPage() {
+    // Navigate to the next exercise or back to workout screen
+    Future.delayed(const Duration(milliseconds: 500), () {
+      if (mounted) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
+        });
+      }
+    });
   }
 
   @override
@@ -61,13 +81,15 @@ class _ExerciseInstructionScreenState extends State<ExerciseInstructionScreen>
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text(
-                      "Chest up &\nshoulderbck", // Fix typo if needed
+                    Text(
+                      _isCompleted
+                          ? "Exercise Complete!"
+                          : "Chest up &\nshoulder back",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: _isCompleted ? Colors.green : Colors.black,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -81,11 +103,37 @@ class _ExerciseInstructionScreenState extends State<ExerciseInstructionScreen>
                           value: _progress,
                           minHeight: 2,
                           backgroundColor: Colors.black12,
-                          color: Colors.black,
+                          color: _isCompleted ? Colors.green : Colors.black,
                         ),
                       ),
                     ),
-                   
+
+                    const SizedBox(height: 20),
+
+                    // Skip button (only show if not completed)
+                    if (!_isCompleted)
+                      GestureDetector(
+                        onTap: () {
+                          _controller.stop();
+                          _navigateToNextPage();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: const Text(
+                            "Skip",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),

@@ -19,6 +19,11 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     try {
       final exercises = await workoutRepository.getExercises();
       
+      if (exercises.isEmpty) {
+        emit(const WorkoutError('No exercises found. Please try again later.'));
+        return;
+      }
+      
       // Filter exercises by workout type
       final warmUpExercises = exercises.where((e) => e.workoutTypeId == '1').toList();
       final workoutExercises = exercises.where((e) => e.workoutTypeId == '2').toList();
@@ -33,7 +38,8 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
         cardioExercises: cardioExercises,
       ));
     } catch (e) {
-      emit(WorkoutError(e.toString()));
+      final errorMessage = e.toString().replaceFirst('Exception: ', '');
+      emit(WorkoutError(errorMessage));
     }
   }
 
@@ -41,10 +47,17 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     emit(WorkoutLoading());
     try {
       final exercises = await workoutRepository.getExercisesByType(event.workoutTypeId);
-      final workoutTypeName = exercises.isNotEmpty ? exercises.first.getWorkoutType.name : '';
+      
+      if (exercises.isEmpty) {
+        emit(const WorkoutError('No exercises found for this workout type.'));
+        return;
+      }
+      
+      final workoutTypeName = exercises.first.getWorkoutType.name;
       emit(WorkoutByTypeLoaded(exercises: exercises, workoutType: workoutTypeName));
     } catch (e) {
-      emit(WorkoutError(e.toString()));
+      final errorMessage = e.toString().replaceFirst('Exception: ', '');
+      emit(WorkoutError(errorMessage));
     }
   }
 
@@ -52,10 +65,17 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     emit(WorkoutLoading());
     try {
       final exercises = await workoutRepository.getExercisesByBodyPart(event.bodyPartId);
-      final bodyPartName = exercises.isNotEmpty ? exercises.first.getBodyPart.name : '';
+      
+      if (exercises.isEmpty) {
+        emit(const WorkoutError('No exercises found for this body part.'));
+        return;
+      }
+      
+      final bodyPartName = exercises.first.getBodyPart.name;
       emit(WorkoutByBodyPartLoaded(exercises: exercises, bodyPart: bodyPartName));
     } catch (e) {
-      emit(WorkoutError(e.toString()));
+      final errorMessage = e.toString().replaceFirst('Exception: ', '');
+      emit(WorkoutError(errorMessage));
     }
   }
 
@@ -66,10 +86,11 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
       if (exercise != null) {
         emit(SingleWorkoutLoaded(exercise));
       } else {
-        emit(const WorkoutError('Exercise not found'));
+        emit(const WorkoutError('Exercise not found. Please check the exercise ID.'));
       }
     } catch (e) {
-      emit(WorkoutError(e.toString()));
+      final errorMessage = e.toString().replaceFirst('Exception: ', '');
+      emit(WorkoutError(errorMessage));
     }
   }
 
@@ -77,6 +98,11 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     // Don't show loading for refresh
     try {
       final exercises = await workoutRepository.getExercises();
+      
+      if (exercises.isEmpty) {
+        emit(const WorkoutError('No exercises found. Please try again later.'));
+        return;
+      }
       
       final warmUpExercises = exercises.where((e) => e.workoutTypeId == '1').toList();
       final workoutExercises = exercises.where((e) => e.workoutTypeId == '2').toList();
@@ -91,7 +117,8 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
         cardioExercises: cardioExercises,
       ));
     } catch (e) {
-      emit(WorkoutError(e.toString()));
+      final errorMessage = e.toString().replaceFirst('Exception: ', '');
+      emit(WorkoutError(errorMessage));
     }
   }
 }
