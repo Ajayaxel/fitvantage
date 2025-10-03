@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_app/bloc/bloc/ai_meal_plan_bloc.dart';
+import 'package:my_app/bloc/aimeals/ai_meal_plan_bloc.dart';
 import 'package:my_app/bloc/auth/auth_bloc.dart';
 import 'package:my_app/bloc/habitcards/bloc/habit_bloc.dart';
 import 'package:my_app/bloc/habitcards/bloc/habit_event.dart';
@@ -21,7 +21,6 @@ import 'package:my_app/services/meal_plan_service.dart';
 import 'package:my_app/services/notification/fcm_config.dart';
 import 'package:my_app/services/notification/notification_service.dart';
 
-
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // print('🔋 Background message: ${message.messageId}');
@@ -33,7 +32,7 @@ void main() async {
   await Firebase.initializeApp();
   LocalNotificationService.initialize();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-   NotificationHandler.initFCM();
+  NotificationHandler.initFCM();
   runApp(MyApp());
 }
 
@@ -54,14 +53,14 @@ class MyApp extends StatelessWidget {
           create: (_) => LifestyleBloc(lifestyleRepo),
         ),
         BlocProvider(
-      create: (context) => AuthBloc(
-        authRepository: AuthRepository()),
+          create: (context) => AuthBloc(authRepository: AuthRepository()),
         ),
         BlocProvider(
           create: (_) => MealPlanBloc(MealPlanService()),
         ),
         BlocProvider(
-          create: (_) =>   WorkoutBloc(WorkoutRepository())..add(const FetchWorkouts()),
+          create: (_) =>
+              WorkoutBloc(WorkoutRepository())..add(const FetchWorkouts()),
         ),
         BlocProvider(
           create: (_) => AiMealPlanBloc(AiMealPlanRepository()),

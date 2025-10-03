@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/presentation/pages/mainpages/notifications/notification_screen.dart';
 import 'package:my_app/presentation/pages/mealplan/genrate_ai_meals_plan.dart';
-import 'package:my_app/bloc/bloc/ai_meal_plan_bloc.dart';
-import 'package:my_app/bloc/bloc/ai_meal_plan_event.dart';
-import 'package:my_app/bloc/bloc/ai_meal_plan_state.dart';
+import 'package:my_app/bloc/aimeals/ai_meal_plan_bloc.dart';
+import 'package:my_app/bloc/aimeals/ai_meal_plan_event.dart';
+import 'package:my_app/bloc/aimeals/ai_meal_plan_state.dart';
 import 'package:my_app/models/ai_meal_plan_models.dart';
 import 'package:my_app/repositories/ai_meal_plan_repository.dart';
 

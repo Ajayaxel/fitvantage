@@ -56,13 +56,13 @@ class AiMealPlan {
   });
 
   factory AiMealPlan.fromJson(Map<String, dynamic> json) => AiMealPlan(
-    generatedAt: DateTime.parse(json["generatedAt"]),
-    preferences: AiPreferences.fromJson(json["preferences"]),
-    meals: List<AiMeal>.from(json["meals"].map((x) => AiMeal.fromJson(x))),
-    totalNutrition: AiTotalNutrition.fromJson(json["totalNutrition"]),
-    isFavorite: json["isFavorite"],
-    id: json["_id"],
-    v: json["__v"],
+    generatedAt: DateTime.tryParse(json["generatedAt"]?.toString() ?? "") ?? DateTime.now(),
+    preferences: AiPreferences.fromJson(json["preferences"] ?? {}),
+    meals: List<AiMeal>.from((json["meals"] ?? []).map((x) => AiMeal.fromJson(x))),
+    totalNutrition: AiTotalNutrition.fromJson(json["totalNutrition"] ?? {}),
+    isFavorite: json["isFavorite"] ?? false,
+    id: json["_id"]?.toString() ?? "",
+    v: json["__v"] is int ? json["__v"] : int.tryParse(json["__v"].toString()) ?? 0,
   );
 }
 
@@ -80,10 +80,10 @@ class AiPreferences {
   });
 
   factory AiPreferences.fromJson(Map<String, dynamic> json) => AiPreferences(
-    goals: List<String>.from(json["goals"]),
-    dietary: List<String>.from(json["dietary"]),
-    calorieTarget: json["calorieTarget"],
-    mealsPerDay: json["mealsPerDay"],
+    goals: List<String>.from(json["goals"] ?? []),
+    dietary: List<String>.from(json["dietary"] ?? []),
+    calorieTarget: json["calorieTarget"] is int ? json["calorieTarget"] : int.tryParse(json["calorieTarget"].toString()) ?? 1800,
+    mealsPerDay: json["mealsPerDay"] is int ? json["mealsPerDay"] : int.tryParse(json["mealsPerDay"].toString()) ?? 4,
   );
 }
 
@@ -109,14 +109,14 @@ class AiMeal {
   });
 
   factory AiMeal.fromJson(Map<String, dynamic> json) => AiMeal(
-    mealType: json["mealType"],
-    name: json["name"],
-    description: json["description"],
-    imageUrl: json["imageUrl"] ?? "",
-    nutrition: AiNutrition.fromJson(json["nutrition"]),
-    ingredients: List<String>.from(json["ingredients"]),
-    instructions: List<String>.from(json["instructions"]),
-    id: json["_id"],
+    mealType: json["mealType"]?.toString() ?? "",
+    name: json["name"]?.toString() ?? "",
+    description: json["description"]?.toString() ?? "",
+    imageUrl: json["imageUrl"]?.toString() ?? "",
+    nutrition: AiNutrition.fromJson(json["nutrition"] ?? {}),
+    ingredients: List<String>.from(json["ingredients"] ?? []),
+    instructions: List<String>.from(json["instructions"] ?? []),
+    id: json["_id"]?.toString() ?? "",
   );
 }
 
@@ -134,10 +134,10 @@ class AiNutrition {
   });
 
   factory AiNutrition.fromJson(Map<String, dynamic> json) => AiNutrition(
-    calories: json["calories"],
-    protein: json["protein"],
-    carbs: json["carbs"],
-    fats: json["fats"],
+    calories: json["calories"] is int ? json["calories"] : int.tryParse(json["calories"].toString()) ?? 0,
+    protein: json["protein"] is int ? json["protein"] : int.tryParse(json["protein"].toString()) ?? 0,
+    carbs: json["carbs"] is int ? json["carbs"] : int.tryParse(json["carbs"].toString()) ?? 0,
+    fats: json["fats"] is int ? json["fats"] : int.tryParse(json["fats"].toString()) ?? 0,
   );
 }
 
@@ -155,9 +155,9 @@ class AiTotalNutrition {
   });
 
   factory AiTotalNutrition.fromJson(Map<String, dynamic> json) => AiTotalNutrition(
-    calories: json["calories"],
-    protein: json["protein"],
-    carbs: json["carbs"],
-    fats: json["fats"],
+    calories: json["calories"] is int ? json["calories"] : int.tryParse(json["calories"].toString()) ?? 0,
+    protein: json["protein"] is int ? json["protein"] : int.tryParse(json["protein"].toString()) ?? 0,
+    carbs: json["carbs"] is int ? json["carbs"] : int.tryParse(json["carbs"].toString()) ?? 0,
+    fats: json["fats"] is int ? json["fats"] : int.tryParse(json["fats"].toString()) ?? 0,
   );
 }
