@@ -203,7 +203,8 @@ class _AiMealsScreenState extends State<AiMealsScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => GenerateAiMealsPlanScreen(mealPlan: state.mealPlan),
+                      builder: (_) =>
+                          GenerateAiMealsPlanScreen(mealPlan: state.mealPlan),
                     ),
                   );
                 } else if (state is AiMealPlanError) {
@@ -220,20 +221,24 @@ class _AiMealsScreenState extends State<AiMealsScreen> {
                           if (selectedGoalIndex != -1) {
                             final selectedGoal = goals[selectedGoalIndex];
                             final selectedDietary = <String>[];
-                            for (int i = 0; i < selectedPreferences.length; i++) {
+                            for (int i = 0;
+                                i < selectedPreferences.length;
+                                i++) {
                               if (selectedPreferences[i]) {
                                 selectedDietary.add(dietaryPreferences[i]);
                               }
                             }
-                            
+
                             final request = AiMealPlanRequest(
                               goals: [selectedGoal],
                               dietary: selectedDietary,
                               calorieTarget: 1800,
                               mealsPerDay: 4,
                             );
-                            
-                            context.read<AiMealPlanBloc>().add(GenerateAiMealPlan(request));
+
+                            context
+                                .read<AiMealPlanBloc>()
+                                .add(GenerateAiMealPlan(request));
                           }
                         },
                       ),
@@ -241,92 +246,103 @@ class _AiMealsScreenState extends State<AiMealsScreen> {
                   );
                 }
               },
-              child: GestureDetector(
-                onTap: () {
-                  if (selectedGoalIndex == -1) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Please select a goal'),
-                        backgroundColor: Colors.orange,
-                      ),
-                    );
-                    return;
-                  }
-                  
-                  final selectedGoal = goals[selectedGoalIndex];
-                  final selectedDietary = <String>[];
-                  for (int i = 0; i < selectedPreferences.length; i++) {
-                    if (selectedPreferences[i]) {
-                      selectedDietary.add(dietaryPreferences[i]);
-                    }
-                  }
-                  
-                  final request = AiMealPlanRequest(
-                    goals: [selectedGoal],
-                    dietary: selectedDietary,
-                    calorieTarget: 1800, // Default value, can be made configurable
-                    mealsPerDay: 4, // Default value, can be made configurable
+              child: GestureDetector(onTap: () {
+                if (selectedGoalIndex == -1) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Please select a goal'),
+                      backgroundColor: Colors.orange,
+                    ),
                   );
-                  
-                  context.read<AiMealPlanBloc>().add(GenerateAiMealPlan(request));
-                },
-                child: BlocBuilder<AiMealPlanBloc, AiMealPlanState>(
-                  builder: (context, state) {
-                    final isLoading = state is AiMealPlanLoading;
-                    return Center(
-                      child: Container(
-                        width: 265,
-                        padding: const EdgeInsets.symmetric(vertical: 18),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(40),
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFF5EFFA4), Color(0xFF26FF70)],
-                          ),
+                  return;
+                }
+
+                final selectedGoal = goals[selectedGoalIndex];
+                final selectedDietary = <String>[];
+                for (int i = 0; i < selectedPreferences.length; i++) {
+                  if (selectedPreferences[i]) {
+                    selectedDietary.add(dietaryPreferences[i]);
+                  }
+                }
+
+                final request = AiMealPlanRequest(
+                  goals: [selectedGoal],
+                  dietary: selectedDietary,
+                  calorieTarget:
+                      1800, // Default value, can be made configurable
+                  mealsPerDay: 4, // Default value, can be made configurable
+                );
+
+                context.read<AiMealPlanBloc>().add(GenerateAiMealPlan(request));
+              }, child: BlocBuilder<AiMealPlanBloc, AiMealPlanState>(
+                builder: (context, state) {
+                  final isLoading = state is AiMealPlanLoading;
+                  return Center(
+                    child: Container(
+                      constraints: const BoxConstraints(
+                        maxWidth: 280, // keeps button within 280 width
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 18, horizontal: 16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(40),
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF5EFFA4), Color(0xFF26FF70)],
                         ),
-                        child: isLoading
-                            ? const Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 20,
-                                    height: 20,
-                                    child: CircularProgressIndicator(
-                                      color: Colors.black,
-                                      strokeWidth: 2,
-                                    ),
+                      ),
+                      child: isLoading
+                          ? const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:  [
+                                SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.black,
+                                    strokeWidth: 2,
                                   ),
-                                  SizedBox(width: 12),
-                                  Text(
+                                ),
+                                SizedBox(width: 12),
+                                Expanded(
+                                  // makes text wrap instead of overflow
+                                  child: Text(
                                     "AI is generating your meal plan...",
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.center,
                                   ),
-                                ],
-                              )
-                            : const Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(width: 8),
-                                  Text(
+                                ),
+                              ],
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Expanded(
+                                  child: Text(
                                     "Generate My Meal Plan",
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.center,
                                   ),
-                                  SizedBox(width: 10),
-                                  Icon(Icons.arrow_forward, color: Colors.black),
-                                ],
-                              ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+                                ),
+                                SizedBox(width: 10),
+                                Icon(Icons.arrow_forward, color: Colors.black),
+                              ],
+                            ),
+                    ),
+                  );
+                },
+              )),
             ),
             const SizedBox(height: 24),
           ],

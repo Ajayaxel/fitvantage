@@ -46,7 +46,7 @@ class Category {
 
   factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
-      categoryId: json['category_id'] ?? '',
+      categoryId: json['category_id']?.toString() ?? '',
       categoryName: json['category_name'] ?? '',
       categoryDescription: json['category_description'] ?? '',
       questions: (json['questions'] as List<dynamic>?)
@@ -81,7 +81,7 @@ class Question {
 
   factory Question.fromJson(Map<String, dynamic> json) {
     return Question(
-      questionId: json['question_id'] ?? '',
+      questionId: json['question_id']?.toString() ?? '',
       questionName: json['question_name'] ?? '',
       questionDescription: json['question_description'],
       options: (json['options'] as List<dynamic>?)
@@ -116,7 +116,7 @@ class Option {
 
   factory Option.fromJson(Map<String, dynamic> json) {
     return Option(
-      optionId: json['option_id'] ?? '',
+      optionId: json['option_id']?.toString() ?? '',
       optionName: json['option_name'] ?? '',
       optionDescription: json['option_description'],
       score: double.tryParse(json['score'].toString()) ?? 0.0,
@@ -147,8 +147,8 @@ class UserResponse {
 
   factory UserResponse.fromJson(Map<String, dynamic> json) {
     return UserResponse(
-      questionId: json['question_id'] ?? '',
-      selectedOptionId: json['selected_option_id'] ?? '',
+      questionId: json['question_id']?.toString() ?? '',
+      selectedOptionId: json['selected_option_id']?.toString() ?? '',
       score: double.tryParse(json['score'].toString()) ?? 0.0,
     );
   }
@@ -182,7 +182,7 @@ class CategoryScore {
 
   factory CategoryScore.fromJson(Map<String, dynamic> json) {
     return CategoryScore(
-      categoryId: json['category_id'] ?? '',
+      categoryId: json['category_id']?.toString() ?? '',
       categoryName: json['category_name'] ?? '',
       totalScore: double.tryParse(json['total_score'].toString()) ?? 0.0,
       maxPossibleScore:
